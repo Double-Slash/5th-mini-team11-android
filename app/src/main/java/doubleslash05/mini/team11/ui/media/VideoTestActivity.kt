@@ -2,7 +2,6 @@ package doubleslash05.mini.team11.ui.media
 
 import android.net.Uri
 import android.os.Bundle
-import android.os.Environment
 import android.util.Log
 import android.widget.MediaController
 import android.widget.Toast
@@ -18,25 +17,34 @@ class VideoTestActivity : AppCompatActivity() {
         val mediaController = MediaController(this)
         videoview_video.setMediaController(mediaController)
 
-//         val uri = Uri.parse("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4") // 서버에 있는 영상
+
+//        val uri = Uri.parse("https://vt.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4") // 서버에 있는 영상
+//        val uri = Uri.parse("http://techslides.com/demos/sample-videos/small.mp4") // 서버에 있는 영상
 //        Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()+"filename") // SD card 영상
-        val uri = Uri.parse("android.resource://$packageName/${R.raw.test_video}")
+        val uri = Uri.parse("android.resource://$packageName/${R.raw.out}")
         videoview_video.setVideoURI(uri)
 
         videoview_video.setOnPreparedListener {
             Log.d("TEST", "Done")
             Toast.makeText(this@VideoTestActivity, "Done!", Toast.LENGTH_LONG)
-            videoview_video.start()
+            videoview_video.seekTo(1)
+
+//            videoview_video.start()
         }
 
         button_video_test.setOnClickListener {
             videoview_video.pause()
-            videoview_video.seekTo(8000)
+            videoview_video.seekTo(videoview_video.currentPosition + 500)
+            Log.d("TEST", (videoview_video.currentPosition).toString())
         }
 
         button_video_resume.setOnClickListener {
-            videoview_video.resume()
+            if (videoview_video.isPlaying) {
+                videoview_video.pause()
+            } else {
+                videoview_video.start()
+            }
+            Log.d("TEST", (videoview_video.currentPosition).toString())
         }
-
     }
 }
