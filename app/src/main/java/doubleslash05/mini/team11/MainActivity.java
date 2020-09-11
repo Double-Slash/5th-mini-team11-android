@@ -3,12 +3,14 @@ package doubleslash05.mini.team11;
 import android.Manifest;
 import android.app.ProgressDialog;
 import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -30,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
     private Button btnRecognizer;
 
 
-//    private Button btnStartAudio; 오디오 출력 필요없음.
+    //    private Button btnStartAudio; 오디오 출력 필요없음.
     private Button btnSync;
     private EditText txtWords;
     private EditText txtDistractor;
@@ -42,23 +44,13 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
     private ProgressDialog dialog = null;
 
 
-
     // 이것의 용도는 대체 무엇일까요...
     private List<String> finalHyp = new ArrayList<String>();
-
-
-
-
-
-
-
-
 
 
     // 에러 확인 메소드
     @Override
     public void rapidSphinxDidStop(String reason, int code) {
-
 
 
         if (code == 500) {
@@ -78,29 +70,46 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
         }
     }
 
+
+    // 결과 처리
     @Override
     public void rapidSphinxFinalResult(String result, List<String> hypArr, List<Double> scores) {
 
 
-        System.out.println("Full Result : " + result);
+        // 소문자 대문자는 영향을 미치지 않게 함.
+        if (result.equalsIgnoreCase(txtWords.getText().toString())) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+
+                txtResult.setTextColor(getResources().getColor(android.R.color.holo_green_light, null));
+
+            } else {
+                txtResult.setTextColor(getResources().getColor(android.R.color.holo_green_light));
+
+            }
 
 
-        // 이 부분은 잘 모르겠다.
-        for (double score: scores) {
-            System.out.println(score);
+        } else {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                txtResult.setTextColor(getResources().getColor(android.R.color.holo_red_light, null));
+
+            } else {
+
+                txtResult.setTextColor(getResources().getColor(android.R.color.holo_red_light));
+
+            }
+
+            txtResult.setText(result);
         }
 
-        // Get array word
-        for (String word: hypArr) {
-            System.out.println(word);
-        }
     }
 
     @Override
     public void rapidSphinxPartialResult(String partialResult) {
 
         // 부분 음성 처리 메소드 쉽게 말해 한음절 한음절 약간 실시간(?)으로 인식되는 메소드?
-        System.out.println(partialResult);
+        txtPartialResult.setText(partialResult);
     }
 
     @Override
@@ -108,19 +117,18 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
         // 지원되지 않는 언어에 대한 메소드
         String unsupportedWords = "";
-        for (String word: words) {
+        for (String word : words) {
             unsupportedWords += word + ", ";
         }
 
         // 지웑되지 않는 언어에 대한 로그 처리 한국어는 되는지 테스트 후 확인해봐야겠음..
-        System.out.println("지원되지 않는 언어 : \n" + unsupportedWords);
+        txtUnsupported.setText("지원되지 않는 언어 : \n" + unsupportedWords);
     }
 
     @Override
     public void rapidSphinxBuffer(short[] shortBuffer, byte[] byteBuffer, boolean inSpeech) {
 
-
-
+        System.out.println(shortBuffer.length + " - " + byteBuffer.length + " - " + inSpeech);
         // 아직 뭔지 잘 모르겠음
 
     }
@@ -129,19 +137,48 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
     @Override
     public void rapidSphinxDidSpeechDetected() {
 
-        System.out.println("단어 감지됨");
+        txtStatus.setText("단어 감지됨");
 
     }
 
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        dialog = ProgressDialog.show(MainActivity.this, "",
+                "데이터 준비중..", true);
+
+
+        rapidSphinx.prepareRapidSphinx(new RapidPreparationListener() {
+            @Override
+            public void rapidPreExecute(Config config) {
+                rapidSphinx.setRawLogAvailable(true);
+                config.setString("-logfn", "/dev/null");
+                config.setBoolean("-verbose", true);
+            }
+
+            @Override
+            public void rapidPostExecute(boolean isSuccess) {
+
+                btnSync.setEnabled(true);
+                btnRecognizer.setEnabled(false);
+                txtStatus.setText("RapidSphinx ready!");
+                dialog.dismiss();
+            }
+        });
+
+
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
 
         rapidSphinx = new RapidSphinx(this);
         rapidSphinx.addListener(this);
-
-
 
 
         rapidSphinx.updateVocabulary("next", new String[]{
@@ -165,7 +202,7 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
         txtUnsupported = findViewById(R.id.txtUnsuported);
         txtStatus = findViewById(R.id.txtStatus);
         btnSync = findViewById(R.id.btnSync);
-        btnRecognizer =  findViewById(R.id.btnRecognizer);
+        btnRecognizer = findViewById(R.id.btnRecognizer);
 
 //        btnStartAudio = (Button) findViewById(R.id.btnStartAudio);
         txtStatus.setText("데이터를 준비하는 중 입니다!");
@@ -217,7 +254,6 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
         });
 
 
-
         // 권환 확인
         if (isPermissionsGranted()) {
 
@@ -248,9 +284,6 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
     }
 
 
-
-
-
     // 권환 확인 메소드
     private boolean isPermissionsGranted() {
 
@@ -265,7 +298,6 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
         }
 
     }
-
 
 
 }
