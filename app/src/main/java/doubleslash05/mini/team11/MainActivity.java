@@ -28,7 +28,9 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
     private RapidSphinx rapidSphinx;
     private Button btnRecognizer;
-    private Button btnStartAudio;
+
+
+//    private Button btnStartAudio; 오디오 출력 필요없음.
     private Button btnSync;
     private EditText txtWords;
     private EditText txtDistractor;
@@ -39,6 +41,9 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
     private ProgressDialog dialog = null;
 
+
+
+    // 이것의 용도는 대체 무엇일까요...
     private List<String> finalHyp = new ArrayList<String>();
 
 
@@ -49,6 +54,8 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
 
 
+
+    // 에러 확인 메소드
     @Override
     public void rapidSphinxDidStop(String reason, int code) {
 
@@ -76,11 +83,9 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
 
         System.out.println("Full Result : " + result);
-        // NOTE :
-        // [x] parameter "result" : Give final response with ??? values when word out-of-vocabulary.
-        // [x] parameter "hypArr" : Give final response in original words without ??? values.
 
-        // Get score from every single word. hypArr length equal with scores length
+
+        // 이 부분은 잘 모르겠다.
         for (double score: scores) {
             System.out.println(score);
         }
@@ -94,20 +99,20 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
     @Override
     public void rapidSphinxPartialResult(String partialResult) {
 
-        // 부분 음성 처리 메소드
+        // 부분 음성 처리 메소드 쉽게 말해 한음절 한음절 약간 실시간(?)으로 인식되는 메소드?
         System.out.println(partialResult);
     }
 
     @Override
     public void rapidSphinxUnsupportedWords(List<String> words) {
 
-        // 지원되지 않는 언어에 대한 메소
+        // 지원되지 않는 언어에 대한 메소드
         String unsupportedWords = "";
         for (String word: words) {
             unsupportedWords += word + ", ";
         }
 
-        // 지웑되지 않는 언어에 대한 로그 처리
+        // 지웑되지 않는 언어에 대한 로그 처리 한국어는 되는지 테스트 후 확인해봐야겠음..
         System.out.println("지원되지 않는 언어 : \n" + unsupportedWords);
     }
 
@@ -119,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
         // 아직 뭔지 잘 모르겠음
 
     }
+
+    // 음성이 감지 되었을때 호출되는 메소드
     @Override
     public void rapidSphinxDidSpeechDetected() {
 
@@ -137,16 +144,30 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
 
 
-        // 초기화
-        txtWords = (EditText) findViewById(R.id.txtWords);
-        txtDistractor = (EditText) findViewById(R.id.txtDistractor);
-        txtResult = (TextView) findViewById(R.id.txtResult);
-        txtPartialResult = (TextView) findViewById(R.id.txtPartialResult);
-        txtUnsupported = (TextView) findViewById(R.id.txtUnsuported);
-        txtStatus = (TextView) findViewById(R.id.txtStatus);
-        btnSync = (Button) findViewById(R.id.btnSync);
-        btnRecognizer = (Button) findViewById(R.id.btnRecognizer);
-        btnStartAudio = (Button) findViewById(R.id.btnStartAudio);
+        rapidSphinx.updateVocabulary("next", new String[]{
+                "다음",
+                "멈춰"
+        }, new RapidCompletionListener() {
+            @Override
+            public void rapidCompletedProcess() {
+                System.out.println("어휘 업데이트 됨!");
+            }
+        });
+
+        //  UI 초기화
+        txtWords = findViewById(R.id.txtWords);
+
+
+        // txtDistractor 가 뭔지 모르겠다.
+        txtDistractor = findViewById(R.id.txtDistractor);
+        txtResult = findViewById(R.id.txtResult);
+        txtPartialResult = findViewById(R.id.txtPartialResult);
+        txtUnsupported = findViewById(R.id.txtUnsuported);
+        txtStatus = findViewById(R.id.txtStatus);
+        btnSync = findViewById(R.id.btnSync);
+        btnRecognizer =  findViewById(R.id.btnRecognizer);
+
+//        btnStartAudio = (Button) findViewById(R.id.btnStartAudio);
         txtStatus.setText("데이터를 준비하는 중 입니다!");
 
         // 실행 초기 버튼 비활성화
@@ -181,13 +202,28 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
         });
 
 
+        btnRecognizer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                txtResult.setText("");
+                txtPartialResult.setText("");
+                txtStatus.setText("");
+                txtUnsupported.setText("");
+                btnSync.setEnabled(false);
+                btnRecognizer.setEnabled(false);
+                rapidSphinx.startRapidSphinx(10000);
+                txtStatus.setText("지금 말하세요!");
+            }
+        });
+
+
 
         // 권환 확인
         if (isPermissionsGranted()) {
 
 
             dialog = ProgressDialog.show(MainActivity.this, "",
-                    "Preparing data. Please wait...", true);
+                    "데이터 준비중. 기다려주세요...", true);
 
             rapidSphinx.prepareRapidSphinx(new RapidPreparationListener() {
                 @Override
@@ -203,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
                     btnSync.setEnabled(true);
                     btnRecognizer.setEnabled(false);
-                    txtStatus.setText("RapidSphinx ready!");
+                    txtStatus.setText("RapidSphinx 준비됨!");
                     dialog.dismiss();
                 }
             });
@@ -215,6 +251,7 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
 
 
+    // 권환 확인 메소드
     private boolean isPermissionsGranted() {
 
         if (ContextCompat.checkSelfPermission(this,

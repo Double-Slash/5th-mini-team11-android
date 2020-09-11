@@ -6,7 +6,8 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity"
     android:id="@+id/container"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/colorAccent">
 
     <LinearLayout
         android:id="@+id/content"
@@ -39,7 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="Update Language Model" />
+            android:text="어휘 업데이트" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,16 +56,9 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="10dp"
                 android:layout_weight="50"
-                android:text="Start Recognizer" />
+                android:text="인식 시작" />
 
-            <Button
-                android:id="@+id/btnStartAudio"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:layout_weight="50"
-                android:text="Play Audio Record" />
+
         </LinearLayout>
 
         <TextView
