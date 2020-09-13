@@ -18,10 +18,10 @@ class VideoTestActivity : AppCompatActivity() {
         videoview_video.setMediaController(mediaController)
 
 
-//        val uri = Uri.parse("https://vt.tumblr.com/tumblr_o600t8hzf51qcbnq0_480.mp4") // 서버에 있는 영상
+        val uri = Uri.parse("https://doubleslash-test.s3.ap-northeast-2.amazonaws.com/Recipe.mp4") // 서버에 있는 영상
 //        val uri = Uri.parse("http://techslides.com/demos/sample-videos/small.mp4") // 서버에 있는 영상
 //        Uri.parse(Environment.getExternalStorageDirectory().getAbsolutePath()+"filename") // SD card 영상
-        val uri = Uri.parse("android.resource://$packageName/${R.raw.out}")
+//        val uri = Uri.parse("android.resource://$packageName/${R.raw.out}")
         videoview_video.setVideoURI(uri)
 
         videoview_video.setOnPreparedListener {
@@ -33,8 +33,7 @@ class VideoTestActivity : AppCompatActivity() {
         }
 
         button_video_test.setOnClickListener {
-            videoview_video.pause()
-            videoview_video.seekTo(videoview_video.currentPosition + 500)
+            videoview_video.seekTo(videoview_video.currentPosition + 1000)
             Log.d("TEST", (videoview_video.currentPosition).toString())
         }
 
