@@ -2,6 +2,7 @@ package doubleslash05.mini.team11;
 
 import android.Manifest;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
@@ -27,6 +28,10 @@ import java.util.List;
 import edu.cmu.pocketsphinx.Config;
 
 public class MainActivity extends AppCompatActivity implements RapidSphinxListener {
+
+    public static final int sub = 1001;
+
+    // 이제 응용해봐야하는데..
 
     private RapidSphinx rapidSphinx;
     private Button btnRecognizer;
@@ -102,7 +107,20 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
             }
 
             txtResult.setText(result);
+
+
+
         }
+
+        if (txtResult.getText().toString() == result) {
+
+
+            Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
+            startActivity(intent);
+
+        }
+
+
 
     }
 
