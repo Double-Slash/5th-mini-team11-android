@@ -16,6 +16,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.icaksama.rapidsphinx.RapidCompletionListener;
 import com.icaksama.rapidsphinx.RapidPreparationListener;
@@ -48,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
     private Button btnStop;
 
     private ProgressDialog dialog = null;
+
+    private String nextKeyword = "next";
 
 
     // 이것의 용도는 대체 무엇일까요...
@@ -85,26 +88,13 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
         // 소문자 대문자는 영향을 미치지 않게 함.
         if (result.equalsIgnoreCase(txtWords.getText().toString())) {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            ResourcesCompat.getColor(getResources(), android.R.color.holo_green_light, null);
 
-                txtResult.setTextColor(getResources().getColor(android.R.color.holo_green_light, null));
-
-            } else {
-                txtResult.setTextColor(getResources().getColor(android.R.color.holo_green_light));
-
-            }
 
 
         } else {
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                txtResult.setTextColor(getResources().getColor(android.R.color.holo_red_light, null));
-
-            } else {
-
-                txtResult.setTextColor(getResources().getColor(android.R.color.holo_red_light));
-
-            }
+           ResourcesCompat.getColor(getResources(), android.R.color.holo_red_light, null);
 
             txtResult.setText(result);
 
@@ -112,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
         }
 
-        if (txtResult.getText().toString() == result) {
+        if (txtResult.getText().toString().equals(nextKeyword)) {
 
 
             Intent intent = new Intent(getApplicationContext(), SecondActivity.class);
