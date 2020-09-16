@@ -33,7 +33,7 @@ public class sub extends AppCompatActivity {
         im4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent_02 = new Intent(getApplication(), MainActivity.class);
+                Intent intent_02 = new Intent(getApplication(), MainActivity2.class);
                 startActivity(intent_02);
             }
         });
