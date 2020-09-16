@@ -183,6 +183,39 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+
+
+
+
+        // onCreate 시에 어휘 업데이트 (버튼 누를 필요 없이 )
+
+
+        dialog.show();
+        btnSync.setEnabled(false);
+        btnRecognizer.setEnabled(true);
+
+        String[] oovwords = {"pause"};
+
+        rapidSphinx.updateVocabulary("next",
+                oovwords, new RapidCompletionListener() {
+                    @Override
+                    public void rapidCompletedProcess() {
+
+
+                        txtResult.setText("");
+                        txtPartialResult.setText("");
+                        txtStatus.setText("");
+                        txtUnsupported.setText("");
+                        btnRecognizer.setEnabled(true);
+                        dialog.dismiss();
+                    }
+                });
+
+
+
+
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -214,37 +247,37 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
 
 
         // 싱크 버튼을 누를때 어휘를 업데이트한다.
-        btnSync.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-
-
-                dialog.show();
-                btnSync.setEnabled(false);
-                btnRecognizer.setEnabled(true);
-
-                String[] oovwords = {"happy", "dog", "cat"};
-
-                rapidSphinx.updateVocabulary("next",
-                        oovwords, new RapidCompletionListener() {
-                            @Override
-                            public void rapidCompletedProcess() {
-
-
-                                txtResult.setText("");
-                                txtPartialResult.setText("");
-                                txtStatus.setText("");
-                                txtUnsupported.setText("");
-                                btnRecognizer.setEnabled(true);
-                                dialog.dismiss();
-                            }
-                        });
-
-
-
-            }
-        });
+//        btnSync.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//
+//
+//                dialog.show();
+//                btnSync.setEnabled(false);
+//                btnRecognizer.setEnabled(true);
+//
+//                String[] oovwords = {"pause"};
+//
+//                rapidSphinx.updateVocabulary("next",
+//                        oovwords, new RapidCompletionListener() {
+//                            @Override
+//                            public void rapidCompletedProcess() {
+//
+//
+//                                txtResult.setText("");
+//                                txtPartialResult.setText("");
+//                                txtStatus.setText("");
+//                                txtUnsupported.setText("");
+//                                btnRecognizer.setEnabled(true);
+//                                dialog.dismiss();
+//                            }
+//                        });
+//
+//
+//
+//            }
+//        });
 
 
         // 인식 시작 버튼 --> 버튼을 안누르고 어떻게 해봐야 할 것 같음. 레시피 클릭시 싱크 버튼을 눌렀다고 치면, 그 후에 자동으로 btnRecognizer 실행 하게끔.
@@ -267,7 +300,7 @@ public class MainActivity extends AppCompatActivity implements RapidSphinxListen
             @Override
             public void onClick(View view) {
                 rapidSphinx.stop();
-                txtStatus.setText("인식 멈");
+                txtStatus.setText("인식 멈춤");
             }
         });
 
