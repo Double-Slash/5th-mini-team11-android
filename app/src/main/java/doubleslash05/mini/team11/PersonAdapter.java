@@ -34,9 +34,9 @@ public class PersonAdapter extends RecyclerView.Adapter<PersonAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
-        TextView textView;
-        TextView textView2;
-        TextView textView3;
+        private TextView textView;
+        private TextView textView2;
+        private TextView textView3;
 
         public ViewHolder(View itemVIew){
             super(itemVIew);

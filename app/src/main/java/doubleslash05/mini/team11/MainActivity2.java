@@ -12,7 +12,7 @@ import android.widget.LinearLayout;
 
 public class MainActivity2 extends AppCompatActivity {
 
-    ImageButton im1,im2;
+    private ImageButton im1,im2;
 
 
     @Override
