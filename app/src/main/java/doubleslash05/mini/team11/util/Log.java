@@ -1,6 +1,8 @@
 package doubleslash05.mini.team11.util;
 
-import doubleslash05.mini.team11.BuildConfig;
+import com.naver.speech.clientapi.BuildConfig;
+
+;
 
 public class Log {
     private static boolean DEBUG = BuildConfig.DEBUG;
