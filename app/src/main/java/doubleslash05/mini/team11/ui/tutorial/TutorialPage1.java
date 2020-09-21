@@ -41,7 +41,13 @@ public class TutorialPage1 extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_tutorial_page1, container, false);
         TextView tvLabel = (TextView) view.findViewById(R.id.tvLabel);
-        tvLabel.setText("안녕하세요! 이제부터 목소리로 요리해보아요.");
+        TextView tvDetail = (TextView) view.findViewById(R.id.tvDetail);
+
+        tvLabel.setText("안녕하세요!\n" + "이제부터 목소리로\n"+"요리해보아요.");
+        tvDetail.setText("앞으로 등장할 하단의 안내문구를\n" +
+                "따라 말해주세요! 5초 이상 인식이 안될 경우\n" +
+                "해당 스텝을 스킵할 수 있습니다.\n");
+
         return view;
     }
 }
