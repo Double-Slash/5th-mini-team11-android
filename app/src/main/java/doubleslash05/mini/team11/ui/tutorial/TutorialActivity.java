@@ -17,12 +17,20 @@ import doubleslash05.mini.team11.R;
 
 public class TutorialActivity extends AppCompatActivity {
 
+
+
     FragmentPagerAdapter adapterViewPager;
 
 
     public static class TutorialPageAdapter extends FragmentPagerAdapter {
-
         private static int PAGE_NUN = 5;
+
+        @Override
+        public int getItemPosition(@NonNull Object object) {
+            return super.getItemPosition(object);
+        }
+
+
 
 
         public TutorialPageAdapter(FragmentManager fragmentManager) {
@@ -44,15 +52,20 @@ public class TutorialActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    return TutorialPage1.getInstance("tutorial1", 1);
+                    TutorialPage1 tutorialPage1 = new TutorialPage1();
+                    return tutorialPage1;
                 case 1:
-                    return TutorialPage2.getInstance("tutorial2", 2);
+                    TutorialPage2 tutorialPage2 = new TutorialPage2();
+                    return tutorialPage2;
                 case 2:
-                    return TutorialPage3.getInstance("tutorial3", 3);
+                    TutorialPage3 tutorialPage3 = new TutorialPage3();
+                    return tutorialPage3;
                 case 3:
-                    return TutorialPage4.getInstance("tutorial4", 4);
+                    TutorialPage4 tutorialPage4 = new TutorialPage4();
+                    return tutorialPage4;
                 case 4:
-                    return TutorialPage5.getInstance("tutorial5", 5);
+                    TutorialPage5 tutorialPage5 = new TutorialPage5();
+                    return tutorialPage5;
                 default:
                     return null;
 
