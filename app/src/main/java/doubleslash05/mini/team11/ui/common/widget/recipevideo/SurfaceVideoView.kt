@@ -11,7 +11,7 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.MediaController
 import doubleslash05.mini.team11.BuildConfig
-import doubleslash05.mini.team11.util.Log
+import doubleslash05.mini.team11.util.LogUtils
 import java.io.IOException
 
 class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : SurfaceView(context, attrs, defStyle), SurfaceHolder.Callback, MediaController.MediaPlayerControl {
@@ -40,7 +40,7 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
                 needPrepare = true
             }
         } catch (e: IOException) {
-            Log.e("RecipeVideo", "URL Error", e)
+            LogUtils.e("RecipeVideo", "URL Error", e)
         }
     }
 

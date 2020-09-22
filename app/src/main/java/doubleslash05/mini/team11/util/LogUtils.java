@@ -2,7 +2,7 @@ package doubleslash05.mini.team11.util;
 
 import doubleslash05.mini.team11.BuildConfig;
 
-public class Log {
+public class LogUtils {
     private static boolean DEBUG = BuildConfig.DEBUG;
 
     public static void v(String tag, String msg) {
