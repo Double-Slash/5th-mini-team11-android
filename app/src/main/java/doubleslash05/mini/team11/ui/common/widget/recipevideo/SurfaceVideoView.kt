@@ -56,7 +56,6 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
     }
 
     override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
-        Log.d("Test", "Release")
         player.release()
         state = State.IDLE
         initMediaPlayer()

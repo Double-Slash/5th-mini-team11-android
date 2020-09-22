@@ -12,7 +12,6 @@ import android.widget.MediaController.MediaPlayerControl
 import android.widget.SeekBar
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
-import doubleslash05.mini.team11.util.Log
 import kotlinx.android.synthetic.main.view_recipe_video.view.*
 import kotlinx.coroutines.*
 import java.lang.Runnable
