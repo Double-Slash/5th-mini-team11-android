@@ -26,6 +26,9 @@ class SurfaceVideoView extends SurfaceView implements SurfaceHolder.Callback, Me
     private MediaPlayer player;
     private Context context;
 
+    private State state = State.IDLE;
+    private MediaPlayer.OnPreparedListener onPreparedListener = null;
+
     public SurfaceVideoView(Context context) {
         super(context);
 
@@ -39,6 +42,13 @@ class SurfaceVideoView extends SurfaceView implements SurfaceHolder.Callback, Me
                 setFitToFillAspectRatio(mp, width, height);
             }
         });
+        player.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            @Override
+            public void onPrepared(MediaPlayer mp) {
+                state = State.PREPARED;
+                if(onPreparedListener != null) onPreparedListener.onPrepared(mp);
+            }
+        });
 
         getHolder().addCallback(this);
     }
@@ -47,16 +57,23 @@ class SurfaceVideoView extends SurfaceView implements SurfaceHolder.Callback, Me
     public void surfaceCreated(@NonNull SurfaceHolder surfaceHolder) {
         player.setDisplay(surfaceHolder);
         try {
-            player.setDataSource("https://doubleslash-test.s3.ap-northeast-2.amazonaws.com/out.mp4");
             player.prepare();
+            state = State.PREPARED;
         } catch (IOException e) {
             Log.e("RecipeVideo", "URL Error", e);
         }
     }
 
     @Override
-    public void surfaceChanged(@NonNull SurfaceHolder surfaceHolder, int i, int i1, int i2) {
-
+    public void surfaceChanged(@NonNull SurfaceHolder holder, int format, int width, int height) {
+//        boolean isValidState = (mTargetState == STATE_PLAYING);
+//        boolean hasValidSize = (mVideoWidth == w && mVideoHeight == h);
+//        if (mMediaPlayer != null && isValidState && hasValidSize) {
+//            if (mSeekWhenPrepared != 0) {
+//                seekTo(mSeekWhenPrepared);
+//            }
+//            start();
+//        }
     }
 
     @Override
@@ -97,27 +114,58 @@ class SurfaceVideoView extends SurfaceView implements SurfaceHolder.Callback, Me
 
     @Override
     public void start() {
-        player.start();
+        switch (state) {
+            case PREPARED:
+            case STARTED:
+            case PAUSED:
+                player.start();
+                state = State.STARTED;
+            default:
+                break;
+        }
     }
 
     @Override
     public void pause() {
-        player.pause();
+        switch (state) {
+            case PREPARED:
+            case STARTED:
+            case PAUSED:
+                player.pause();
+                state = State.PAUSED;
+            default:
+                break;
+        }
     }
 
     @Override
     public int getDuration() {
+        switch (state) {
+            case PREPARED:
+            case STARTED:
+            case PAUSED:
+            case STOPPED:
+            return player.getDuration();
+        }
         return 0;
     }
 
     @Override
     public int getCurrentPosition() {
-        return 0;
+        return player.getCurrentPosition();
     }
 
     @Override
     public void seekTo(int pos) {
-
+        switch (state) {
+            case PREPARED:
+            case STARTED:
+            case PAUSED:
+                player.seekTo(pos);
+                break;
+            default:
+                break;
+        }
     }
 
     @Override
@@ -147,6 +195,28 @@ class SurfaceVideoView extends SurfaceView implements SurfaceHolder.Callback, Me
 
     @Override
     public int getAudioSessionId() {
-        return 0;
+        return player.getAudioSessionId();
+    }
+
+    public void setDataSource() {
+        try {
+            player.setDataSource("https://doubleslash-test.s3.ap-northeast-2.amazonaws.com/out.mp4");
+            state = State.INITIALIZED;
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setOnPreparedListener(MediaPlayer.OnPreparedListener listener) {
+        onPreparedListener = listener;
+    }
+
+    private enum State {
+        IDLE,
+        INITIALIZED,
+        PREPARED,
+        STARTED,
+        PAUSED,
+        STOPPED,
     }
 }
