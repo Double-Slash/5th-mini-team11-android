@@ -1,4 +1,4 @@
-package doubleslash05.mini.team11.test;
+package doubleslash05.mini.team11.ui.test;
 
 import android.os.Bundle;
 

@@ -4,13 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.PersistableBundle;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import doubleslash05.mini.team11.test.TestActivity;
-import doubleslash05.mini.team11.util.Log;
+import doubleslash05.mini.team11.ui.test.TestActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override

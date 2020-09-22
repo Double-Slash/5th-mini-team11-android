@@ -17,7 +17,7 @@ import androidx.annotation.Nullable;
 import doubleslash05.mini.team11.R;
 import doubleslash05.mini.team11.util.Log;
 
-public class RecipeVideoView extends FrameLayout implements SeekBar.OnSeekBarChangeListener, MediaPlayer.OnPreparedListener {
+public class RecipeVideoView extends FrameLayout implements SeekBar.OnSeekBarChangeListener, MediaPlayer.OnPreparedListener, MediaController.MediaPlayerControl {
     private SurfaceVideoView player;
     private MediaController controller;
 
@@ -85,9 +85,9 @@ public class RecipeVideoView extends FrameLayout implements SeekBar.OnSeekBarCha
             @Override
             public void onClick(View view) {
                 if (player.isPlaying()) {
-                    player.pause();
+                    pause();
                 } else {
-                    player.start();
+                    start();
                 }
             }
         });
@@ -103,7 +103,6 @@ public class RecipeVideoView extends FrameLayout implements SeekBar.OnSeekBarCha
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
         if (!fromUser) return;
-        Log.d("RecipeVideo", progress + "");
         player.seekTo(progress);
     }
 
@@ -126,5 +125,60 @@ public class RecipeVideoView extends FrameLayout implements SeekBar.OnSeekBarCha
         seekBar.setEnabled(true);
         playButton.setEnabled(true);
         seekThread.start();
+    }
+
+    @Override
+    public void start(){
+        player.start();
+    }
+
+    @Override
+    public void pause(){
+        player.pause();
+    }
+
+    @Override
+    public int getDuration() {
+        return player.getDuration();
+    }
+
+    @Override
+    public int getCurrentPosition() {
+        return player.getCurrentPosition();
+    }
+
+    @Override
+    public void seekTo(int pos) {
+        player.seekTo(pos);
+    }
+
+    @Override
+    public boolean isPlaying() {
+        return player.isPlaying();
+    }
+
+    @Override
+    public int getBufferPercentage() {
+        return player.getBufferPercentage();
+    }
+
+    @Override
+    public boolean canPause() {
+        return player.canPause();
+    }
+
+    @Override
+    public boolean canSeekBackward() {
+        return player.canSeekBackward();
+    }
+
+    @Override
+    public boolean canSeekForward() {
+        return player.canSeekForward();
+    }
+
+    @Override
+    public int getAudioSessionId() {
+        return player.getAudioSessionId();
     }
 }
