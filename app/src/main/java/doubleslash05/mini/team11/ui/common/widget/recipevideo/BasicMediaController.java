@@ -1,7 +1,6 @@
-package doubleslash05.mini.team11.ui.common.widget;
+package doubleslash05.mini.team11.ui.common.widget.recipevideo;
 
 import android.content.Context;
-import android.media.MediaPlayer;
 import android.view.View;
 import android.widget.MediaController;
 
