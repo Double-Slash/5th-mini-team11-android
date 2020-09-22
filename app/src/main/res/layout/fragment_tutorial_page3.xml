@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.tutorial.TutorialPage3"
+    tools:context=".ui.tutorial.TutorialFragment3"
     android:orientation="vertical">
 
     <TextView
@@ -86,6 +86,7 @@
 
     <View
 
+        android:id="@+id/vLine"
         android:layout_width="229dp"
         android:layout_height="1dp"
         android:layout_marginStart="66dp"

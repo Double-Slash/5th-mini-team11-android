@@ -3,9 +3,12 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="tutorialPage1Main">안녕하세요!\n이제부터 목소리로\n요리해보아요.</string>
-    <string name="tutorialPage1Detail">앞으로 등장할 하단의 안내문구를\n
-                따라 말해주세요! 5초 이상 인식이 안될 경우\n해당 스텝을 스킵할 수 있습니다.</string>
+    <string name="tutorialPage1Detail">앞으로 등장할 하단의 안내문구를\n따라 말해주세요! 5초 이상 인식이 안될 경우\n해당 스텝을 스킵할 수 있습니다.</string>
     <string name="tutorialPage3Main">잘 듣고 있어요. 계속 따라해주세요!</string>
     <string name="tutorialPage3Detail">레시피 영상 재생시 다음 이라고 말하면 다음 스텝이 시작됩니다. </string>
+    <string name="tutorialPage4Main">이제 다왔어요!\n마지막으로 따라해주세요!</string>
+    <string name="tutorialPage4Detail">레시피 영상 재생시 다시라고 말하면\n해당스텝이 다시 시작됩니다. </string>
+    <string name="tutorialPage5Main">수고하셨어요 :)\n이제부터 요리할 때\n스크린에 손은 그만!</string>
+    <string name="tutorialPage5Detail">목소리로 영상 스텝을 조정하며\n편하게 요리해 보세요!</string>
 </resources>
 

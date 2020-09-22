@@ -9,7 +9,8 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
-import android.view.Window;
+
+import com.google.android.material.tabs.TabLayout;
 
 import doubleslash05.mini.team11.R;
 
@@ -24,6 +25,8 @@ public class TutorialActivity extends AppCompatActivity {
 
     public static class TutorialPageAdapter extends FragmentPagerAdapter {
         private static int PAGE_NUN = 5;
+
+
 
         @Override
         public int getItemPosition(@NonNull Object object) {
@@ -52,20 +55,20 @@ public class TutorialActivity extends AppCompatActivity {
         public Fragment getItem(int position) {
             switch (position) {
                 case 0:
-                    TutorialPage1 tutorialPage1 = new TutorialPage1();
-                    return tutorialPage1;
+                    TutorialFragment1 tutorialFragment1 = new TutorialFragment1();
+                    return tutorialFragment1;
                 case 1:
-                    TutorialPage2 tutorialPage2 = new TutorialPage2();
-                    return tutorialPage2;
+                    TutorialFragment2 tutorialFragment2 = new TutorialFragment2();
+                    return tutorialFragment2;
                 case 2:
-                    TutorialPage3 tutorialPage3 = new TutorialPage3();
-                    return tutorialPage3;
+                    TutorialFragment3 tutorialFragment3 = new TutorialFragment3();
+                    return tutorialFragment3;
                 case 3:
-                    TutorialPage4 tutorialPage4 = new TutorialPage4();
-                    return tutorialPage4;
+                    TutorialFragment4 tutorialFragment4 = new TutorialFragment4();
+                    return tutorialFragment4;
                 case 4:
-                    TutorialPage5 tutorialPage5 = new TutorialPage5();
-                    return tutorialPage5;
+                    TutorialFragment6 tutorialFragment6 = new TutorialFragment6();
+                    return tutorialFragment6;
                 default:
                     return null;
 
@@ -75,7 +78,7 @@ public class TutorialActivity extends AppCompatActivity {
         @Nullable
         @Override
         public CharSequence getPageTitle(int position) {
-            return "Page" + position;
+            return null;
 
         }
     }
@@ -89,6 +92,10 @@ public class TutorialActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
         ViewPager vpPager = (ViewPager)findViewById(R.id.vpPager);
+        TabLayout customTab = (TabLayout)findViewById(R.id.customTab);
+
+        customTab.setupWithViewPager(vpPager, true);
+
         adapterViewPager = new TutorialPageAdapter(getSupportFragmentManager());
         vpPager.setAdapter(adapterViewPager);
         vpPager.setCurrentItem(0);
