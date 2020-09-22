@@ -2,6 +2,7 @@ package doubleslash05.mini.team11.ui.common.widget.recipevideo
 
 import android.content.Context
 import android.media.MediaPlayer
+import android.media.MediaPlayer.OnBufferingUpdateListener
 import android.media.MediaPlayer.OnPreparedListener
 import android.util.AttributeSet
 import android.view.View
@@ -11,26 +12,16 @@ import android.widget.MediaController.MediaPlayerControl
 import android.widget.SeekBar
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
+import doubleslash05.mini.team11.util.Log
 import kotlinx.android.synthetic.main.view_recipe_video.view.*
+import kotlinx.coroutines.*
+import java.lang.Runnable
 
 
 class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : FrameLayout(context, attrs, defStyle), OnPreparedListener, MediaPlayerControl, SeekBar.OnSeekBarChangeListener {
 
     private val controller = BasicMediaController(context)
     private lateinit var data: RecipeVideoData
-
-    private val seekBarThread = Thread(Runnable {
-        while (true) {
-            if (player_recipevideo.isPlaying) {
-                handler.post(Runnable { seekbar_recipevideo.progress = player_recipevideo.currentPosition })
-            }
-            try {
-                Thread.sleep(100)
-            } catch (e: InterruptedException) {
-                e.printStackTrace()
-            }
-        }
-    })
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -46,6 +37,10 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
         // player_recipevideo
         player_recipevideo.setOnPreparedListener(this)
+        player_recipevideo.setOnReleaseListener {
+            seekBarCoroutine.cancel()
+        }
+
 
         seekbar_recipevideo.setOnSeekBarChangeListener(this)
 
@@ -62,6 +57,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
         })
     }
 
+    // region seekbar
     private var trackingStart = false
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         if (!fromUser) return
@@ -77,13 +73,32 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
         if (trackingStart) player_recipevideo.start()
     }
 
+    //endregion
+
+
+    private lateinit var seekBarCoroutine : Job
+
     override fun onPrepared(mp: MediaPlayer) {
         seekbar_recipevideo.max = mp.duration
         seekbar_recipevideo.isEnabled = true
         button_recipevideo.isEnabled = true
-        seekBarThread.start()
+
+        seekBarCoroutine = GlobalScope.launch  {
+            while (true){
+                delay(300)
+                launch(Dispatchers.Main) {
+                    try {
+                        seekbar_recipevideo.progress = player_recipevideo.currentPosition
+                    }catch (e : Exception){
+
+                    }
+                }
+            }
+        }
     }
 
+
+    // region MediaPlayer Controller
     override fun start() {
         player_recipevideo.start()
     }
@@ -127,6 +142,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     override fun getAudioSessionId(): Int {
         return player_recipevideo.audioSessionId
     }
+    //endregion
 
     fun setData(data: RecipeVideoData) {
         this.data = data

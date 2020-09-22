@@ -15,22 +15,16 @@ import doubleslash05.mini.team11.util.Log
 import java.io.IOException
 
 class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : SurfaceView(context, attrs, defStyle), SurfaceHolder.Callback, MediaController.MediaPlayerControl {
-    private val player = MediaPlayer()
+    private var player = MediaPlayer()
     private var state = State.IDLE
     private var onPreparedListener: OnPreparedListener? = null
+    private var onReleaseListener: (() -> Unit)? = null
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
     init {
-        player.setOnVideoSizeChangedListener(OnVideoSizeChangedListener { mp, width, height ->
-            setFitToFillAspectRatio(mp, width, height)
-        })
-        player.setOnPreparedListener(OnPreparedListener { mp ->
-            state = State.PREPARED
-            onPreparedListener?.onPrepared(mp)
-        })
-
+        initMediaPlayer()
         holder.addCallback(this)
     }
 
@@ -62,31 +56,11 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
     }
 
     override fun surfaceDestroyed(surfaceHolder: SurfaceHolder) {
+        Log.d("Test", "Release")
         player.release()
-    }
-
-    private fun setFitToFillAspectRatio(mp: MediaPlayer?, videoWidth: Int, videoHeight: Int) {
-        if (mp == null) return
-        val screenWidth: Int
-        val screenHeight: Int
-        if (BuildConfig.VERSION_CODE >= Build.VERSION_CODES.R) {
-            val screenRect = (context as Activity).windowManager.currentWindowMetrics.bounds
-            screenWidth = screenRect.width()
-            screenHeight = screenRect.height()
-        } else {
-            screenWidth = context!!.display!!.width
-            screenHeight = context.display!!.height
-        }
-
-        val videoParams = layoutParams
-        if (videoWidth > videoHeight) {
-            videoParams.width = screenWidth
-            videoParams.height = screenWidth * videoHeight / videoWidth
-        } else {
-            videoParams.width = screenHeight * videoWidth / videoHeight
-            videoParams.height = screenHeight
-        }
-        layoutParams = videoParams
+        state = State.IDLE
+        initMediaPlayer()
+        onReleaseListener?.invoke()
     }
 
     override fun start() {
@@ -102,7 +76,7 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
     override fun pause() {
         when (state) {
-            State.PREPARED, State.STARTED, State.PAUSED -> {
+            State.STARTED, State.PAUSED -> {
                 player.pause()
                 state = State.PAUSED
             }
@@ -170,6 +144,46 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
     fun setOnPreparedListener(listener: OnPreparedListener) {
         onPreparedListener = listener
     }
+
+    fun setOnReleaseListener(listener: (() -> Unit)?) {
+        onReleaseListener = listener
+    }
+
+    private fun initMediaPlayer(){
+        player = MediaPlayer()
+        player.setOnVideoSizeChangedListener(OnVideoSizeChangedListener { mp, width, height ->
+            setFitToFillAspectRatio(mp, width, height)
+        })
+        player.setOnPreparedListener(OnPreparedListener { mp ->
+            state = State.PREPARED
+            onPreparedListener?.onPrepared(mp)
+        })
+    }
+
+    private fun setFitToFillAspectRatio(mp: MediaPlayer?, videoWidth: Int, videoHeight: Int) {
+        if (mp == null) return
+        val screenWidth: Int
+        val screenHeight: Int
+        if (BuildConfig.VERSION_CODE >= Build.VERSION_CODES.R) {
+            val screenRect = (context as Activity).windowManager.currentWindowMetrics.bounds
+            screenWidth = screenRect.width()
+            screenHeight = screenRect.height()
+        } else {
+            screenWidth = context!!.display!!.width
+            screenHeight = context.display!!.height
+        }
+
+        val videoParams = layoutParams
+        if (videoWidth > videoHeight) {
+            videoParams.width = screenWidth
+            videoParams.height = screenWidth * videoHeight / videoWidth
+        } else {
+            videoParams.width = screenHeight * videoWidth / videoHeight
+            videoParams.height = screenHeight
+        }
+        layoutParams = videoParams
+    }
+
 
     private enum class State {
         IDLE, INITIALIZED, PREPARED, STARTED, PAUSED, STOPPED,
