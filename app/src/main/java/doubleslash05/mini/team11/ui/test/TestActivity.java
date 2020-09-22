@@ -20,7 +20,7 @@ public class TestActivity extends BaseActivity {
 
         RecipeVideoView videoView = findViewById(R.id.recipevideo);
 
-        RecipeVideoData data = new RecipeVideoData("https://doubleslash-test.s3.ap-northeast-2.amazonaws.com/out.mp4", new Integer[] {5000, 10000, 25000});
+        RecipeVideoData data = new RecipeVideoData("https://doubleslash-test.s3.ap-northeast-2.amazonaws.com/out.mp4", new Integer[] {50000, 100000});
         videoView.setData(data);
     }
 }

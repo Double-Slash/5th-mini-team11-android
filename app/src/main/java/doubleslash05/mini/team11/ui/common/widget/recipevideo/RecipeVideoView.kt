@@ -19,7 +19,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     private val controller = BasicMediaController(context)
     private lateinit var data: RecipeVideoData
 
-    val seekBarthread = Thread(Runnable {
+    private val seekBarThread = Thread(Runnable {
         while (true) {
             if (player_recipevideo.isPlaying) {
                 handler.post(Runnable { seekbar_recipevideo.progress = player_recipevideo.currentPosition })
@@ -81,7 +81,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
         seekbar_recipevideo.max = mp.duration
         seekbar_recipevideo.isEnabled = true
         button_recipevideo.isEnabled = true
-        seekBarthread.start()
+        seekBarThread.start()
     }
 
     override fun start() {
