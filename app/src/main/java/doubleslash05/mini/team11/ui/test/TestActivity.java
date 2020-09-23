@@ -24,7 +24,7 @@ public class TestActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        RecipeVideoData data = new RecipeVideoData("https://doubleslash-test.s3.ap-northeast-2.amazonaws.com/out.mp4", new Integer[]{50000, 100000});
+        RecipeVideoData data = new RecipeVideoData("https://doubleslash-test.s3.ap-northeast-2.amazonaws.com/out.mp4", new Integer[]{30000, 60000, 90000, 120000});
 
         videoView.setData(data);
     }

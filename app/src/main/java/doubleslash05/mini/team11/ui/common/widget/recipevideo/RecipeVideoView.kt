@@ -1,10 +1,12 @@
 package doubleslash05.mini.team11.ui.common.widget.recipevideo
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.media.MediaPlayer
-import android.media.MediaPlayer.OnBufferingUpdateListener
 import android.media.MediaPlayer.OnPreparedListener
 import android.util.AttributeSet
+import android.view.MotionEvent
+import android.view.VelocityTracker
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.FrameLayout
@@ -14,12 +16,12 @@ import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
 import kotlinx.android.synthetic.main.view_recipe_video.view.*
 import kotlinx.coroutines.*
-import java.lang.Runnable
+import kotlin.math.abs
 
-
-class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : FrameLayout(context, attrs, defStyle), OnPreparedListener, MediaPlayerControl, SeekBar.OnSeekBarChangeListener {
-
-    private val controller = BasicMediaController(context)
+@SuppressLint("ClickableViewAccessibility")
+class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : FrameLayout(
+    context, attrs, defStyle
+), OnPreparedListener, MediaPlayerControl, SeekBar.OnSeekBarChangeListener {
     private lateinit var data: RecipeVideoData
 
     constructor(context: Context) : this(context, null, 0)
@@ -27,9 +29,6 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
     init {
         val v = View.inflate(context, R.layout.view_recipe_video, this)
-
-        controller.setAnchorView(player_recipevideo)
-        controller.setMediaPlayer(player_recipevideo)
 
         seekbar_recipevideo.isEnabled = false
         button_recipevideo.isEnabled = false
@@ -51,9 +50,50 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
             }
         })
 
-        player_recipevideo.setOnClickListener(OnClickListener {
-            //                controller.show(3000);
-        })
+        val velocityTracker: VelocityTracker = VelocityTracker.obtain()
+        player_recipevideo.setOnTouchListener { v, event ->
+            when (event!!.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    velocityTracker.clear()
+                    return@setOnTouchListener true
+                }
+                MotionEvent.ACTION_MOVE -> {
+                    velocityTracker.addMovement(event)
+                    return@setOnTouchListener true
+                }
+                MotionEvent.ACTION_UP -> {
+                    velocityTracker.computeCurrentVelocity(250)
+                    if (velocityTracker.xVelocity > 500) {
+                        nextSection()
+                    } else if (velocityTracker.xVelocity < -500) {
+                        prevSection()
+                    } else if (event.eventTime - event.downTime < 200) {
+                        switchController()
+                    } else {
+                        return@setOnTouchListener false
+                    }
+                    return@setOnTouchListener true
+                }
+            }
+            return@setOnTouchListener false
+        }
+
+        button_recipevideo_start.setOnClickListener {
+            hideController()
+            start()
+        }
+
+        button_recipevideo_replay.setOnClickListener {
+            replySction()
+        }
+
+        button_recipevideo_next.setOnClickListener {
+            nextSection()
+        }
+
+        button_recipevideo_prev.setOnClickListener {
+            prevSection()
+        }
     }
 
     // region seekbar
@@ -75,22 +115,18 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     //endregion
 
 
-    private lateinit var seekBarCoroutine : Job
+    private lateinit var seekBarCoroutine: Job
 
     override fun onPrepared(mp: MediaPlayer) {
         seekbar_recipevideo.max = mp.duration
         seekbar_recipevideo.isEnabled = true
         button_recipevideo.isEnabled = true
 
-        seekBarCoroutine = GlobalScope.launch  {
-            while (true){
-                delay(300)
+        seekBarCoroutine = GlobalScope.launch {
+            while (true) {
+                delay(TICK_TIME)
                 launch(Dispatchers.Main) {
-                    try {
-                        seekbar_recipevideo.progress = player_recipevideo.currentPosition
-                    }catch (e : Exception){
-
-                    }
+                    tick()
                 }
             }
         }
@@ -106,6 +142,18 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
         player_recipevideo.pause()
     }
 
+    fun nextSection() {
+        seekTo(data.getNextSection(currentPosition))
+    }
+
+    fun replySction() {
+        seekTo(data.getCurrentSction(currentPosition))
+    }
+
+    fun prevSection() {
+        seekTo(data.getPrevSection(currentPosition))
+    }
+
     override fun getDuration(): Int {
         return player_recipevideo.duration
     }
@@ -115,6 +163,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
 
     override fun seekTo(pos: Int) {
+        seekbar_recipevideo.progress = pos
         player_recipevideo.seekTo(pos)
     }
 
@@ -143,10 +192,55 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
     //endregion
 
+    fun switchController() {
+        if (layout_recipevideo_controller.visibility == View.VISIBLE) {
+            hideController()
+        } else {
+            showController()
+        }
+    }
+
+    fun showController() {
+        pause()
+        layout_recipevideo_controller.visibility = View.VISIBLE
+    }
+
+    fun hideController() {
+        layout_recipevideo_controller.visibility = View.GONE
+    }
+
+
     fun setData(data: RecipeVideoData) {
         this.data = data
         player_recipevideo.setDataSource(data.path)
         seekbar_recipevideo.setSections(data.sections)
     }
 
+    private var isStopEndSection = true
+    // 매 틱마다 UI 및 로직 처리
+    private fun tick() {
+        val currentPosition = player_recipevideo.currentPosition
+        seekbar_recipevideo.progress = currentPosition
+
+        var ch = false
+        for(section in data.sections){
+            if(abs(section - currentPosition) <= TICK_TIME) {
+                ch = true
+                break
+            }
+        }
+
+        if (ch) {
+            if(!isStopEndSection) return
+            pause()
+            showController()
+            isStopEndSection = false
+        } else {
+            isStopEndSection = true
+        }
+    }
+
+    companion object{
+        private const val TICK_TIME = 300L
+    }
 }
