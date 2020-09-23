@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.viewpager.widget.ViewPager;
+
+import com.google.android.material.tabs.TabLayout;
 
 import doubleslash05.mini.team11.R;
 
@@ -21,6 +24,7 @@ public class TutorialFragment4 extends Fragment {
 
         TextView tvMain = (TextView) view.findViewById(R.id.tvLabel);
         TextView tvDetail = (TextView) view.findViewById(R.id.tvDetail);
+
 
         tvMain.setText(R.string.tutorialPage4Main);
         tvDetail.setText(R.string.tutorialPage4Detail);

@@ -5,7 +5,7 @@
         <shape
             android:innerRadius="0dp"
             android:shape="ring"
-            android:thickness="8dp"
+            android:thickness="3.5dp"
             android:useLevel="false">
             <solid android:color="#707070"/>
         </shape>

@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import doubleslash05.mini.team11.R;
 
-public class TutorialFragment6 extends Fragment {
+public class TutorialFragment5 extends Fragment {
 
 
 
@@ -22,6 +22,7 @@ public class TutorialFragment6 extends Fragment {
 
         TextView tvMain = (TextView) view.findViewById(R.id.tvLabel);
         TextView tvDetail = (TextView) view.findViewById(R.id.tvDetail);
+
 
         tvMain.setText(R.string.tutorialPage5Main);
         tvDetail.setText(R.string.tutorialPage5Detail);

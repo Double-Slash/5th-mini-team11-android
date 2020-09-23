@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import android.os.Bundle;
+import android.os.Handler;
 
 import com.google.android.material.tabs.TabLayout;
 
@@ -67,8 +68,8 @@ public class TutorialActivity extends AppCompatActivity {
                     TutorialFragment4 tutorialFragment4 = new TutorialFragment4();
                     return tutorialFragment4;
                 case 4:
-                    TutorialFragment6 tutorialFragment6 = new TutorialFragment6();
-                    return tutorialFragment6;
+                    TutorialFragment5 tutorialFragment5 = new TutorialFragment5();
+                    return tutorialFragment5;
                 default:
                     return null;
 
@@ -91,7 +92,7 @@ public class TutorialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_tutorial);
-        ViewPager vpPager = (ViewPager)findViewById(R.id.vpPager);
+        final ViewPager vpPager = (ViewPager)findViewById(R.id.vpPager);
         TabLayout customTab = (TabLayout)findViewById(R.id.customTab);
 
         customTab.setupWithViewPager(vpPager, true);
@@ -101,6 +102,25 @@ public class TutorialActivity extends AppCompatActivity {
         vpPager.setCurrentItem(0);
 
 
+        new Handler().postDelayed(new Runnable()
+        {
+            @Override
+            public void run()
+            {
+
+                vpPager.setCurrentItem(1);
+            }
+        },  5000);
+
+
+
+
+
     }
+
+
+
+
+
 }
 
