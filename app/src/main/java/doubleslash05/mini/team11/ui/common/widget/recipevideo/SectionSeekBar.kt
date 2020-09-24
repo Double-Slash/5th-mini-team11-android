@@ -2,11 +2,13 @@ package doubleslash05.mini.team11.ui.common.widget.recipevideo
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.Paint
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatSeekBar
+import androidx.core.content.res.ResourcesCompat
+import doubleslash05.mini.team11.R
 import kotlin.math.abs
 import kotlin.math.max
 
@@ -17,6 +19,15 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
 
     private var sections: Array<Int>? = null
     private var onSeekBarChangeListener: OnSeekBarChangeListener? = null
+
+    private val backgroundPaint = Paint().apply {
+        color = ResourcesCompat.getColor(resources, R.color.colorSeekBarBackground, null)
+    }
+    private val fillPaint = Paint().apply {
+        color = ResourcesCompat.getColor(resources, R.color.colorMain, null)
+    }
+//    private val height = dpToPx(12)
+
 
     init {
         super.setOnSeekBarChangeListener(this)
@@ -34,7 +45,7 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
     private var fromuserStick = false
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
 
-        if(fromuserStick && !fromUser){
+        if (fromuserStick && !fromUser) {
             onSeekBarChangeListener?.onProgressChanged(seekBar, progress, true)
             fromuserStick = false
             return
@@ -69,12 +80,6 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
             return
         }
 
-        val backgroundPaint = Paint().apply {
-            color = Color.GRAY
-        }
-        val fillPaint = Paint().apply {
-            color = Color.BLUE
-        }
 
         val margin = max.toFloat() / SPLIT_LINE_WIDTH_RATE
         for (i in 0..sections.size) {
@@ -92,6 +97,11 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
             }
         }
 
+    }
+
+    private fun dpToPx(dp: Int): Float {
+        val dm = resources.displayMetrics
+        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), dm)
     }
 
     companion object {

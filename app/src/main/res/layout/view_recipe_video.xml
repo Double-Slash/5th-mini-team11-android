@@ -66,7 +66,7 @@
     <doubleslash05.mini.team11.ui.common.widget.recipevideo.SectionSeekBar
         android:id="@+id/seekbar_recipevideo"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="12dp"
         app:layout_constraintTop_toBottomOf="@id/player_recipevideo"
         android:thumb="@android:color/transparent"
         />

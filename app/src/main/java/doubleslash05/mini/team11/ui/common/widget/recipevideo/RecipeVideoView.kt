@@ -2,7 +2,6 @@ package doubleslash05.mini.team11.ui.common.widget.recipevideo
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.media.MediaPlayer
 import android.media.MediaPlayer.OnPreparedListener
 import android.util.AttributeSet
 import android.view.MotionEvent
@@ -19,13 +18,14 @@ import kotlinx.coroutines.*
 import kotlin.math.abs
 
 @SuppressLint("ClickableViewAccessibility")
-class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : FrameLayout(
-    context, attrs, defStyle
-), OnPreparedListener, MediaPlayerControl, SeekBar.OnSeekBarChangeListener {
+class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : FrameLayout(context, attrs, defStyle), MediaPlayerControl, SeekBar.OnSeekBarChangeListener {
     private lateinit var data: RecipeVideoData
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
+
+
+    private lateinit var seekBarCoroutine: Job
 
     init {
         val v = View.inflate(context, R.layout.view_recipe_video, this)
@@ -34,7 +34,21 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
         button_recipevideo.isEnabled = false
 
         // player_recipevideo
-        player_recipevideo.setOnPreparedListener(this)
+        player_recipevideo.setOnPreparedListener(OnPreparedListener { mp ->
+            seekbar_recipevideo.max = mp.duration
+            seekbar_recipevideo.isEnabled = true
+            button_recipevideo.isEnabled = true
+
+            seekBarCoroutine = GlobalScope.launch {
+                while (true) {
+                    delay(TICK_TIME)
+                    launch(Dispatchers.Main) {
+                        tick()
+                    }
+                }
+            }
+        })
+
         player_recipevideo.setOnReleaseListener {
             seekBarCoroutine.cancel()
         }
@@ -114,25 +128,6 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
     //endregion
 
-
-    private lateinit var seekBarCoroutine: Job
-
-    override fun onPrepared(mp: MediaPlayer) {
-        seekbar_recipevideo.max = mp.duration
-        seekbar_recipevideo.isEnabled = true
-        button_recipevideo.isEnabled = true
-
-        seekBarCoroutine = GlobalScope.launch {
-            while (true) {
-                delay(TICK_TIME)
-                launch(Dispatchers.Main) {
-                    tick()
-                }
-            }
-        }
-    }
-
-
     // region MediaPlayer Controller
     override fun start() {
         player_recipevideo.start()
@@ -192,6 +187,8 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
     //endregion
 
+
+    // region Controller
     fun switchController() {
         if (layout_recipevideo_controller.visibility == View.VISIBLE) {
             hideController()
@@ -208,6 +205,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     fun hideController() {
         layout_recipevideo_controller.visibility = View.GONE
     }
+    //endregion
 
 
     fun setData(data: RecipeVideoData) {
@@ -217,21 +215,22 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
 
     private var isStopEndSection = true
+
     // 매 틱마다 UI 및 로직 처리
     private fun tick() {
         val currentPosition = player_recipevideo.currentPosition
         seekbar_recipevideo.progress = currentPosition
 
         var ch = false
-        for(section in data.sections){
-            if(abs(section - currentPosition) <= TICK_TIME) {
+        for (section in data.sections) {
+            if (abs(section - currentPosition) <= TICK_TIME) {
                 ch = true
                 break
             }
         }
 
         if (ch) {
-            if(!isStopEndSection) return
+            if (!isStopEndSection) return
             pause()
             showController()
             isStopEndSection = false
@@ -240,7 +239,11 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
         }
     }
 
-    companion object{
+    interface SectionListener {
+        fun onChangeSection(index: Int)
+    }
+
+    companion object {
         private const val TICK_TIME = 300L
     }
 }
