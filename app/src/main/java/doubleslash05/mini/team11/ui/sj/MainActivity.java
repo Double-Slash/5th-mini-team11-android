@@ -1,27 +1,27 @@
 package doubleslash05.mini.team11.ui.sj;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
-import android.widget.LinearLayout;
 
 import java.util.ArrayList;
 
 import doubleslash05.mini.team11.R;
+import doubleslash05.mini.team11.UiData.Base;
+import doubleslash05.mini.team11.UiData.Beginner;
+import doubleslash05.mini.team11.UiData.Category;
+import doubleslash05.mini.team11.UiData.Text1;
+import doubleslash05.mini.team11.UiData.Text2;
 import doubleslash05.mini.team11.ui.base.BaseActivity;
+
+import static android.widget.LinearLayout.VERTICAL;
 
 public class MainActivity extends BaseActivity {
 
-    RecyclerView recyclerCategory;
-    GridLayoutManager gridLayoutManager;
-    CategoryAdapter categoryAdapter;
-
-    RecyclerView recyclerBeginner;
-    LinearLayoutManager linearLayoutManager;
-    BeginnerAdapter beginnerAdapter;
+     RecyclerView recyclerView;
+     CategoryAdapter categoryAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,40 +30,37 @@ public class MainActivity extends BaseActivity {
 
         setTitle("COOKICE");
 
-        recyclerCategory = (RecyclerView)findViewById(R.id.recyclerCategory);
-        gridLayoutManager = new GridLayoutManager(this,3);
 
-        recyclerCategory.setHasFixedSize(true);
-        recyclerCategory.setLayoutManager(gridLayoutManager);
 
-        ArrayList<Category> list = new ArrayList<>();
+        recyclerView = findViewById(R.id.recyclerCategory);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
-        list.add(new Category("쌀/콩/견과",R.drawable.category_empty));
+        categoryAdapter = new CategoryAdapter(this);
+        recyclerView.setAdapter(categoryAdapter);
 
-        categoryAdapter = new CategoryAdapter(this,list);
-        recyclerCategory.setAdapter(categoryAdapter);
 
-        recyclerBeginner = (RecyclerView)findViewById(R.id.recyclerBeginner);
-        linearLayoutManager = new LinearLayoutManager(this);
+        Base[] list = new Base[]{
+          new Text1("카테고리","주재료를 선택해보세요!"),
 
-        recyclerBeginner.setHasFixedSize(true);
-        recyclerBeginner.setLayoutManager(linearLayoutManager);
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
+                new Category("쌀/콩/견과",R.drawable.category_empty),
 
-        ArrayList<Beginner> list2 = new ArrayList<>();
+                new Text2("달달한것 먹고 기운내요"),
+                new Text2("요리 초보를 위한 도전"),
 
-        list2.add(new Beginner("팬케이크","주말에는 여유롭게 브런치",R.drawable.beginner_empty,"15분","초급"));
-        list2.add(new Beginner("팬케이크","주말에는 여유롭게 브런치",R.drawable.beginner_empty,"15분","초급"));
-        list2.add(new Beginner("팬케이크","주말에는 여유롭게 브런치",R.drawable.beginner_empty,"15분","초급"));
+                new Beginner("팬케이크",R.drawable.beginner_empty,"주말에는 여유롭게 브런치","15분","초급"),
+                new Beginner("팬케이크",R.drawable.beginner_empty,"주말에는 여유롭게 브런치","15분","초급"),
+                new Beginner("팬케이크",R.drawable.beginner_empty,"주말에는 여유롭게 브런치","15분","초급"),
+        };
 
-        beginnerAdapter = new BeginnerAdapter(this,list2);
-        recyclerBeginner.setAdapter(beginnerAdapter);
+        categoryAdapter.setData(list);
     }
+
 }
