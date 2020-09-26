@@ -65,7 +65,7 @@
 
 
     <TextView
-        android:id="@+id/tvGuide"
+        android:id="@+id/tvGuide1"
         android:layout_width="211dp"
         android:layout_height="66dp"
         android:layout_marginStart="75dp"
@@ -75,7 +75,7 @@
         android:layout_marginRight="75dp"
         android:layout_marginBottom="157dp"
         android:gravity="center"
-        android:text="“이전”"
+        android:text=""
         android:textColor="#707070"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -84,6 +84,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
+    <TextView
+        android:id="@+id/tvResult"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="625dp" />
 
     <View
 

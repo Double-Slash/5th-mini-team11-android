@@ -1,6 +1,7 @@
 package doubleslash05.mini.team11.util;
 
-import com.naver.speech.clientapi.BuildConfig;
+
+import doubleslash05.mini.team11.BuildConfig;
 
 ;
 

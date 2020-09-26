@@ -63,7 +63,7 @@
 
 
     <TextView
-        android:id="@+id/tvGuide"
+        android:id="@+id/tvGuide3"
         android:layout_width="211dp"
         android:layout_height="66dp"
         android:layout_marginStart="75dp"
@@ -73,7 +73,7 @@
         android:layout_marginRight="75dp"
         android:layout_marginBottom="157dp"
         android:gravity="center"
-        android:text="“다시”"
+        android:text="pause"
         android:textColor="#707070"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
