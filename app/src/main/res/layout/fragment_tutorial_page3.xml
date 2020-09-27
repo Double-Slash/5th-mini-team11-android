@@ -86,15 +86,6 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/tvResult2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="625dp"
-        tools:ignore="MissingConstraints" />
-
 
     <View
 

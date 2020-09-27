@@ -20,8 +20,6 @@ class TutorialFragment2 : Fragment() {
         val tvMain = view.findViewById<View>(R.id.tvLabel) as TextView
         val tvDetail = view.findViewById<View>(R.id.tvDetail) as TextView
         tvGuide1 = view.findViewById<View>(R.id.tvGuide1) as TextView
-        tvResult = view.findViewById<View>(R.id.tvResult) as TextView
-        tvResult!!.text = "say!"
         tvMain.setText(R.string.tutorialPage1Main)
         tvDetail.setText(R.string.tutorialPage1Detail)
         tvGuide1!!.text = "stop"

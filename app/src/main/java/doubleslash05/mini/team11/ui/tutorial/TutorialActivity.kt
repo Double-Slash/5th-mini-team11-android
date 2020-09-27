@@ -30,11 +30,9 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
     private var vpPager: ViewPager? = null
     private var customTab: TabLayout? = null
     private var rapidSphinx: RapidSphinx? = null
-    private val tutorialFragment2: TutorialFragment2 = TutorialFragment2()
-    private val tutorialFragment3: TutorialFragment3 = TutorialFragment3()
-    private val tutorialFragment4: TutorialFragment4 = TutorialFragment4()
     override fun rapidSphinxDidStop(reason: String, code: Int) {
-        rapidSphinx!!.stop()
+        Log.d("cycle", "rapid stopped")
+        rapidSphinx!!.startRapidSphinx(10000)
     }
 
     // most important method
@@ -45,24 +43,18 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
     ) {
         when (result) {
             stopKeyword -> {
-                tvResult.setText(result)
-                vpPager?.setCurrentItem(2)
-                rapidSphinx?.startRapidSphinx(10000)
-            }
-            nextKeyword -> {
-                tvResult2.setText(result)
-                vpPager?.setCurrentItem(3)
-                rapidSphinx?.startRapidSphinx(10000)
-            }
-            pauseKeyword -> {
-                tvResult3.setText(result)
-                vpPager?.setCurrentItem(4)
-                rapidSphinx?.startRapidSphinx(10000)
+                vpPager?.setCurrentItem(1)
             }
         }
     }
 
     override fun rapidSphinxPartialResult(partialResult: String) {
+
+        if (partialResult == nextKeyword){
+            vpPager?.setCurrentItem(2)
+        } else if (partialResult == pauseKeyword) {
+            vpPager?.setCurrentItem(3)
+        }
 
     }
     override fun rapidSphinxUnsupportedWords(words: List<String>) {
@@ -87,22 +79,20 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
 
         override fun getItem(position: Int): Fragment {
             return when (position) {
+
                 0 -> {
-                    TutorialFragment1()
-                }
-                1 -> {
                     TutorialFragment2()
                 }
-                2 -> {
+                1 -> {
                     TutorialFragment3()
                 }
-                3 -> {
+                2 -> {
                     TutorialFragment4()
                 }
-                4 -> {
+                3 -> {
                     TutorialFragment5()
                 }
-                else -> TutorialFragment1()
+                else -> TutorialFragment2()
             }
         }
 
@@ -111,7 +101,7 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
         }
 
         companion object {
-            private const val PAGE_NUN = 5
+            private const val PAGE_NUN = 4
         }
     }
 
@@ -130,7 +120,6 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
                 }
 
                 override fun rapidPostExecute(isSuccess: Boolean) {
-                    vpPager!!.currentItem = 1
                 }
             })
         } catch (e: Exception) {
@@ -146,7 +135,7 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
     override fun onResume() {
         super.onResume()
         Log.d("cycle", "onResume")
-        val oovwords = arrayOf("next", "stop")
+        val oovwords = arrayOf("next", "pause")
         rapidSphinx!!.updateVocabulary(
             stopKeyword,
             oovwords
