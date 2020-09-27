@@ -10,6 +10,7 @@ import doubleslash05.mini.team11.R
 
 class TutorialFragment3 : Fragment() {
     var tvGuide2: TextView? = null
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

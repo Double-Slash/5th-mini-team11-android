@@ -20,6 +20,8 @@ import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.R
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.fragment_tutorial_page2.*
+import kotlinx.android.synthetic.main.fragment_tutorial_page3.*
+import kotlinx.android.synthetic.main.fragment_tutorial_page4.*
 
 class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
     private val stopKeyword = "stop"
@@ -41,10 +43,22 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
         hypArr: List<String>,
         scores: List<Double>
     ) {
-
-        tvResult.setText(result)
-        if (tvResult.text.toString() == stopKeyword) {
-            vpPager?.setCurrentItem(3)
+        when (result) {
+            stopKeyword -> {
+                tvResult.setText(result)
+                vpPager?.setCurrentItem(2)
+                rapidSphinx?.startRapidSphinx(10000)
+            }
+            nextKeyword -> {
+                tvResult2.setText(result)
+                vpPager?.setCurrentItem(3)
+                rapidSphinx?.startRapidSphinx(10000)
+            }
+            pauseKeyword -> {
+                tvResult3.setText(result)
+                vpPager?.setCurrentItem(4)
+                rapidSphinx?.startRapidSphinx(10000)
+            }
         }
     }
 
