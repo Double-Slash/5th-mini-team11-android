@@ -20,12 +20,11 @@ import kotlin.math.abs
 @SuppressLint("ClickableViewAccessibility")
 class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : FrameLayout(context, attrs, defStyle), MediaPlayerControl, SeekBar.OnSeekBarChangeListener {
     private lateinit var data: RecipeVideoData
+    private lateinit var seekBarCoroutine: Job
+    private var onChangeSectionListener: OnChangeSectionListener? = null
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
-
-
-    private lateinit var seekBarCoroutine: Job
 
     init {
         val v = View.inflate(context, R.layout.view_recipe_video, this)
@@ -131,6 +130,10 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     // region MediaPlayer Controller
     override fun start() {
         player_recipevideo.start()
+        if (!isStopEndSection) {
+            onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
+        }
+        isStopEndSection = true
     }
 
     override fun pause() {
@@ -139,14 +142,17 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
     fun nextSection() {
         seekTo(data.getNextSection(currentPosition))
+        onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
     }
 
     fun replySction() {
         seekTo(data.getCurrentSction(currentPosition))
+        onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
     }
 
     fun prevSection() {
         seekTo(data.getPrevSection(currentPosition))
+        onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
     }
 
     override fun getDuration(): Int {
@@ -207,13 +213,17 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
     //endregion
 
-
     fun setData(data: RecipeVideoData) {
         this.data = data
         player_recipevideo.setDataSource(data.path)
         seekbar_recipevideo.setSections(data.sections)
     }
 
+    fun setOnChangeSectionListener(listener: OnChangeSectionListener) {
+        this.onChangeSectionListener = listener
+    }
+
+    // true 일경우 Section이 끝나면 Stop
     private var isStopEndSection = true
 
     // 매 틱마다 UI 및 로직 처리
@@ -234,12 +244,10 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
             pause()
             showController()
             isStopEndSection = false
-        } else {
-            isStopEndSection = true
         }
     }
 
-    interface SectionListener {
+    interface OnChangeSectionListener {
         fun onChangeSection(index: Int)
     }
 

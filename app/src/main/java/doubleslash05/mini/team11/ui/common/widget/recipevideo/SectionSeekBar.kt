@@ -4,7 +4,6 @@ import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.core.content.res.ResourcesCompat
@@ -26,8 +25,7 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
     private val fillPaint = Paint().apply {
         color = ResourcesCompat.getColor(resources, R.color.colorMain, null)
     }
-//    private val height = dpToPx(12)
-
+    //    private val height = dpToPx(12)
 
     init {
         super.setOnSeekBarChangeListener(this)
@@ -73,6 +71,7 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
         onSeekBarChangeListener?.onStopTrackingTouch(seekBar)
     }
 
+
     override fun onDraw(canvas: Canvas) {
         val sections = this.sections
         if (sections == null || sections.size == 1) {
@@ -96,13 +95,8 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
                 canvas.drawRect(startPoint, 0f, max(0f, progress - prevSection) / max * width + startPoint, height.toFloat(), fillPaint)
             }
         }
-
     }
 
-    private fun dpToPx(dp: Int): Float {
-        val dm = resources.displayMetrics
-        return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, dp.toFloat(), dm)
-    }
 
     companion object {
         private const val SPLIT_LINE_WIDTH_RATE = 500
