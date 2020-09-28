@@ -11,11 +11,12 @@ import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.MediaController
 import doubleslash05.mini.team11.BuildConfig
+import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.util.LogUtils
 import java.io.IOException
 
 class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : SurfaceView(context, attrs, defStyle), SurfaceHolder.Callback, MediaController.MediaPlayerControl {
-    private var player = MediaPlayer()
+    private lateinit var player: MediaPlayer
     private var state = State.IDLE
     private var onPreparedListener: OnPreparedListener? = null
     private var onReleaseListener: (() -> Unit)? = null
@@ -33,7 +34,7 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
         player.setDisplay(surfaceHolder)
         try {
             if (state == State.INITIALIZED) {
-                player.prepare()
+                player.prepareAsync()
                 state = State.PREPARED
                 needPrepare = false
             } else {
@@ -129,10 +130,10 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
     fun setDataSource(path: String?) {
         try {
-            player.setDataSource(path)
+            //            player.setDataSource(path)
             state = State.INITIALIZED
             if (needPrepare) {
-                player.prepare()
+                player.prepareAsync()
                 state = State.PREPARED
             }
         } catch (e: IOException) {
@@ -148,8 +149,8 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
         onReleaseListener = listener
     }
 
-    private fun initMediaPlayer(){
-        player = MediaPlayer()
+    private fun initMediaPlayer() {
+        player = MediaPlayer.create(context, R.raw.out)
         player.setOnVideoSizeChangedListener(OnVideoSizeChangedListener { mp, width, height ->
             setFitToFillAspectRatio(mp, width, height)
         })
