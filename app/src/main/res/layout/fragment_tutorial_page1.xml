@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".ui.tutorial.TutorialFragment2"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.tutorial.TutorialFragment1">
+
 
     <TextView
         android:id="@+id/tvLabel"
-        android:layout_width="224dp"
-        android:layout_height="75dp"
+        android:layout_width="282dp"
+        android:layout_height="126dp"
         android:layout_marginStart="22dp"
         android:layout_marginLeft="22dp"
         android:layout_marginTop="81dp"
@@ -28,8 +29,8 @@
 
     <TextView
         android:id="@+id/tvDetail"
-        android:layout_width="233dp"
-        android:layout_height="61dp"
+        android:layout_width="248dp"
+        android:layout_height="60dp"
         android:layout_marginStart="22dp"
         android:layout_marginLeft="22dp"
         android:layout_marginTop="7dp"
@@ -63,10 +64,8 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-
-
     <TextView
-        android:id="@+id/tvGuide2"
+        android:id="@+id/tvGuide1"
         android:layout_width="211dp"
         android:layout_height="66dp"
         android:layout_marginStart="75dp"
@@ -76,7 +75,7 @@
         android:layout_marginRight="75dp"
         android:layout_marginBottom="157dp"
         android:gravity="center"
-        android:text="next"
+        android:text=""
         android:textColor="#707070"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -87,9 +86,9 @@
 
 
 
+
     <View
 
-        android:id="@+id/vLine"
         android:layout_width="229dp"
         android:layout_height="1dp"
         android:layout_marginStart="66dp"
@@ -104,6 +103,9 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
 
 
 

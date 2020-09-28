@@ -5,7 +5,6 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,9 +18,6 @@ import com.icaksama.rapidsphinx.RapidSphinx
 import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.R
 import edu.cmu.pocketsphinx.Config
-import kotlinx.android.synthetic.main.fragment_tutorial_page2.*
-import kotlinx.android.synthetic.main.fragment_tutorial_page3.*
-import kotlinx.android.synthetic.main.fragment_tutorial_page4.*
 
 class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
     private val stopKeyword = "stop"
@@ -81,18 +77,18 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
             return when (position) {
 
                 0 -> {
-                    TutorialFragment2()
+                    TutorialFragment1()
                 }
                 1 -> {
-                    TutorialFragment3()
+                    TutorialFragment2()
                 }
                 2 -> {
-                    TutorialFragment4()
+                    TutorialFragment3()
                 }
                 3 -> {
-                    TutorialFragment5()
+                    TutorialFragment4()
                 }
-                else -> TutorialFragment2()
+                else -> TutorialFragment1()
             }
         }
 

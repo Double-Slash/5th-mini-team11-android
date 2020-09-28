@@ -1,6 +1,7 @@
 package doubleslash05.mini.team11.ui.tutorial
 
 import android.os.Bundle
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,8 +10,6 @@ import androidx.fragment.app.Fragment
 import doubleslash05.mini.team11.R
 
 class TutorialFragment4 : Fragment() {
-    var tvGuide3: TextView? = null
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -19,13 +18,8 @@ class TutorialFragment4 : Fragment() {
         val view = inflater.inflate(R.layout.fragment_tutorial_page4, container, false)
         val tvMain = view.findViewById<View>(R.id.tvLabel) as TextView
         val tvDetail = view.findViewById<View>(R.id.tvDetail) as TextView
-        tvGuide3 = view.findViewById<View>(R.id.tvGuide3) as TextView
-        tvMain.setText(R.string.tutorialPage4Main)
-        tvDetail.setText(R.string.tutorialPage4Detail)
+        tvMain.setText(Html.fromHtml("수고하셨어요 :)<br>이제부터 요리할 때</br><br><font color='#FF9E00'>스크린</font>에 <font color='#FF9E00'>손</font>은 <font color='#FF9E00'>그만</font>!</br>"))
+        tvDetail.setText(R.string.tutorialPage5Detail)
         return view
-    }
-
-    fun setTvGuide3(value: String?) {
-        tvGuide3!!.text = value
     }
 }
