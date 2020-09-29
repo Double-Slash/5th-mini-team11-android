@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".ui.tutorial.TutorialActivity">
 
-    <androidx.viewpager.widget.ViewPager
+    <doubleslash05.mini.team11.ui.tutorial.SwipeDisabledViewPager
         android:id="@+id/vpPager"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />

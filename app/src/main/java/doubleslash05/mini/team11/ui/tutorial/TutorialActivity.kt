@@ -99,6 +99,8 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
         companion object {
             private const val PAGE_NUN = 4
         }
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
