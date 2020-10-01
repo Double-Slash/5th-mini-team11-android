@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">DoubleSlashMini0511</string>
 
-    <string name="category_1">category_1</string>
-    <string name="category_2">category_2</string>
-    <string name="category_3">category_3</string>
-    <string name="category_4">category_4</string>
-    <string name="category_5">category_5</string>
-    <string name="category_6">category_6</string>
-    <string name="category_7">category_7</string>
-    <string name="category_8">category_8</string>
-    <string name="category_9">category_9</string>
+    <string name="category_1">카테고리_1</string>
+    <string name="category_2">카테고리_2</string>
+    <string name="category_3">카테고리_3</string>
+    <string name="category_4">카테고리_4</string>
+    <string name="category_5">카테고리_5</string>
+    <string name="category_6">카테고리_6</string>
+    <string name="category_7">카테고리_7</string>
+    <string name="category_8">카테고리_8</string>
+    <string name="category_9">카테고리_9</string>
 </resources>

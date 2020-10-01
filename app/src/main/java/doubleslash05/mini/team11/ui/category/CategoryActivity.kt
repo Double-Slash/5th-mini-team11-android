@@ -30,7 +30,7 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
             val item = tablayout_category.newTab()
             tablayout_category.addTab(item)
 
-            with(item){
+            with(item) {
                 text = str
 
             }
@@ -47,11 +47,13 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
         tablayout_category.addOnTabSelectedListener(this)
 
+        textview_category_title.text = strArray[0]
         supportFragmentManager.beginTransaction().replace(R.id.fragment_category, fragmentList[0]).commit()
 
     }
 
     override fun onTabSelected(tab: TabLayout.Tab) {
+        textview_category_title.text = tab.text
         supportFragmentManager.beginTransaction().replace(R.id.fragment_category, fragmentList[tab.position]).commit()
     }
 
@@ -60,5 +62,4 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
     override fun onTabUnselected(tab: TabLayout.Tab) {
     }
-
 }
