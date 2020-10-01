@@ -1,4 +1,4 @@
-package doubleslash05.mini.team11.UiData;
+package doubleslash05.mini.team11.model.data;
 
 public class Beginner extends Base {
     public String name;
@@ -8,8 +8,7 @@ public class Beginner extends Base {
     public String level;
 
     public Beginner(String name, int imageNum, String explain, String time, String level) {
-        super(name, imageNum, explain, time, level, null, 0, null, 0, null, 0,
-                null, 0, null, 0, null, 0, null, 0, null, 0);
+
         this.name = name;
         this.imageNum = imageNum;
         this.explain = explain;

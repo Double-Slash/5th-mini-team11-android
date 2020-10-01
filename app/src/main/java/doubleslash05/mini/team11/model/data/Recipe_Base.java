@@ -1,4 +1,4 @@
-package doubleslash05.mini.team11.UiData;
+package doubleslash05.mini.team11.model.data;
 
 public abstract class Recipe_Base {
 

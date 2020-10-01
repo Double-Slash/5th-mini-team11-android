@@ -1,4 +1,4 @@
-package doubleslash05.mini.team11.UiData;
+package doubleslash05.mini.team11.model.data;
 
 public class Step extends Recipe_Base {
     public String recipeStep;

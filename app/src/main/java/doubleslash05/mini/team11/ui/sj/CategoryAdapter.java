@@ -1,6 +1,5 @@
 package doubleslash05.mini.team11.ui.sj;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 import doubleslash05.mini.team11.R;
-import doubleslash05.mini.team11.UiData.Base;
-import doubleslash05.mini.team11.UiData.Beginner;
-import doubleslash05.mini.team11.UiData.Category;
-import doubleslash05.mini.team11.UiData.Text1;
-import doubleslash05.mini.team11.UiData.Text2;
+import doubleslash05.mini.team11.model.data.Base;
+import doubleslash05.mini.team11.model.data.Beginner;
+import doubleslash05.mini.team11.model.data.Category;
+import doubleslash05.mini.team11.model.data.Text1;
+import doubleslash05.mini.team11.model.data.Text2;
+import doubleslash05.mini.team11.model.data.horizontal;
 
 public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -27,12 +27,14 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int ITEM_TEXT1 = 2;
     private static final int ITEM_TEXT2 = 3;
 
+
     private Base[] list;
     private Context context;
+    private LayoutInflater inflater;
 
-
-    public CategoryAdapter(Context context){
-        this.context=context;
+    public CategoryAdapter(Context context) {
+        this.context = context;
+        this.inflater = LayoutInflater.from(context);
     }
 
 
@@ -41,10 +43,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view;
 
-        LayoutInflater inflater =
-                LayoutInflater.from(context);
+        /*LayoutInflater inflater =
+                LayoutInflater.from(context);*/
 
-        switch (viewType){
+        switch (viewType) {
             case ITEM_CATEGORY:
                 view = inflater.inflate(R.layout.item_category, parent, false);
                 return new CategoryViewHolder(view);
@@ -65,47 +67,31 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof CategoryViewHolder) {
             CategoryViewHolder c = (CategoryViewHolder) viewHolder;
-            Base c1 = (Base) list[position];
-            c.content.setText(c1.name);
-            c.image.setImageResource(c1.imageNum);
-            c.content2.setText(c1.name2);
-            c.image2.setImageResource(c1.imageNum2);
-            c.content3.setText(c1.name3);
-            c.image3.setImageResource(c1.imageNum3);
-            c.content4.setText(c1.name4);
-            c.image4.setImageResource(c1.imageNum4);
-            c.content5.setText(c1.name5);
-            c.image5.setImageResource(c1.imageNum5);
-            c.content6.setText(c1.name6);
-            c.image6.setImageResource(c1.imageNum6);
-            c.content7.setText(c1.name7);
-            c.image7.setImageResource(c1.imageNum7);
-            c.content8.setText(c1.name8);
-            c.image8.setImageResource(c1.imageNum8);
-            c.content9.setText(c1.name9);
-            c.image9.setImageResource(c1.imageNum9);
-        }
-        else if (viewHolder instanceof BeginnerViewHolder){
+            Category c1 = (Category) list[position];
+            c.content[0].setText(c1.name[0]);
+            c.image[0].setImageResource(c1.imageNum[0]);
+            for (int i = 0; i < 9; i++) {
+                c.content[i].setText(c1.name[i]);
+                c.image[i].setImageResource(c1.imageNum[i]);
+            }
+        } else if (viewHolder instanceof BeginnerViewHolder) {
             BeginnerViewHolder b = (BeginnerViewHolder) viewHolder;
-            Base c2 = (Base)list[position];
+            Beginner c2 = (Beginner) list[position];
             b.content.setText(c2.name);
             b.image.setImageResource(c2.imageNum);
             b.contentExplain.setText(c2.explain);
             b.contentTime.setText(c2.time);
             b.contentLevel.setText(c2.level);
+        } else if (viewHolder instanceof Text1ViewHolder) {
+            Text1ViewHolder t1 = (Text1ViewHolder) viewHolder;
+            Text1 c3 = (Text1) list[position];
+            t1.content.setText(c3.name1);
+            t1.contentExplain.setText(c3.name2);
+        } else if (viewHolder instanceof Text2ViewHolder) {
+            Text2ViewHolder t2 = (Text2ViewHolder) viewHolder;
+            Text2 c4 = (Text2) list[position];
+            t2.content.setText(c4.name);
         }
-        else if (viewHolder instanceof Text1ViewHolder){
-            Text1ViewHolder T1 = (Text1ViewHolder) viewHolder;
-            Base c3 = (Base)list[position];
-            T1.content.setText(c3.name);
-            T1.contentExplain.setText(c3.explain);
-        }
-        else if (viewHolder instanceof Text2ViewHolder){
-            Text2ViewHolder T2 = (Text2ViewHolder) viewHolder;
-            Base c4 = (Base)list[position];
-            T2.content.setText(c4.name);
-        }
-
     }
 
     @Override
@@ -115,47 +101,50 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public int getItemViewType(int position) {
-        if(list[position]instanceof Category){
+        if (list[position] instanceof Category) {
             return ITEM_CATEGORY;
-        }else if(list[position]instanceof Beginner){
+        } else if (list[position] instanceof Beginner) {
             return ITEM_BEGINNER;
-        }else if(list[position]instanceof Text1){
+        } else if (list[position] instanceof Text1) {
             return ITEM_TEXT1;
-        }else if(list[position]instanceof Text2){
+        } else if (list[position] instanceof Text2) {
             return ITEM_TEXT2;
         }
         return -1;
     }
-    public void setData(Base[] list){
+
+    public void setData(Base[] list) {
         this.list = list;
         notifyDataSetChanged();
     }
 
     public static class CategoryViewHolder extends RecyclerView.ViewHolder {
-        TextView content,content2,content3,content4,content5,content6,content7,content8,content9;
-        ImageView image,image2,image3,image4,image5,image6,image7,image8,image9;
+        final static int STRINGNUM = 9;
+        final static int IMAGENUM = 9;
+        TextView[] content = new TextView[STRINGNUM];
+        ImageView[] image = new ImageView[IMAGENUM];
 
 
         CategoryViewHolder(View itemView) {
             super(itemView);
-            content = itemView.findViewById(R.id.textItem);
-            image = itemView.findViewById(R.id.imageItem);
-            content2 = itemView.findViewById(R.id.textItem2);
-            image2 = itemView.findViewById(R.id.imageItem2);
-            content3 = itemView.findViewById(R.id.textItem3);
-            image3 = itemView.findViewById(R.id.imageItem3);
-            content4 = itemView.findViewById(R.id.textItem4);
-            image4 = itemView.findViewById(R.id.imageItem4);
-            content5 = itemView.findViewById(R.id.textItem5);
-            image5 = itemView.findViewById(R.id.imageItem5);
-            content6 = itemView.findViewById(R.id.textItem6);
-            image6 = itemView.findViewById(R.id.imageItem6);
-            content7 = itemView.findViewById(R.id.textItem7);
-            image7 = itemView.findViewById(R.id.imageItem7);
-            content8 = itemView.findViewById(R.id.textItem8);
-            image8 = itemView.findViewById(R.id.imageItem8);
-            content9 = itemView.findViewById(R.id.textItem9);
-            image9 = itemView.findViewById(R.id.imageItem9);
+            content[0] = itemView.findViewById(R.id.textItem0);
+            image[0] = itemView.findViewById(R.id.imageItem0);
+            content[1] = itemView.findViewById(R.id.textItem1);
+            image[1] = itemView.findViewById(R.id.imageItem1);
+            content[2] = itemView.findViewById(R.id.textItem2);
+            image[2] = itemView.findViewById(R.id.imageItem2);
+            content[3] = itemView.findViewById(R.id.textItem3);
+            image[3] = itemView.findViewById(R.id.imageItem3);
+            content[4] = itemView.findViewById(R.id.textItem4);
+            image[4] = itemView.findViewById(R.id.imageItem4);
+            content[5] = itemView.findViewById(R.id.textItem5);
+            image[5] = itemView.findViewById(R.id.imageItem5);
+            content[6] = itemView.findViewById(R.id.textItem6);
+            image[6] = itemView.findViewById(R.id.imageItem6);
+            content[7] = itemView.findViewById(R.id.textItem7);
+            image[7] = itemView.findViewById(R.id.imageItem7);
+            content[8] = itemView.findViewById(R.id.textItem8);
+            image[8] = itemView.findViewById(R.id.imageItem8);
         }
     }
 
@@ -186,6 +175,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             contentExplain = itemView.findViewById(R.id.itemText2);
         }
     }
+
     public static class Text2ViewHolder extends RecyclerView.ViewHolder {
         TextView content;
 
@@ -194,4 +184,15 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             content = itemView.findViewById(R.id.itemText3);
         }
     }
+
+    /*public class horizonViewHolder extends RecyclerView.ViewHolder{
+        public RecyclerView horizontalView;
+        public TextView subName;
+
+        public horizonViewHolder (View itemView){
+            super(itemView);
+
+        }
+    }*/
+
 }

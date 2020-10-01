@@ -13,14 +13,35 @@
             android:layout_margin="10dp">
 
             <ImageView
-                android:id="@+id/imageItem"
+                android:id="@+id/imageItem0"
                 android:layout_width="110dp"
                 android:layout_height="110dp"
                 android:clickable="true"
                 android:src="@drawable/category_empty" />
 
             <TextView
-                android:id="@+id/textItem"
+                android:id="@+id/textItem0"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|left"
+                android:layout_marginBottom="5dp"
+                android:text="이름"
+                android:textSize="15sp" />
+        </FrameLayout>
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="10dp">
+
+            <ImageView
+                android:id="@+id/imageItem1"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:clickable="true"
+                android:src="@drawable/category_empty" />
+
+            <TextView
+                android:id="@+id/textItem1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|left"
@@ -48,7 +69,10 @@
                 android:layout_marginBottom="5dp"
                 android:text="이름"
                 android:textSize="15sp" />
+
         </FrameLayout>
+    </TableRow>
+    <TableRow>
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -69,10 +93,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="이름"
                 android:textSize="15sp" />
-
         </FrameLayout>
-    </TableRow>
-    <TableRow>
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -114,7 +135,10 @@
                 android:layout_marginBottom="5dp"
                 android:text="이름"
                 android:textSize="15sp" />
+
         </FrameLayout>
+    </TableRow>
+    <TableRow>
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -135,10 +159,7 @@
                 android:layout_marginBottom="5dp"
                 android:text="이름"
                 android:textSize="15sp" />
-
         </FrameLayout>
-    </TableRow>
-    <TableRow>
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
@@ -174,27 +195,6 @@
 
             <TextView
                 android:id="@+id/textItem8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom|left"
-                android:layout_marginBottom="5dp"
-                android:text="이름"
-                android:textSize="15sp" />
-        </FrameLayout>
-        <FrameLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_margin="10dp">
-
-            <ImageView
-                android:id="@+id/imageItem9"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:clickable="true"
-                android:src="@drawable/category_empty" />
-
-            <TextView
-                android:id="@+id/textItem9"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom|left"
