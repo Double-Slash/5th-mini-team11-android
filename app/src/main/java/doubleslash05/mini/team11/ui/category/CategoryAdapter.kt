@@ -14,6 +14,7 @@ import kotlinx.android.synthetic.main.item_title.view.*
 
 class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var list: List<MenuList>
+    private var onMenuItemClickListener: OnMenuItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val inflater = LayoutInflater.from(context)
@@ -73,7 +74,7 @@ class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
         return VIEW_TYPE_MENU
     }
 
-    fun setData(list : List<MenuList>){
+    fun setData(list: List<MenuList>) {
         this.list = list
         notifyDataSetChanged()
     }
@@ -109,6 +110,10 @@ class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
         return null
     }
 
+    fun setOnMenuItemClickListener(listener: OnMenuItemClickListener) {
+        this.onMenuItemClickListener = listener
+    }
+
     private inner class HiddentViewHolder : RecyclerView.ViewHolder(View(context))
     private inner class TitleViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val mainTitle = v.textview_title_main!!
@@ -122,6 +127,14 @@ class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
         val txtLevel = v.textview_menu_level!!
         val checkbox = v.checkbox_menu_favorite!!
 
+        init {
+            v.setOnClickListener {
+                val position = adapterPosition
+                val data = getMenuData(position) ?: return@setOnClickListener
+                onMenuItemClickListener?.onMenuItemClick(data)
+            }
+        }
+
         @SuppressLint("SetTextI18n")
         fun bind(data: MenuData) {
             txtMain.text = data.name
@@ -131,6 +144,10 @@ class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
 
             checkbox.isChecked = data.favorite
         }
+    }
+
+    interface OnMenuItemClickListener {
+        fun onMenuItemClick(data: MenuData)
     }
 
     companion object {
