@@ -185,14 +185,6 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    /*public class horizonViewHolder extends RecyclerView.ViewHolder{
-        public RecyclerView horizontalView;
-        public TextView subName;
 
-        public horizonViewHolder (View itemView){
-            super(itemView);
-
-        }
-    }*/
 
 }
