@@ -150,7 +150,7 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
     }
 
     private fun initMediaPlayer() {
-        player = MediaPlayer.create(context, R.raw.out)
+        // player = MediaPlayer.create(context, R.raw.out)
         player.setOnVideoSizeChangedListener(OnVideoSizeChangedListener { mp, width, height ->
             setFitToFillAspectRatio(mp, width, height)
         })

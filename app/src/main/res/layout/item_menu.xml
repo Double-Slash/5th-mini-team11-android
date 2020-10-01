@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp"
+    xmlns:tool="http://schemas.android.com/tools"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageview_menu_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="#555"
+            />
+
+        <TextView
+            android:id="@+id/textview_menu_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginBottom="20dp"
+            tool:text="Main Title"
+            />
+
+        <TextView
+            android:id="@+id/textview_menu_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toLeftOf="@id/textview_menu_main"
+            tool:text="Sub Title"
+            />
+        
+        <ImageView
+            android:id="@+id/imageview_menu_clock"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="#a00"
+            app:layout_constraintBottom_toBottomOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/textview_menu_main"
+            />
+
+        <TextView
+            android:id="@+id/textview_menu_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/imageview_menu_clock"
+            tool:text="15분"
+            />
+
+        <ImageView
+            android:id="@+id/imageview_menu_star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="#a00"
+            app:layout_constraintBottom_toBottomOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/textview_menu_time"
+            />
+
+        <TextView
+            android:id="@+id/textview_menu_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/imageview_menu_star"
+            tool:text="15분"
+            />
+
+        <CheckBox
+            android:id="@+id/checkbox_menu_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/textview_menu_main"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

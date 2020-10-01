@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">DoubleSlashMini0511</string>
+
+    <string name="category_1">category_1</string>
+    <string name="category_2">category_2</string>
+    <string name="category_3">category_3</string>
+    <string name="category_4">category_4</string>
+    <string name="category_5">category_5</string>
+    <string name="category_6">category_6</string>
+    <string name="category_7">category_7</string>
+    <string name="category_8">category_8</string>
+    <string name="category_9">category_9</string>
 </resources>
