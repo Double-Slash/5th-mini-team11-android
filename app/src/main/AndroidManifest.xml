@@ -17,7 +17,6 @@
 
         <activity
             android:name="doubleslash05.mini.team11.ui.category.CategoryActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"
             >
 
             <intent-filter>

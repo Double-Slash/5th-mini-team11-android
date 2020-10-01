@@ -26,14 +26,17 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         )
 
 
-        for (str in strArray.indices) {
+        for (str in strArray) {
             val item = tablayout_category.newTab()
             tablayout_category.addTab(item)
 
-            item.text = strArray[str]
+            with(item){
+                text = str
+
+            }
 
             val bundle = Bundle().apply {
-                putString(CategoryFragment.ARGUMENT_CATEGORY, strArray[str])
+                putString(CategoryFragment.ARGUMENT_CATEGORY, str)
             }
 
             fragmentList.add(CategoryFragment().apply {
