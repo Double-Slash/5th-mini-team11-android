@@ -9,7 +9,7 @@ import kotlinx.android.synthetic.main.activity_recipe.*
 
 class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
-    private val ingredientFragment = IngredientFragment()
+    private val ingredientFragment = RecipeInfoFragment()
     private val stepFragment = RecipeStepFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {

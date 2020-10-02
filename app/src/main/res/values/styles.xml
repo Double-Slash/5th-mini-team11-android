@@ -11,12 +11,18 @@
         <item name="android:background">@color/white</item>
     </style>
 
-    <style name="TitleMain">
+
+    <style name="TextViewDefault">
+        <item name="android:textColor">@color/greyish_brown</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="TitleMain" parent="TextViewDefault">
         <item name="android:textSize">29sp</item>
         <item name="android:textColor">@color/greyish_brown</item>
     </style>
 
-    <style name="TitleSub">
+    <style name="TitleSub" parent="TextViewDefault">
         <item name="android:textSize">14sp</item>
         <item name="android:textColor">@color/brownish_grey</item>
     </style>

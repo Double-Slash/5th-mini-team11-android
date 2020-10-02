@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingVertical="30dp">
+
+        <FrameLayout
+            android:id="@+id/layout_recipeinfo_tags"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/textview_recipeinfo_detail"
+            style="@style/TextViewDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/margin_recipeinfo_layout_horizon"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/greyish_brown"
+            android:textSize="16sp"
+            tools:text="여유로운 주말에는 팬케이크 믹스를 활용하여 맛있고 간단한 브런치를 즐겨보세요! 재료도 간편하고 요리 과정도 쉽지만 분위기 내기에는 최고랍니다.기호에 따라 시럽 및 견과류 혹은 과일을 얹어 색다른 맛을 시도해 보세요!" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/textview_recipeinfo_title"
+                style="@style/TitleMain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_recipeinfo_layout_horizon"
+                android:layout_marginLeft="@dimen/margin_recipeinfo_layout_horizon"
+                android:text="@string/all_ingredient_info"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                style="@style/TitleSub"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:layout_marginEnd="@dimen/margin_recipeinfo_item_horizon"
+                android:layout_marginRight="@dimen/margin_recipeinfo_item_horizon"
+                android:text="2인분 기준"
+                app:layout_constraintBaseline_toBaselineOf="@+id/textview_recipeinfo_title"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            style="@style/TextViewDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorMain"
+            android:paddingHorizontal="@dimen/margin_recipeinfo_item_horizon"
+            android:paddingVertical="5dp"
+            android:text="@string/all_ingredient_main"
+            android:textColor="@color/greyish_brown"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/layout_recipeinfo_ingredient_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_recipeinfo_layout_horizon"
+            android:layout_marginEnd="@dimen/margin_recipeinfo_layout_horizon"
+            android:orientation="vertical" />
+
+
+        <TextView
+            style="@style/TextViewDefault"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@color/colorMain"
+            android:paddingHorizontal="@dimen/margin_recipeinfo_item_horizon"
+            android:paddingVertical="5dp"
+            android:text="@string/all_ingredient_sub"
+            android:textColor="@color/greyish_brown"
+            android:textSize="14sp" />
+
+        <LinearLayout
+            android:id="@+id/layout_recipeinfo_ingredient_sub"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_recipeinfo_layout_horizon"
+            android:layout_marginEnd="@dimen/margin_recipeinfo_layout_horizon"
+            android:orientation="vertical" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#d5d5d5" />
+
+        <TextView
+            style="@style/TitleMain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/margin_recipeinfo_layout_horizon"
+            android:layout_marginLeft="@dimen/margin_recipeinfo_layout_horizon"
+            android:text="@string/all_nutrition_info" />
+
+        <LinearLayout
+            android:id="@+id/layout_recipeinfo_nutrition"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" />
+    </LinearLayout>
+</ScrollView>
