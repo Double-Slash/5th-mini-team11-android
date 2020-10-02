@@ -5,7 +5,6 @@ import doubleslash05.mini.team11.util.LogUtils
 data class RecipeVideoData(val path: String, val sections: Array<Int>) {
     fun getSectionIndex(ms: Int): Int {
         for (i in sections.size - 1 downTo 0) {
-            LogUtils.d("Test", "$ms ${sections[i]}")
             if (sections[i] <= ms) {
                 return i + 1
             }

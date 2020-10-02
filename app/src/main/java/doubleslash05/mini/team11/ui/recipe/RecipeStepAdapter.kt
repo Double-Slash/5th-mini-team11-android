@@ -15,6 +15,7 @@ import kotlin.math.max
 class RecipeStepAdapter(private val context: Context) : RecyclerView.Adapter<RecipeStepAdapter.StepViewHolder>() {
     private var list: List<RecipeStepData>? = null
     private val inflater = LayoutInflater.from(context)
+    private var currentStep: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StepViewHolder {
         val v = inflater.inflate(R.layout.item_recipe_step, parent, false)
@@ -28,17 +29,20 @@ class RecipeStepAdapter(private val context: Context) : RecyclerView.Adapter<Rec
 
     override fun onBindViewHolder(holder: StepViewHolder, position: Int) {
         holder.step.text = "STEP ${position + 1}"
-        if (position < 2) holder.step.isSelected = true
+        holder.step.isSelected = position <= currentStep
 
         val instructions = list!![position].instructions
 
         for (i in 0 until max(instructions.size, holder.instruction.childCount)) {
+            if (i >= instructions.size) {
+                // TextView 가리기
+                holder.instruction[i].visibility = View.GONE
+                continue // Instruction 보다 View 가 많은 상황
+            }
+
             if (i >= holder.instruction.childCount) {
                 // TextView 생성
                 holder.instruction.addView(inflater.inflate(R.layout.item_recipe_step_detail, holder.instruction, false))
-            } else if (i >= instructions.size) {
-                // TextView 가리기
-                holder.instruction[i].visibility = View.GONE
             }
 
             val txt = holder.instruction[i] as TextView
@@ -49,6 +53,11 @@ class RecipeStepAdapter(private val context: Context) : RecyclerView.Adapter<Rec
 
     fun setData(list: List<RecipeStepData>) {
         this.list = list
+        notifyDataSetChanged()
+    }
+
+    fun setStep(index: Int){
+        currentStep = index
         notifyDataSetChanged()
     }
 

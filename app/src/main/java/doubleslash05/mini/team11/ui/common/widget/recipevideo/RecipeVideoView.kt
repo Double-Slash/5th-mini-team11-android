@@ -13,6 +13,7 @@ import android.widget.MediaController.MediaPlayerControl
 import android.widget.SeekBar
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
+import doubleslash05.mini.team11.util.LogUtils
 import kotlinx.android.synthetic.main.view_recipe_video.view.*
 import kotlinx.coroutines.*
 import kotlin.math.abs
@@ -114,6 +115,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
         if (!fromUser) return
         player_recipevideo.seekTo(progress)
+        onChangeSectionListener?.onChangeSection(data.getSectionIndex(progress))
     }
 
     override fun onStartTrackingTouch(seekBar: SeekBar?) {
@@ -131,7 +133,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     override fun start() {
         player_recipevideo.start()
         if (!isStopEndSection) {
-            onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
+            onChangeSectionListener?.onChangeSection(data.getSectionIndex(currentPosition))
         }
         isStopEndSection = true
     }
@@ -142,17 +144,14 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
     fun nextSection() {
         seekTo(data.getNextSection(currentPosition))
-        onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
     }
 
     fun replySction() {
         seekTo(data.getCurrentSction(currentPosition))
-        onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
     }
 
     fun prevSection() {
         seekTo(data.getPrevSection(currentPosition))
-        onChangeSectionListener?.onChangeSection(data.getSectionIndex(duration))
     }
 
     override fun getDuration(): Int {
@@ -164,8 +163,10 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
 
     override fun seekTo(pos: Int) {
+        LogUtils.d("TEST", "${data.getSectionIndex(pos)}")
         seekbar_recipevideo.progress = pos
         player_recipevideo.seekTo(pos)
+        onChangeSectionListener?.onChangeSection(data.getSectionIndex(pos))
     }
 
     override fun isPlaying(): Boolean {
@@ -224,7 +225,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
 
     // true 일경우 Section이 끝나면 Stop
-    private var isStopEndSection = true
+    private var isStopEndSection = false
 
     // 매 틱마다 UI 및 로직 처리
     private fun tick() {
