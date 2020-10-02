@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.ui.base.BaseFragment
 
-class TutorialFragment4 : Fragment() {
+class TutorialFragment4 : BaseFragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

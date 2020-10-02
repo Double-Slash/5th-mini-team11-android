@@ -17,18 +17,18 @@ import com.icaksama.rapidsphinx.RapidPreparationListener
 import com.icaksama.rapidsphinx.RapidSphinx
 import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.ui.base.BaseActivity
 import edu.cmu.pocketsphinx.Config
+import kotlinx.android.synthetic.main.activity_tutorial.*
 
-class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
+class TutorialActivity : BaseActivity(), RapidSphinxListener {
     private val stopKeyword = "stop"
     private val nextKeyword = "next"
     private val pauseKeyword = "pause"
-    private var vpPager: ViewPager? = null
-    private var customTab: TabLayout? = null
-    private var rapidSphinx: RapidSphinx? = null
+    private val rapidSphinx: RapidSphinx by lazy { RapidSphinx(this) }
     override fun rapidSphinxDidStop(reason: String, code: Int) {
         Log.d("cycle", "rapid stopped")
-        rapidSphinx!!.startRapidSphinx(10000)
+        rapidSphinx.startRapidSphinx(10000)
     }
 
     // most important method
@@ -38,19 +38,17 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
         scores: List<Double>
     ) {
         when (result) {
-            stopKeyword -> {
-                vpPager?.setCurrentItem(1)
-            }
+            stopKeyword -> vpPager?.setCurrentItem(1)
         }
     }
-
     override fun rapidSphinxPartialResult(partialResult: String) {
 
-        if (partialResult == nextKeyword){
-            vpPager?.setCurrentItem(2)
-        } else if (partialResult == pauseKeyword) {
-            vpPager?.setCurrentItem(3)
+        when (partialResult) {
+            nextKeyword -> vpPager?.setCurrentItem(2)
+            pauseKeyword -> vpPager?.setCurrentItem(3)
         }
+
+
 
     }
     override fun rapidSphinxUnsupportedWords(words: List<String>) {
@@ -76,18 +74,14 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
         override fun getItem(position: Int): Fragment {
             return when (position) {
 
-                0 -> {
-                    TutorialFragment1()
-                }
-                1 -> {
-                    TutorialFragment2()
-                }
-                2 -> {
-                    TutorialFragment3()
-                }
-                3 -> {
-                    TutorialFragment4()
-                }
+                0 -> TutorialFragment1()
+
+                1 -> TutorialFragment2()
+
+                2 -> TutorialFragment3()
+
+                3 -> TutorialFragment4()
+
                 else -> TutorialFragment1()
             }
         }
@@ -104,15 +98,23 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
+
+        customTab!!.setupWithViewPager(vpPager, true)
+        adapterViewPager = TutorialPageAdapter(supportFragmentManager)
+        vpPager!!.adapter = adapterViewPager
+
         Log.d("cycle", "onCreate")
-        rapidSphinx = RapidSphinx(this)
-        rapidSphinx!!.addListener(this)
-        if (isPermissionsGranted) try {
-            rapidSphinx!!.prepareRapidSphinx(object : RapidPreparationListener {
+        rapidSphinx.addListener(this)
+
+
+
+        if (isPermissionsGranted == true)
+            rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
                 override fun rapidPreExecute(config: Config) {
-                    rapidSphinx!!.isRawLogAvailable = true
+                    rapidSphinx.isRawLogAvailable = true
                     config.setString("-logfn", "/dev/null")
                     config.setBoolean("-verbose", true)
                 }
@@ -120,24 +122,18 @@ class TutorialActivity : AppCompatActivity(), RapidSphinxListener {
                 override fun rapidPostExecute(isSuccess: Boolean) {
                 }
             })
-        } catch (e: Exception) {
-            println(e)
-        }
-        vpPager = findViewById<View>(R.id.vpPager) as ViewPager
-        customTab = findViewById<View>(R.id.customTab) as TabLayout
-        customTab!!.setupWithViewPager(vpPager, true)
-        adapterViewPager = TutorialPageAdapter(supportFragmentManager)
-        vpPager!!.adapter = adapterViewPager
+
+
     }
 
     override fun onResume() {
         super.onResume()
         Log.d("cycle", "onResume")
         val oovwords = arrayOf("next", "pause")
-        rapidSphinx!!.updateVocabulary(
+        rapidSphinx.updateVocabulary(
             stopKeyword,
             oovwords
-        ) { rapidSphinx!!.startRapidSphinx(10000) }
+        ) { rapidSphinx.startRapidSphinx(10000) }
     }
 
     private val isPermissionsGranted: Boolean

@@ -8,8 +8,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.ui.base.BaseFragment
 
-class TutorialFragment3 : Fragment() {
+class TutorialFragment3 : BaseFragment() {
     var tvGuide3: TextView? = null
 
     override fun onCreateView(

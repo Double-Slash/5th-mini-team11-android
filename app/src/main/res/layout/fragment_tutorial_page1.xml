@@ -113,7 +113,7 @@
         android:id="@+id/btnSkip"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="@drawable/btn_rounded_corners"
+        android:background="@drawable/btn_top_rounded"
         android:text="Skip"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

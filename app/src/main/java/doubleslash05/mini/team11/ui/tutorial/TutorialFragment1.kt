@@ -12,8 +12,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.ui.base.BaseFragment
 
-class TutorialFragment1 : Fragment() {
+class TutorialFragment1 : BaseFragment() {
     var tvGuide1: TextView? = null
     var tvResult: TextView? = null
     override fun onCreateView(
