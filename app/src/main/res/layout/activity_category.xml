@@ -17,8 +17,7 @@
             style="@style/AppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            app:navigationIcon="@drawable/ic_btn_back_24dp"
-            >
+            app:navigationIcon="@drawable/ic_btn_back_24dp">
 
             <TextView
                 android:id="@+id/textview_category_title"
@@ -34,15 +33,12 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_category"
+        style="@style/TabLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintTop_toBottomOf="@id/layout_category_appbar"
         app:tabContentStart="56dp"
-        app:tabIndicatorColor="@color/colorMain"
-        app:tabMode="scrollable"
-        app:tabTextColor="@color/brownish_grey"
-        app:tabSelectedTextColor="@color/greyish_brown"
-        />
+        app:tabMode="scrollable" />
 
     <FrameLayout
         android:id="@+id/fragment_category"

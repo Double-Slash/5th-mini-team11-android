@@ -10,4 +10,6 @@
     <string name="category_7">카테고리_7</string>
     <string name="category_8">카테고리_8</string>
     <string name="category_9">카테고리_9</string>
+    <string name="recipe_tab_0"><![CDATA[재료 & 정보]]></string>
+    <string name="recipe_tab_1">레시피</string>
 </resources>

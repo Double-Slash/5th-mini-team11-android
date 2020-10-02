@@ -11,4 +11,20 @@
         <item name="android:background">@color/white</item>
     </style>
 
+    <style name="TitleMain">
+        <item name="android:textSize">29sp</item>
+        <item name="android:textColor">@color/greyish_brown</item>
+    </style>
+
+    <style name="TitleSub">
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/brownish_grey</item>
+    </style>
+
+    <style name="TabLayout">
+        <item name="tabTextColor">@color/brownish_grey</item>
+        <item name="tabSelectedTextColor">@color/greyish_brown</item>
+        <item name="tabIndicatorColor">@color/colorMain</item>
+    </style>
+
 </resources>
