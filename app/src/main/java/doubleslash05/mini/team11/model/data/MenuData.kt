@@ -1,5 +1,8 @@
 package doubleslash05.mini.team11.model.data
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
 data class MenuData(
     val id: Int,
     val name: String,
@@ -8,7 +11,7 @@ data class MenuData(
     val descriptionShort: String,
     val thumbnailUrl: String,
     val favorite: Boolean
-){
+) {
 
     companion object{
         fun getSample() : MenuData {

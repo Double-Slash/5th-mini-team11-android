@@ -163,7 +163,6 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
 
     override fun seekTo(pos: Int) {
-        LogUtils.d("TEST", "${data.getSectionIndex(pos)}")
         seekbar_recipevideo.progress = pos
         player_recipevideo.seekTo(pos)
         onChangeSectionListener?.onChangeSection(data.getSectionIndex(pos))

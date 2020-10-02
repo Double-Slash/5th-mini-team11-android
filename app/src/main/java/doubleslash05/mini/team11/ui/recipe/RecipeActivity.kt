@@ -6,21 +6,22 @@ import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
-import doubleslash05.mini.team11.util.LogUtils
 import kotlinx.android.synthetic.main.activity_recipe.*
 
 class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
-
     private val infoFragment = RecipeInfoFragment()
     private val stepFragment = RecipeStepFragment()
+    private val menuId by lazy { intent.getIntExtra(EXTRA_MENU_ID, -1) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
 
+        //        textview_receipe_main.text = menuData.name
+        //        textview_receipe_sub.text = menuData.descriptionShort
+
         videoview_receipe.setOnChangeSectionListener(object : RecipeVideoView.OnChangeSectionListener {
             override fun onChangeSection(index: Int) {
-                LogUtils.d("TEST", index.toString())
                 stepFragment.setStep(index)
             }
         })
@@ -58,4 +59,8 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
     }
 
+    companion object {
+        const val EXTRA_MENU_ID = "EXTRA_MENU_ID"
+        const val EXTRA_MENU_DATA = "EXTRA_MENU_DATA"
+    }
 }

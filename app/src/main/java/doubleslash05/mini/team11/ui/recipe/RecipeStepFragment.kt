@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
 
 class RecipeStepFragment : BaseFragment() {
     private val adapter by lazy { RecipeStepAdapter(context!!) }
-    val smoothScroller: RecyclerView.SmoothScroller by lazy {
+    private val smoothScroller: RecyclerView.SmoothScroller by lazy {
         object : LinearSmoothScroller(context) {
             override fun getVerticalSnapPreference() = SNAP_TO_START
         }
