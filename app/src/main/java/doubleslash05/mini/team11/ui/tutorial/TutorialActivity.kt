@@ -5,14 +5,11 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import androidx.viewpager.widget.ViewPager
-import com.google.android.material.tabs.TabLayout
 import com.icaksama.rapidsphinx.RapidPreparationListener
 import com.icaksama.rapidsphinx.RapidSphinx
 import com.icaksama.rapidsphinx.RapidSphinxListener
@@ -26,6 +23,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     private val nextKeyword = "next"
     private val pauseKeyword = "pause"
     private val rapidSphinx: RapidSphinx by lazy { RapidSphinx(this) }
+
     override fun rapidSphinxDidStop(reason: String, code: Int) {
         Log.d("cycle", "rapid stopped")
         rapidSphinx.startRapidSphinx(10000)
@@ -74,15 +72,15 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         override fun getItem(position: Int): Fragment {
             return when (position) {
 
-                0 -> TutorialFragment1()
+                0 -> Tutorial1Fragment()
 
-                1 -> TutorialFragment2()
+                1 -> Tutorial2Fragment()
 
-                2 -> TutorialFragment3()
+                2 -> Tutorial3Fragment()
 
-                3 -> TutorialFragment4()
+                3 -> Tutorial4Fragment()
 
-                else -> TutorialFragment1()
+                else -> Tutorial1Fragment()
             }
         }
 
