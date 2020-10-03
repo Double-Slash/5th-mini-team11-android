@@ -17,8 +17,11 @@
         android:layout_marginEnd="114dp"
         android:layout_marginRight="114dp"
         android:layout_marginBottom="447dp"
+        android:fontFamily="@font/font_main"
         android:text="Hello"
+        android:textColor="#303030"
         android:textSize="24sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -32,17 +35,18 @@
         android:layout_height="60dp"
         android:layout_marginStart="22dp"
         android:layout_marginLeft="22dp"
-        android:layout_marginTop="7dp"
+        android:layout_marginTop="3dp"
         android:layout_marginEnd="105dp"
         android:layout_marginRight="105dp"
         android:layout_marginBottom="379dp"
+        android:fontFamily="@font/font_main"
         android:text="TextView"
         android:textSize="13sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvLabel"
+        app:layout_constraintTop_toBottomOf="@+id/tvLabel3"
         app:layout_constraintVertical_bias="0.127" />
 
 
@@ -51,7 +55,7 @@
         android:layout_height="62dp"
         android:layout_marginStart="155dp"
         android:layout_marginLeft="155dp"
-        android:layout_marginTop="293dp"
+        android:layout_marginTop="143dp"
         android:layout_marginEnd="155dp"
         android:layout_marginRight="155dp"
         android:layout_marginBottom="265dp"
@@ -60,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetail3" />
 
 
     <TextView
@@ -69,7 +73,7 @@
         android:layout_height="66dp"
         android:layout_marginStart="75dp"
         android:layout_marginLeft="75dp"
-        android:layout_marginTop="417dp"
+        android:layout_marginTop="257dp"
         android:layout_marginEnd="75dp"
         android:layout_marginRight="75dp"
         android:layout_marginBottom="157dp"
@@ -81,8 +85,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/tvDetail3" />
 
 
     <View
@@ -91,7 +94,7 @@
         android:layout_height="1dp"
         android:layout_marginStart="66dp"
         android:layout_marginLeft="66dp"
-        android:layout_marginTop="470dp"
+        android:layout_marginTop="311dp"
         android:layout_marginEnd="66dp"
         android:layout_marginRight="66dp"
         android:layout_marginBottom="170dp"
@@ -100,7 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/tvDetail3" />
 
 
 
