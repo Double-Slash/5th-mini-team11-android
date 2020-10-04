@@ -15,7 +15,7 @@ import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
 
 class CategoryFragment : BaseFragment() {
     private val category: String by lazy { arguments!!.getString(ARGUMENT_CATEGORY, "all") }
-    private val adapter by lazy { CategoryAdapter(context!!) }
+    private val adapter by lazy { CategoryAdapter() }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

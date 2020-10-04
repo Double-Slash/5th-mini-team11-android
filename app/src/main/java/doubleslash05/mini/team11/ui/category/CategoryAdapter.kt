@@ -12,12 +12,12 @@ import doubleslash05.mini.team11.model.data.MenuList
 import kotlinx.android.synthetic.main.item_menu.view.*
 import kotlinx.android.synthetic.main.item_title.view.*
 
-class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var list: List<MenuList>
     private var onMenuItemClickListener: OnMenuItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val inflater = LayoutInflater.from(context)
+        val inflater = LayoutInflater.from(parent.context)
         when (viewType) {
             VIEW_TYPE_TITLE -> {
                 val v = inflater.inflate(R.layout.item_title, parent, false)
@@ -28,7 +28,7 @@ class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
                 return MenuViewHolder(v)
             }
             else -> {
-                return HiddentViewHolder()
+                return HiddenViewHolder(parent.context)
             }
         }
     }
@@ -114,7 +114,7 @@ class CategoryAdapter(private val context: Context) : RecyclerView.Adapter<Recyc
         this.onMenuItemClickListener = listener
     }
 
-    private inner class HiddentViewHolder : RecyclerView.ViewHolder(View(context))
+    private inner class HiddenViewHolder(context: Context) : RecyclerView.ViewHolder(View(context))
     private inner class TitleViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val mainTitle = v.textview_title_main!!
         val subTitle = v.textview_title_sub!!

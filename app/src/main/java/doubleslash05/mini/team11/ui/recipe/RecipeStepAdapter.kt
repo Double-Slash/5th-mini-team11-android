@@ -12,13 +12,12 @@ import doubleslash05.mini.team11.model.data.RecipeStepData
 import kotlinx.android.synthetic.main.item_recipe_step.view.*
 import kotlin.math.max
 
-class RecipeStepAdapter(private val context: Context) : RecyclerView.Adapter<RecipeStepAdapter.StepViewHolder>() {
+class RecipeStepAdapter() : RecyclerView.Adapter<RecipeStepAdapter.StepViewHolder>() {
     private var list: List<RecipeStepData>? = null
-    private val inflater = LayoutInflater.from(context)
     private var currentStep: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StepViewHolder {
-        val v = inflater.inflate(R.layout.item_recipe_step, parent, false)
+        val v = LayoutInflater.from(parent.context).inflate(R.layout.item_recipe_step, parent, false)
 
         return StepViewHolder(v)
     }
@@ -42,7 +41,8 @@ class RecipeStepAdapter(private val context: Context) : RecyclerView.Adapter<Rec
 
             if (i >= holder.instruction.childCount) {
                 // TextView 생성
-                holder.instruction.addView(inflater.inflate(R.layout.item_recipe_step_detail, holder.instruction, false))
+                val v = LayoutInflater.from(holder.instruction.context).inflate(R.layout.item_recipe_step_detail, holder.instruction, false)
+                holder.instruction.addView(v)
             }
 
             val txt = holder.instruction[i] as TextView
