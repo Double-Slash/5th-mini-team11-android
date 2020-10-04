@@ -10,6 +10,7 @@ import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.MenuData
 import doubleslash05.mini.team11.model.data.MenuList
 import doubleslash05.mini.team11.ui.base.BaseFragment
+import doubleslash05.mini.team11.ui.common.OnMenuItemClickListener
 import doubleslash05.mini.team11.ui.recipe.RecipeActivity
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
 
@@ -29,7 +30,7 @@ class CategoryFragment : BaseFragment() {
             MenuList.getSample()
         ))
 
-        adapter.setOnMenuItemClickListener(object : CategoryAdapter.OnMenuItemClickListener{
+        adapter.setOnMenuItemClickListener(object : OnMenuItemClickListener {
             override fun onMenuItemClick(data: MenuData) {
                 val intent = Intent(context, RecipeActivity::class.java)
                 intent.putExtra(RecipeActivity.EXTRA_MENU_ID, data.id)

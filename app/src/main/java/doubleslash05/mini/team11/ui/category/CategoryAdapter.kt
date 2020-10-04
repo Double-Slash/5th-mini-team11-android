@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.MenuData
 import doubleslash05.mini.team11.model.data.MenuList
+import doubleslash05.mini.team11.ui.common.MenuViewHolder
+import doubleslash05.mini.team11.ui.common.OnMenuItemClickListener
 import kotlinx.android.synthetic.main.item_menu.view.*
 import kotlinx.android.synthetic.main.item_title.view.*
 
@@ -120,35 +122,6 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val subTitle = v.textview_title_sub!!
     }
 
-    private inner class MenuViewHolder(v: View) : RecyclerView.ViewHolder(v) {
-        val txtMain = v.textview_menu_main!!
-        val txtSub = v.textview_menu_sub!!
-        val txtTime = v.textview_menu_time!!
-        val txtLevel = v.textview_menu_level!!
-        val checkbox = v.checkbox_menu_favorite!!
-
-        init {
-            v.setOnClickListener {
-                val position = adapterPosition
-                val data = getMenuData(position) ?: return@setOnClickListener
-                onMenuItemClickListener?.onMenuItemClick(data)
-            }
-        }
-
-        @SuppressLint("SetTextI18n")
-        fun bind(data: MenuData) {
-            txtMain.text = data.name
-            txtSub.text = data.descriptionShort
-            txtTime.text = "${data.cookingTime} 분"
-            txtLevel.text = data.level
-
-            checkbox.isChecked = data.favorite
-        }
-    }
-
-    interface OnMenuItemClickListener {
-        fun onMenuItemClick(data: MenuData)
-    }
 
     companion object {
         private const val VIEW_TYPE_TITLE = 0
