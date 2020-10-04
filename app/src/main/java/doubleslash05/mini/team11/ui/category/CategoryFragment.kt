@@ -25,6 +25,7 @@ class CategoryFragment : BaseFragment() {
 
 
         adapter.setData(listOf(
+            MenuList.getSampleHorizon(),
             MenuList.getSample(),
             MenuList.getSample()
         ))

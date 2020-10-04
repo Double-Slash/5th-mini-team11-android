@@ -20,5 +20,18 @@ data class MenuList(
                 false
             )
         }
+        fun getSampleHorizon(): MenuList {
+            return MenuList(
+                "H - TTT",
+                "H - SSS",
+                listOf(
+                    MenuData.getSample(),
+                    MenuData.getSample(),
+                    MenuData.getSample(),
+                    MenuData.getSample()
+                ),
+                true
+            )
+        }
     }
 }

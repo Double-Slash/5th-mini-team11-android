@@ -5,14 +5,17 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.MenuData
 import doubleslash05.mini.team11.model.data.MenuList
+import doubleslash05.mini.team11.util.extension.dpToPx
 import kotlinx.android.synthetic.main.item_menu.view.*
 import kotlinx.android.synthetic.main.item_title.view.*
 
-class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var list: List<MenuList>
     private var onMenuItemClickListener: OnMenuItemClickListener? = null
 
@@ -26,6 +29,10 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             VIEW_TYPE_MENU -> {
                 val v = inflater.inflate(R.layout.item_menu, parent, false)
                 return MenuViewHolder(v)
+            }
+            VIEW_TYPE_HORIZON -> {
+                val v = RecyclerView(parent.context)
+                return HorizonRecyclerViewHolder(v)
             }
             else -> {
                 return HiddenViewHolder(parent.context)
@@ -57,6 +64,10 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             is MenuViewHolder -> {
                 val data = getMenuData(position) ?: return
                 holder.bind(data)
+            }
+            is HorizonRecyclerViewHolder -> {
+                val data = getInfoData(position) ?: return
+                holder.recyclerView.adapter = HorizontalMenuAdapter(data.menuList)
             }
         }
     }
@@ -114,6 +125,13 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         val subTitle = v.textview_title_sub!!
     }
 
+    private inner class HorizonRecyclerViewHolder(val recyclerView: RecyclerView) : RecyclerView.ViewHolder(recyclerView) {
+        init {
+            recyclerView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            recyclerView.layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
+        }
+    }
+
     private inner class MenuViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         val txtMain = v.textview_menu_main!!
         val txtSub = v.textview_menu_sub!!
@@ -142,9 +160,17 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private data class InternalData(val viewType: Int, val info: MenuList, val data: MenuData?)
 
-    private inner class HorizontalMenuAdapter(val list: List<MenuData>) : RecyclerView.Adapter<MenuViewHolder>(){
+    private inner class HorizontalMenuAdapter(val list: List<MenuData>) : RecyclerView.Adapter<MenuViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
-            val v = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
+            val context = parent.context
+            val v = LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false)
+            v.layoutParams = FrameLayout.LayoutParams(context.dpToPx(286f), context.dpToPx(132f)).apply {
+                leftMargin = context.dpToPx(10f)
+                rightMargin = context.dpToPx(10f)
+                topMargin = context.dpToPx(20f)
+                bottomMargin = context.dpToPx(10f)
+            }
+
             return MenuViewHolder(v)
         }
 
