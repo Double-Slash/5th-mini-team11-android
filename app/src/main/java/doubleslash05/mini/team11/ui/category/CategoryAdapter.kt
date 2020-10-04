@@ -62,16 +62,9 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemViewType(position: Int): Int {
-        var count = 0
-        for (element in list) {
-            val size = element.menuList.size
-            if (size == 0) continue
+        val data = getInternalData(position) ?: return -1
 
-            if (count == position) return VIEW_TYPE_TITLE
-            count += size + 1
-        }
-
-        return VIEW_TYPE_MENU
+        return data.viewType
     }
 
     fun setData(list: List<MenuList>) {
@@ -79,35 +72,36 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         notifyDataSetChanged()
     }
 
-    fun getInfoData(position: Int): MenuList? {
+    private fun getInternalData(position: Int): InternalData? {
         var count = 0
         for (element in list) {
             val size = element.menuList.size
             if (size == 0) continue
 
-            if (count == position) return element
+            if (count == position) return InternalData(VIEW_TYPE_TITLE, element, null)
+            if (element.horizon) {
+                if (count + 1 == position) return InternalData(VIEW_TYPE_HORIZON, element, null)
+                count += 2
+                continue
+            }
 
+            val preCount = count
             count += size + 1
+            if (position < count) return InternalData(VIEW_TYPE_MENU, element, element.menuList[position - preCount - 1])
         }
 
         return null
     }
 
+    fun getInfoData(position: Int): MenuList? {
+        val d = getInternalData(position)
+        return d?.info
+    }
+
     // Adapter position으로 MenuData 가져오기
     fun getMenuData(position: Int): MenuData? {
-        var count = 0
-        for (element in list) {
-            val size = element.menuList.size
-            if (size == 0) continue
-
-            if (count == position) return null // Title 일때는 null
-
-            val preCount = count
-            count += size + 1
-            if (position < count) return element.menuList[position - preCount - 1]
-        }
-
-        return null
+        val d = getInternalData(position)
+        return d?.data
     }
 
     fun setOnMenuItemClickListener(listener: OnMenuItemClickListener) {
@@ -143,6 +137,23 @@ class CategoryAdapter() : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             txtLevel.text = data.level
 
             checkbox.isChecked = data.favorite
+        }
+    }
+
+    private data class InternalData(val viewType: Int, val info: MenuList, val data: MenuData?)
+
+    private inner class HorizontalMenuAdapter(val list: List<MenuData>) : RecyclerView.Adapter<MenuViewHolder>(){
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
+            val v = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
+            return MenuViewHolder(v)
+        }
+
+        override fun getItemCount(): Int {
+            return list.size
+        }
+
+        override fun onBindViewHolder(holder: MenuViewHolder, position: Int) {
+            holder.bind(list[position])
         }
     }
 
