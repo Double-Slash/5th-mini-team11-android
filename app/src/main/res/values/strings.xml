@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">DoubleSlashMini0511</string>
 
+    <string name="all_ingredient_info">재료 정보</string>
+    <string name="all_nutrition_info">영양 정보</string>
+    <string name="all_ingredient_main">주재료</string>
+    <string name="all_ingredient_sub">부재료</string>
+    <string name="all_next">다음</string>
+    <string name="all_prev">이전</string>
+    <string name="all_replay">다시</string>
+
     <string name="category_1">카테고리_1</string>
     <string name="category_2">카테고리_2</string>
     <string name="category_3">카테고리_3</string>
@@ -12,8 +20,11 @@
     <string name="category_9">카테고리_9</string>
     <string name="recipe_tab_0"><![CDATA[재료 & 정보]]></string>
     <string name="recipe_tab_1">레시피</string>
-    <string name="all_ingredient_info">재료 정보</string>
-    <string name="all_nutrition_info">영양 정보</string>
-    <string name="all_ingredient_main">주재료</string>
-    <string name="all_ingredient_sub">부재료</string>
+
+    <string name="guide_voice_head">레시피 영상을 재생할 때\n다음과 같이 말해주세요.</string>
+    <string name="guide_voice_tail">영상 화면을 터치해서 재생/ 정지 할 수도 있어요!</string>
+    <string name="guide_dont_watch">다시 안볼래요</string>
+    <string name="guide_prev">이전 STEP 으로</string>
+    <string name="guide_next">다음 STEP 으로</string>
+    <string name="guide_replay">현재 STEP 다시 재생</string>
 </resources>

@@ -2,6 +2,7 @@ package doubleslash05.mini.team11.ui.recipe
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayout
+import doubleslash05.mini.team11.App
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
 import doubleslash05.mini.team11.ui.base.BaseActivity
@@ -27,6 +28,8 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         })
         tablayout_recipe.addOnTabSelectedListener(this)
 
+        if(App.prefs.isShowVoiceGuide)
+        GuideVoiceDialog().show(supportFragmentManager, null)
 
         supportFragmentManager.beginTransaction()
             .add(R.id.fragment_recipe, stepFragment)
