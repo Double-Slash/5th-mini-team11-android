@@ -23,7 +23,7 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
         color = ResourcesCompat.getColor(resources, R.color.colorSeekBarBackground, null)
     }
     private val fillPaint = Paint().apply {
-        color = ResourcesCompat.getColor(resources, R.color.colorMain, null)
+        color = ResourcesCompat.getColor(resources, R.color.orange_yellow, null)
     }
     //    private val height = dpToPx(12)
 
