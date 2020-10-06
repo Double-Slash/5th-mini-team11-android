@@ -5,8 +5,6 @@ import android.text.Html
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.fragment.app.Fragment
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_tutorial_page1.*
@@ -23,9 +21,9 @@ class Tutorial2Fragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        tvGuide1.text = "다음"
-        tvLabel1.setText(R.string.tutorialPage3Main)
-        tvDetail1.setText(Html.fromHtml("레시피 영상 재생시 <font color='#FF9E00'>다음</font>이라고 말하면<br><font color='#FF9E00'>다음</font> 스텝이 시작됩니다.</br>"))
+        tvGuide.text = "다음"
+        tvLabel.setText(R.string.tutorial_title)
+        tvDetail.setText(Html.fromHtml("레시피 영상 재생시 <font color='#FF9E00'>다음</font>이라고 말하면<br><font color='#FF9E00'>다음</font> 스텝이 시작됩니다.</br>"))
 
 
     }

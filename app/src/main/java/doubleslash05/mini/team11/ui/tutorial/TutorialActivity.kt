@@ -45,9 +45,12 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     override fun rapidSphinxPartialResult(partialResult: String) {
 
         when (partialResult) {
-            stopKeyword2 -> viewpager_tutorial.setCurrentItem(1)
-            nextKeyword -> viewpager_tutorial.setCurrentItem(2)
-            pauseKeyword -> viewpager_tutorial.setCurrentItem(3)
+            stopKeyword2 -> viewpager_tutorial.currentItem = 1
+            nextKeyword -> viewpager_tutorial.currentItem = 2
+            pauseKeyword -> {
+                viewpager_tutorial.currentItem = 3
+                btnSkip.setText("시작하기")
+            }
         }
 
 
@@ -67,8 +70,8 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
 
-        customTab!!.setupWithViewPager(viewpager_tutorial, true)
-        viewpager_tutorial!!.adapter = adapterViewPager
+        customTab.setupWithViewPager(viewpager_tutorial, true)
+        viewpager_tutorial.adapter = adapterViewPager
 
         Log.d("cycle", "onCreate")
         rapidSphinx.addListener(this)
@@ -95,9 +98,10 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         Log.d("cycle", "onResume")
         val oovwords = arrayOf("darcy", "daum", "region")
         rapidSphinx.updateVocabulary(
-            Companion.stopKeyword,
+            stopKeyword,
             oovwords
         ) { rapidSphinx.startRapidSphinx(10000) }
+
     }
 
     private val isPermissionsGranted: Boolean
@@ -118,35 +122,30 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     class TutorialPageAdapter(fragmentManager: FragmentManager?) : FragmentPagerAdapter(
         fragmentManager!!
     ) {
+
+        private val PAGE_NUMBER = listOf<BaseFragment>(
+            Tutorial1Fragment(),
+            Tutorial2Fragment(),
+            Tutorial3Fragment(),
+            Tutorial4Fragment()
+        )
+
+
+
         override fun getItemPosition(`object`: Any): Int {
             return super.getItemPosition(`object`)
         }
 
         override fun getCount(): Int {
-            return PAGE_NUN
+            return PAGE_NUMBER.size
         }
 
         override fun getItem(position: Int): Fragment {
-            return when (position) {
-
-                0 -> Tutorial1Fragment()
-
-                1 -> Tutorial2Fragment()
-
-                2 -> Tutorial3Fragment()
-
-                3 -> Tutorial4Fragment()
-
-                else -> Tutorial1Fragment()
-            }
+            return PAGE_NUMBER[position]
         }
 
         override fun getPageTitle(position: Int): CharSequence? {
             return null
-        }
-
-        companion object {
-            private const val PAGE_NUN = 4
         }
 
 
