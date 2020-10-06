@@ -24,8 +24,8 @@ class FavoriteFragment : BaseFragment() {
 
         TabLayoutMediator(view.tablayout_favorite, view.viewpager_favorite) { tab, position ->
             tab.text = when (position) {
-                0 -> "1"
-                1 -> "2"
+                0 -> getString(R.string.favorite_make_menu)
+                1 -> getString(R.string.favorite_made_menu)
                 else -> "???"
             }
         }.attach()
