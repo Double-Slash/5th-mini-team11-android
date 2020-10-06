@@ -30,8 +30,7 @@ class Tutorial1Fragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-
-        tvGuide1.text = "stop"
+        tvGuide1.text = "이전"
         tvLabel1.setText(Html.fromHtml("<br>안녕하세요!</br><br>이제부터<font color='#FF9E00'>쿠키스</font>와 함께</br><br><font color='#FF9E00'>목소리</font>로 요리해보아요.</br>"))
         tvDetail1.setText(Html.fromHtml("레시피 영상 재생시 <font color='#FF9E00'>이전</font> 이라고 말하면<br><font color='#FF9E00'>이전</font> 스텝이 시작됩니다.</br>"))
 
