@@ -4,9 +4,11 @@ import android.os.Bundle
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.favorite.FavoriteFragment
+import doubleslash05.mini.team11.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main2.*
 
 class HomeActivity : BaseActivity() {
+    private val searchFragment = SearchFragment()
     private val favoriteFragment = FavoriteFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -23,11 +25,13 @@ class HomeActivity : BaseActivity() {
     private fun goToHome() {
         clearNavigation()
         button_main_nav_home.isSelected = true
+        supportFragmentManager.beginTransaction().remove(searchFragment).remove(favoriteFragment).commit()
     }
 
     private fun goToSearch() {
         clearNavigation()
         button_main_nav_search.isSelected = true
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_main, searchFragment).commit()
     }
 
     private fun goToFavorite() {

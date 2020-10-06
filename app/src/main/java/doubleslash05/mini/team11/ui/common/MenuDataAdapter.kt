@@ -51,6 +51,7 @@ class MenuDataAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         @SuppressLint("SetTextI18n")
         fun bind(data: MenuData) {
+            this.data = data
             txtMain.text = data.name
             txtSub.text = data.descriptionShort
             txtTime.text = "${data.cookingTime} 분"
