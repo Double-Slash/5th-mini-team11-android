@@ -14,6 +14,9 @@ class HomeActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
+        setSupportActionBar(toolbar_main)
+
         button_main_nav_search.setOnClickListener { goToSearch() }
         button_main_nav_favorite.setOnClickListener { goToFavorite() }
         button_main_nav_home.setOnClickListener { goToHome() }

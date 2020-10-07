@@ -9,6 +9,7 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_favorite.view.*
 
@@ -19,6 +20,10 @@ class FavoriteFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+        supportActionBar?.title = getString(R.string.favorite_my_menu)
+
         view.viewpager_favorite.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         view.viewpager_favorite.adapter = ViewPagerAdapter()
 
