@@ -33,6 +33,11 @@ public class HorAdapter extends RecyclerView.Adapter<HorAdapter.HorViewHolder> {
         holder.tvexplain.setText(list.get(position));
         holder.tvtime.setText(list.get(position));
         holder.tvlevel.setText(list.get(position));
+
+        holder.ivempty.setImageResource(R.drawable.beginner_empty);
+        holder.ivtime.setImageResource(R.drawable.tiem_icon);
+        holder.ivlevel.setImageResource(R.drawable.level_icon);
+        holder.ivbookmark.setImageResource(R.drawable.bookmark_icon);
     }
 
     @Override
@@ -41,6 +46,11 @@ public class HorAdapter extends RecyclerView.Adapter<HorAdapter.HorViewHolder> {
     }
 
     class HorViewHolder extends RecyclerView.ViewHolder {
+        ImageView ivempty = itemView.findViewById(R.id.itemIv);
+        ImageView ivtime = itemView.findViewById(R.id.itemIv2);
+        ImageView ivlevel = itemView.findViewById(R.id.itemIv3);
+        ImageView ivbookmark = itemView.findViewById(R.id.itemIv4);
+        
         TextView tvname = itemView.findViewById(R.id.itemTv);
         TextView tvexplain = itemView.findViewById(R.id.itemTv2);
         TextView tvtime = itemView.findViewById(R.id.itemTv3);

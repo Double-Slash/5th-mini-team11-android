@@ -8,7 +8,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.ArrayList;
 
@@ -16,10 +18,13 @@ import doubleslash05.mini.team11.R;
 import doubleslash05.mini.team11.model.data.Base;
 import doubleslash05.mini.team11.model.data.Beginner;
 import doubleslash05.mini.team11.model.data.Category;
+import doubleslash05.mini.team11.model.data.Fragment1;
+import doubleslash05.mini.team11.model.data.MainViewPager;
 import doubleslash05.mini.team11.model.data.Text1;
 import doubleslash05.mini.team11.model.data.Text2;
 import doubleslash05.mini.team11.model.data.VerBeginner;
 import doubleslash05.mini.team11.util.Log;
+import me.relex.circleindicator.CircleIndicator3;
 
 public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -30,7 +35,9 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int ITEM_VERTICAL = 4;
 
 
+
     ArrayList<Object> list = new ArrayList<>();
+
 
 
     @NonNull
@@ -49,6 +56,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             return new VerticalViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.vertical_recycler, parent, false));
         }
 
+
         return null;
     }
 
@@ -56,22 +64,11 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof CategoryViewHolder) {
             ((CategoryViewHolder) viewHolder).rv.setAdapter(new GridAdapter(((Category) list.get(position)).itemList));
-//            CategoryViewHolder c = (CategoryViewHolder) viewHolder;
-//            Category c1 = (Category) list.get(position);
-//            c.content.setText(c1.name);
-//            c.image.setImageResource(c1.imageNum);
-//            c.rv.setAdapter(new GridAdapter(((Category) list.get(position)).itemList));
+
 
         } else if (viewHolder instanceof BeginnerViewHolder) {
             ((BeginnerViewHolder) viewHolder).rv2.setAdapter(new HorAdapter(((Beginner) list.get(position)).itemList));
-//            BeginnerViewHolder b = (BeginnerViewHolder) viewHolder;
-//            Beginner c2 = (Beginner) list.get(position);
-//            b.content.setText(c2.name);
-//            b.image.setImageResource(c2.imageNum);
-//            b.contentExplain.setText(c2.explain);
-//            b.contentTime.setText(c2.time);
-//            b.contentLevel.setText(c2.level);
-//            b.rv2.setAdapter(new HorAdapter(((Beginner) list.get(position)).itemList));
+
 
         } else if (viewHolder instanceof Text1ViewHolder) {
             Text1ViewHolder t1 = (Text1ViewHolder) viewHolder;
@@ -184,6 +181,5 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             rv3 = itemView.findViewById(R.id.verticalrecycler);
         }
     }
-
 
 }

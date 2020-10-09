@@ -5,8 +5,10 @@ import java.util.ArrayList;
 public class Beginner extends Base {
     public ArrayList<String> itemList;
 
+
     public Beginner(ArrayList<String> itemList) {
         this.itemList = itemList;
+
     }
 }
 //    public String name;
