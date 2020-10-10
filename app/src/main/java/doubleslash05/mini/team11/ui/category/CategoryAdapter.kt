@@ -140,6 +140,7 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     private inner class MenuViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        lateinit var data : MenuData
         val background = v.imageview_menu_background!!
         val txtMain = v.textview_menu_main!!
         val txtSub = v.textview_menu_sub!!
@@ -149,20 +150,17 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         init {
             v.setOnClickListener {
-                val position = adapterPosition
-                val data = getMenuData(position) ?: return@setOnClickListener
                 onMenuItemClickListener?.onMenuItemClick(data)
             }
 
             checkbox.setOnCheckedChangeListener { _, isChecked ->
-                val position = adapterPosition
-                val data = getMenuData(position) ?: return@setOnCheckedChangeListener
                 RecipeModel.setFavorite(data.id, isChecked)
             }
         }
 
         @SuppressLint("SetTextI18n")
         fun bind(data: MenuData) {
+            this.data = data
             Glide.with(background.context).load(data.thumbnailUrl).into(background)
 
             txtMain.text = data.name
