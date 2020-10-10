@@ -131,7 +131,10 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private inner class HorizonRecyclerViewHolder(val recyclerView: RecyclerView) : RecyclerView.ViewHolder(recyclerView) {
         init {
-            recyclerView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            val padding = recyclerView.context.dpToPx(6)
+            recyclerView.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            recyclerView.clipToPadding = false
+            recyclerView.setPadding(padding, 0, padding, 0)
             recyclerView.layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
         }
     }
@@ -177,7 +180,12 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
             val context = parent.context
             val v = LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false)
-
+            v.layoutParams = FrameLayout.LayoutParams(context.dpToPx(286), context.dpToPx(132)).apply {
+                rightMargin = context.dpToPx(10)
+                leftMargin = context.dpToPx(10)
+                topMargin = context.dpToPx(10)
+                bottomMargin = context.dpToPx(10)
+            }
             return MenuViewHolder(v)
         }
 
