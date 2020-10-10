@@ -3,6 +3,7 @@ package doubleslash05.mini.team11.ui.tutorial
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -17,6 +18,7 @@ import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_tutorial.*
+import kotlin.concurrent.timer
 
 class TutorialActivity : BaseActivity(), RapidSphinxListener {
     companion object {
@@ -28,7 +30,10 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
     private val rapidSphinx: RapidSphinx by lazy { RapidSphinx(this) }
     private val adapterViewPager: FragmentPagerAdapter = TutorialPageAdapter(supportFragmentManager)
-
+    private val updateHandler = Handler()
+    private val runnable = Runnable {
+        updateDisplay()
+    }
 
     override fun rapidSphinxDidStop(reason: String, code: Int) {
         rapidSphinx.startRapidSphinx(10000)
@@ -45,11 +50,19 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     override fun rapidSphinxPartialResult(partialResult: String) {
 
         when (partialResult) {
-            stopKeyword2 -> viewpager_tutorial.currentItem = 1
-            nextKeyword -> viewpager_tutorial.currentItem = 2
+            stopKeyword2 -> {
+                viewpager_tutorial.currentItem = 1
+                btnSkip.setText("Skip")
+            }
+            nextKeyword -> {
+                viewpager_tutorial.currentItem = 2
+                btnSkip.setText("Skip")
+
+            }
             pauseKeyword -> {
                 viewpager_tutorial.currentItem = 3
                 btnSkip.setText("시작하기")
+
             }
         }
 
@@ -69,7 +82,14 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
+        btnSkip.isEnabled = false
+        updateHandler.postDelayed(runnable, 5000)
 
+        btnSkip.setOnClickListener {
+            updateHandler.postDelayed(runnable, 5000)
+            viewpager_tutorial.currentItem += 1
+            btnSkip.isEnabled = false
+        }
         customTab.setupWithViewPager(viewpager_tutorial, true)
         viewpager_tutorial.adapter = adapterViewPager
 
@@ -118,6 +138,11 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         } else {
             true
         }
+
+    private fun updateDisplay() {
+        btnSkip.isEnabled = true
+    }
+
 
     class TutorialPageAdapter(fragmentManager: FragmentManager?) : FragmentPagerAdapter(
         fragmentManager!!

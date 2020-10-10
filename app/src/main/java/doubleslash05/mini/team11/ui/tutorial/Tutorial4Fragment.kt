@@ -22,7 +22,7 @@ class Tutorial4Fragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         tvDetail.setText(R.string.tutorial_finish)
         tvLabel.setText(Html.fromHtml("수고하셨어요 :)<br>이제부터 요리할 때</br><br><font color='#FF9E00'>스크린</font>에 <font color='#FF9E00'>손</font>은 <font color='#FF9E00'>그만</font>!</br>"))
-        imageView.visibility = View.INVISIBLE
+        imageview_logo.visibility = View.INVISIBLE
         view_line.visibility = View.INVISIBLE
     }
 }
