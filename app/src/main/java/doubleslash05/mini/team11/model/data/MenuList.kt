@@ -1,10 +1,12 @@
 package doubleslash05.mini.team11.model.data
 
+import com.google.gson.annotations.SerializedName
+
 data class MenuList(
-    val mainTitle: String,
-    val subTitle: String,
-    val menuList: List<MenuData>,
-    val horizon: Boolean
+    var mainTitle: String,
+    var subTitle: String,
+    @SerializedName("menu_list") val menuList: List<MenuData>,
+    var horizon: Boolean
 ) {
     companion object {
         fun getSample(): MenuList {

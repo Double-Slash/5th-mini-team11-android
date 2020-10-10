@@ -5,10 +5,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.model.RecipeModel
 import doubleslash05.mini.team11.model.data.MenuData
 import doubleslash05.mini.team11.model.data.MenuList
+import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import doubleslash05.mini.team11.ui.recipe.RecipeActivity
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
@@ -24,13 +27,7 @@ class CategoryFragment : BaseFragment() {
         v.recyclerview.adapter = adapter
 
 
-        adapter.setData(listOf(
-            MenuList.getSampleHorizon(),
-            MenuList.getSample(),
-            MenuList.getSample()
-        ))
-
-        adapter.setOnMenuItemClickListener(object : CategoryAdapter.OnMenuItemClickListener{
+        adapter.setOnMenuItemClickListener(object : CategoryAdapter.OnMenuItemClickListener {
             override fun onMenuItemClick(data: MenuData) {
                 val intent = Intent(context, RecipeActivity::class.java)
                 intent.putExtra(RecipeActivity.EXTRA_MENU_ID, data.id)
@@ -39,6 +36,17 @@ class CategoryFragment : BaseFragment() {
         })
 
         return v
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        RecipeModel.getCategory().observe(viewLifecycleOwner, Observer {
+            when (it) {
+                is ApiStatus.Success -> {
+                    adapter.setData(it.data)
+                }
+            }
+        })
     }
 
     companion object {

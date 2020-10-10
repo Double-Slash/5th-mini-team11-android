@@ -1,16 +1,17 @@
 package doubleslash05.mini.team11.model.data
 
 import android.os.Parcelable
+import com.google.gson.annotations.SerializedName
 import kotlinx.android.parcel.Parcelize
 
 data class MenuData(
     val id: Int,
     val name: String,
-    val cookingTime: Int,
+    @SerializedName("cooking_time") val cookingTime: Int,
     val level: String,
-    val descriptionShort: String,
-    val thumbnailUrl: String,
-    val favorite: Boolean
+    @SerializedName("short_description") val descriptionShort: String,
+    @SerializedName("thumbnail_url") val thumbnailUrl: String,
+    @SerializedName("favorites") val favorite: Boolean
 ) {
 
     companion object{

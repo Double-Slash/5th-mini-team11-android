@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.item_menu.view.*
 import kotlinx.android.synthetic.main.item_title.view.*
 
 class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var list: List<MenuList>
+    private var list: List<MenuList>? = null
     private var onMenuItemClickListener: OnMenuItemClickListener? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -42,7 +42,8 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int {
         var count = 0
-        for (element in list) {
+        if(list == null) return 0
+        for (element in list!!) {
             if (element.horizon) { // 가로 모드일 경우에는 2개만 추가
                 count += 2
                 continue
@@ -85,7 +86,8 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private fun getInternalData(position: Int): InternalData? {
         var count = 0
-        for (element in list) {
+        if(list == null) return null
+        for (element in list!!) {
             val size = element.menuList.size
             if (size == 0) continue
 
