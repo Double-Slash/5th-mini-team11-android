@@ -5,14 +5,17 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.model.RecipeModel
 import doubleslash05.mini.team11.model.data.MenuData
 import doubleslash05.mini.team11.ui.recipe.RecipeActivity
 import kotlinx.android.synthetic.main.item_menu.view.*
 
 class MenuDataAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-    private lateinit var list: List<MenuData>
+    private var list: List<MenuData>? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val v = LayoutInflater.from(parent.context).inflate(R.layout.item_menu, parent, false)
@@ -20,20 +23,22 @@ class MenuDataAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return list?.size ?: 0
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         if (holder !is MenuDataViewHolder) return
-        holder.bind(list[position])
+        holder.bind(list!![position])
     }
 
     fun setData(list: List<MenuData>) {
         this.list = list
+        notifyDataSetChanged()
     }
 
     private inner class MenuDataViewHolder(v: View) : RecyclerView.ViewHolder(v) {
         private lateinit var data: MenuData
+        val background = v.imageview_menu_background!!
         private val txtMain = v.textview_menu_main!!
         private val txtSub = v.textview_menu_sub!!
         private val txtTime = v.textview_menu_time!!
@@ -47,11 +52,18 @@ class MenuDataAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 intent.putExtra(RecipeActivity.EXTRA_MENU_ID, data.id)
                 context.startActivity(intent)
             }
+
+            checkbox.setOnClickListener { v ->
+                v as CheckBox
+                RecipeModel.setFavorite(data.id.toString(), v.isChecked)
+            }
         }
 
         @SuppressLint("SetTextI18n")
         fun bind(data: MenuData) {
             this.data = data
+            Glide.with(background.context).load(data.thumbnailUrl).into(background)
+
             txtMain.text = data.name
             txtSub.text = data.descriptionShort
             txtTime.text = "${data.cookingTime} 분"

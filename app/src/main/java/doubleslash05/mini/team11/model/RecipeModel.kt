@@ -12,7 +12,6 @@ object RecipeModel {
 
     private val service by lazy { RestClient.getRecipeService() }
 
-
     fun getCategory(): RetroLiveData<List<MenuList>> {
         val result = MediatorLiveData<ApiStatus<List<MenuList>>>()
         val list = ArrayList<MenuList>()
@@ -56,5 +55,20 @@ object RecipeModel {
         }
 
         return result
+    }
+
+    fun getFavoritesList(): RetroLiveData<MenuList> {
+        return service.getFavoritesList()
+    }
+
+    fun getMadeMenuList(): RetroLiveData<MenuList> {
+        return service.getMadeList()
+    }
+
+    fun setFavorite(recipeId: String, isChecked: Boolean) {
+        if (isChecked)
+            service.setFavorite(recipeId)
+        else
+            service.unsetFavorite(recipeId)
     }
 }

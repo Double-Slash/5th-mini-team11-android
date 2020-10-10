@@ -9,8 +9,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayoutMediator
 import doubleslash05.mini.team11.R
-import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
+import doubleslash05.mini.team11.ui.favorite.FavoriteListFragment.Companion.ARGUMENT_FAVORITE_TYPE
 import kotlinx.android.synthetic.main.fragment_favorite.view.*
 
 class FavoriteFragment : BaseFragment() {
@@ -38,7 +38,10 @@ class FavoriteFragment : BaseFragment() {
 
 
     inner class ViewPagerAdapter : FragmentStateAdapter(activity!!) {
-        private val fragmentList = listOf(FavoriteListFragment(), FavoriteListFragment())
+        private val fragmentList = listOf(
+            FavoriteListFragment.getInstance(0),
+            FavoriteListFragment.getInstance(1)
+        )
 
         override fun getItemCount(): Int {
             return fragmentList.size
@@ -47,6 +50,5 @@ class FavoriteFragment : BaseFragment() {
         override fun createFragment(position: Int): Fragment {
             return fragmentList[position]
         }
-
     }
 }

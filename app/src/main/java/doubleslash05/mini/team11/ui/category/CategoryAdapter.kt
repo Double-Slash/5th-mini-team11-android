@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.model.RecipeModel
 import doubleslash05.mini.team11.model.data.MenuData
 import doubleslash05.mini.team11.model.data.MenuList
 import doubleslash05.mini.team11.util.extension.dpToPx
@@ -148,6 +149,12 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 val position = adapterPosition
                 val data = getMenuData(position) ?: return@setOnClickListener
                 onMenuItemClickListener?.onMenuItemClick(data)
+            }
+
+            checkbox.setOnCheckedChangeListener { _, isChecked ->
+                val position = adapterPosition
+                val data = getMenuData(position) ?: return@setOnCheckedChangeListener
+                RecipeModel.setFavorite(data.id.toString(), isChecked)
             }
         }
 
