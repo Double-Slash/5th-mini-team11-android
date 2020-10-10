@@ -27,4 +27,8 @@
     <string name="guide_prev">이전 STEP 으로</string>
     <string name="guide_next">다음 STEP 으로</string>
     <string name="guide_replay">현재 STEP 다시 재생</string>
+
+    <string name="favorite_my_menu">나의 요리</string>
+    <string name="favorite_make_menu">만들 요리</string>
+    <string name="favorite_made_menu">만든 요리</string>
 </resources>

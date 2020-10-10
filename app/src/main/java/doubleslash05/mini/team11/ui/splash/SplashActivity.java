@@ -8,7 +8,7 @@ import android.os.Looper;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import doubleslash05.mini.team11.ui.test.TestActivity;
+import doubleslash05.mini.team11.ui.main.HomeActivity;
 
 public class SplashActivity extends AppCompatActivity {
     @Override
@@ -18,7 +18,7 @@ public class SplashActivity extends AppCompatActivity {
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent intent = new Intent(getApplication(), TestActivity.class);
+                Intent intent = new Intent(getApplication(), HomeActivity.class);
                 startActivity(intent);
                 finish();
             }
