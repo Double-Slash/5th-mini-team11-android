@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.MenuData
 import doubleslash05.mini.team11.model.data.MenuList
@@ -42,7 +43,7 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     override fun getItemCount(): Int {
         var count = 0
-        if(list == null) return 0
+        if (list == null) return 0
         for (element in list!!) {
             if (element.horizon) { // 가로 모드일 경우에는 2개만 추가
                 count += 2
@@ -86,7 +87,7 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private fun getInternalData(position: Int): InternalData? {
         var count = 0
-        if(list == null) return null
+        if (list == null) return null
         for (element in list!!) {
             val size = element.menuList.size
             if (size == 0) continue
@@ -135,6 +136,7 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     }
 
     private inner class MenuViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        val background = v.imageview_menu_background!!
         val txtMain = v.textview_menu_main!!
         val txtSub = v.textview_menu_sub!!
         val txtTime = v.textview_menu_time!!
@@ -151,6 +153,8 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         @SuppressLint("SetTextI18n")
         fun bind(data: MenuData) {
+            Glide.with(background.context).load(data.thumbnailUrl).into(background)
+
             txtMain.text = data.name
             txtSub.text = data.descriptionShort
             txtTime.text = "${data.cookingTime} 분"
