@@ -1,10 +1,11 @@
 package doubleslash05.mini.team11.ui.sj;
 
-import android.app.ActionBar;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.ViewCompat;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
@@ -33,8 +34,15 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main2);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayShowCustomEnabled(true);
+        actionBar.setDisplayShowTitleEnabled(false);
+
 
         RecyclerView rv = findViewById(R.id.recyclerCategory);
+        //rv.smoothScrollBy(, 0);
         CategoryAdapter adapter = new CategoryAdapter();
         rv.setAdapter(adapter);
         adapter.setList(getData());
