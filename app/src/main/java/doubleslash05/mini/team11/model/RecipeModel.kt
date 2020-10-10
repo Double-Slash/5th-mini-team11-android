@@ -1,12 +1,11 @@
 package doubleslash05.mini.team11.model
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import doubleslash05.mini.team11.model.data.MenuList
 import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.model.network.base.RestClient
+import doubleslash05.mini.team11.util.extension.RetroLiveData
 
-typealias RetroLiveData<T> = LiveData<ApiStatus<T>>
 
 object RecipeModel {
 

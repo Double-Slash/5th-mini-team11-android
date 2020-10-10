@@ -1,12 +1,9 @@
 package doubleslash05.mini.team11.model.network
 
-import androidx.lifecycle.LiveData
 import doubleslash05.mini.team11.model.data.MenuList
-import doubleslash05.mini.team11.model.network.base.ApiStatus
-import retrofit2.Call
+import doubleslash05.mini.team11.util.extension.RetroLiveData
 import retrofit2.http.*
 
-typealias RetroLiveData<T> = LiveData<ApiStatus<T>>
 
 interface RecipeRetrofit {
     @GET("/recipe/popular")
