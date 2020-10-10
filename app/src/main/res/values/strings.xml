@@ -8,6 +8,8 @@
     <string name="all_next">다음</string>
     <string name="all_prev">이전</string>
     <string name="all_replay">다시</string>
+    <string name="all_complete">완성</string>
+
 
     <string name="category_1">한식</string>
     <string name="category_2">양식</string>

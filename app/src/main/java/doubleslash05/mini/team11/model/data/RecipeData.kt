@@ -10,7 +10,7 @@ data class RecipeData(
     val level: String,
     @SerializedName("cooking_time") val cookingTime: Int,
     @SerializedName("favorites") val favorite: Boolean,
-    @SerializedName("made") val isMade: Boolean,
+    @SerializedName("made") var isMade: Boolean,
     @SerializedName("video_url") val videoUrl: String,
     val servings: Int,
     val step: List<List<String>>,

@@ -177,12 +177,6 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
             val context = parent.context
             val v = LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false)
-            v.layoutParams = FrameLayout.LayoutParams(context.dpToPx(286f), context.dpToPx(132f)).apply {
-                leftMargin = context.dpToPx(10f)
-                rightMargin = context.dpToPx(10f)
-                topMargin = context.dpToPx(20f)
-                bottomMargin = context.dpToPx(10f)
-            }
 
             return MenuViewHolder(v)
         }

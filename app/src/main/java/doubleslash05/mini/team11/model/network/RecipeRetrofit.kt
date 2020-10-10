@@ -31,8 +31,8 @@ interface RecipeRetrofit {
 
     @POST("/recipe/made/{recipe_id}")
     fun setMade(
-        @Path("recipe_id") recipeId: String
-    )
+        @Path("recipe_id") recipeId: Int
+    ): RetroLiveData<Any>
 
     @GET("/recipe/new")
     fun getCategoryNew(

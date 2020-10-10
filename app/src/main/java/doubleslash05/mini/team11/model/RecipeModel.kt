@@ -76,4 +76,8 @@ object RecipeModel {
     fun getRecipeDetail(recipeId: Int): RetroLiveData<RecipeData>{
         return service.getRecipeDetail(recipeId)
     }
+
+    fun setMade(recipeId: Int): RetroLiveData<Any> {
+        return service.setMade(recipeId)
+    }
 }

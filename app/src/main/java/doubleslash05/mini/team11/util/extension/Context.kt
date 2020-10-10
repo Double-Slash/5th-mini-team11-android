@@ -7,11 +7,14 @@ import android.util.DisplayMetrics
 import doubleslash05.mini.team11.BuildConfig
 import kotlin.math.roundToInt
 
-fun Context.dpToPx(dp: Float): Int {
-    val metrics = resources.displayMetrics
-    return (dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT)).roundToInt()
+fun Context.dpToPx(dp: Int): Int {
+    return dpToPx(dp.toFloat()).roundToInt()
 }
 
+fun Context.dpToPx(dp: Float): Float {
+    val metrics = resources.displayMetrics
+    return (dp * (metrics.densityDpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT))
+}
 
 fun Context.pxToDp(px: Float): Int {
     val metrics = resources.displayMetrics
