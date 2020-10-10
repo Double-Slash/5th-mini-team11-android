@@ -16,33 +16,25 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         val strArray = arrayOf(
             getString(R.string.category_1),
             getString(R.string.category_2),
-            getString(R.string.category_3),
+            getString(R.string.category_3)/*,
             getString(R.string.category_4),
             getString(R.string.category_5),
             getString(R.string.category_6),
             getString(R.string.category_7),
             getString(R.string.category_8),
-            getString(R.string.category_9)
+            getString(R.string.category_9)*/
         )
 
 
         for (str in strArray) {
             val item = tablayout_category.newTab()
             tablayout_category.addTab(item)
-
             with(item) {
                 text = str
 
             }
 
-            val bundle = Bundle().apply {
-                putString(CategoryFragment.ARGUMENT_CATEGORY, str)
-            }
-
-            fragmentList.add(CategoryFragment().apply {
-                arguments = bundle
-            })
-
+            fragmentList.add(CategoryFragment.getInstance(str))
         }
 
         tablayout_category.addOnTabSelectedListener(this)

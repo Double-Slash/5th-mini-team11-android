@@ -12,11 +12,11 @@ object RecipeModel {
 
     private val service by lazy { RestClient.getRecipeService() }
 
-    fun getCategory(): RetroLiveData<List<MenuList>> {
+    fun getCategory(category: String): RetroLiveData<List<MenuList>> {
         val result = MediatorLiveData<ApiStatus<List<MenuList>>>()
         val list = ArrayList<MenuList>()
-        val newLiveData = service.getCategoryNew("한식")
-        val popularLiveDouble = service.getCategoryPopular("한식")
+        val newLiveData = service.getCategoryNew(category)
+        val popularLiveDouble = service.getCategoryPopular(category)
 
 
         fun merge(liveData: RetroLiveData<MenuList>) {

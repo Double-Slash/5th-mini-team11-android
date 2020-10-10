@@ -1,8 +1,10 @@
 package doubleslash05.mini.team11.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseActivity
+import doubleslash05.mini.team11.ui.category.CategoryActivity
 import doubleslash05.mini.team11.ui.favorite.FavoriteFragment
 import doubleslash05.mini.team11.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main2.*
@@ -29,6 +31,8 @@ class HomeActivity : BaseActivity() {
         clearNavigation()
         button_main_nav_home.isSelected = true
         supportFragmentManager.beginTransaction().remove(searchFragment).remove(favoriteFragment).commit()
+        val intent = Intent(this, CategoryActivity::class.java)
+        startActivity(intent)
     }
 
     private fun goToSearch() {

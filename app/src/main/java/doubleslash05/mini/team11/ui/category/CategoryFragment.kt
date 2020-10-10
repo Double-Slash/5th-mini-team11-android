@@ -10,21 +10,25 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.RecipeModel
 import doubleslash05.mini.team11.model.data.MenuData
-import doubleslash05.mini.team11.model.data.MenuList
 import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import doubleslash05.mini.team11.ui.recipe.RecipeActivity
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
 
-class CategoryFragment : BaseFragment() {
+class CategoryFragment private constructor(): BaseFragment() {
     private val category: String by lazy { arguments!!.getString(ARGUMENT_CATEGORY, "all") }
     private val adapter by lazy { CategoryAdapter() }
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v = inflater.inflate(R.layout.fragment_recyclerview, container, false)
-        v.recyclerview.layoutManager = LinearLayoutManager(context)
-        v.recyclerview.adapter = adapter
+        return inflater.inflate(R.layout.fragment_recyclerview, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        view.recyclerview.layoutManager = LinearLayoutManager(context)
+        view.recyclerview.adapter = adapter
 
 
         adapter.setOnMenuItemClickListener(object : CategoryAdapter.OnMenuItemClickListener {
@@ -35,12 +39,7 @@ class CategoryFragment : BaseFragment() {
             }
         })
 
-        return v
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        RecipeModel.getCategory().observe(viewLifecycleOwner, Observer {
+        RecipeModel.getCategory(category).observe(viewLifecycleOwner, Observer {
             when (it) {
                 is ApiStatus.Success -> {
                     adapter.setData(it.data)
@@ -50,6 +49,14 @@ class CategoryFragment : BaseFragment() {
     }
 
     companion object {
+        fun getInstance(category: String): CategoryFragment {
+            return CategoryFragment().apply {
+                arguments = Bundle().apply {
+                    putString(ARGUMENT_CATEGORY, category)
+                }
+            }
+        }
+
         const val ARGUMENT_CATEGORY = "category"
     }
 }
