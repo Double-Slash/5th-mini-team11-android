@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.item_recipe_step.view.*
 import kotlin.math.max
 
 class RecipeStepAdapter() : RecyclerView.Adapter<RecipeStepAdapter.StepViewHolder>() {
-    private var list: List<RecipeStepData>? = null
+    private var list: List<List<String>>? = null
     private var currentStep: Int = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StepViewHolder {
@@ -30,7 +30,7 @@ class RecipeStepAdapter() : RecyclerView.Adapter<RecipeStepAdapter.StepViewHolde
         holder.step.text = "STEP ${position + 1}"
         holder.step.isSelected = position <= currentStep
 
-        val instructions = list!![position].instructions
+        val instructions = list!![position]
 
         for (i in 0 until max(instructions.size, holder.instruction.childCount)) {
             if (i >= instructions.size) {
@@ -51,7 +51,7 @@ class RecipeStepAdapter() : RecyclerView.Adapter<RecipeStepAdapter.StepViewHolde
         }
     }
 
-    fun setData(list: List<RecipeStepData>) {
+    fun setData(list: List<List<String>>) {
         this.list = list
         notifyDataSetChanged()
     }

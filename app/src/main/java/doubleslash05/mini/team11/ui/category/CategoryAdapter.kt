@@ -154,7 +154,7 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             checkbox.setOnCheckedChangeListener { _, isChecked ->
                 val position = adapterPosition
                 val data = getMenuData(position) ?: return@setOnCheckedChangeListener
-                RecipeModel.setFavorite(data.id.toString(), isChecked)
+                RecipeModel.setFavorite(data.id, isChecked)
             }
         }
 

@@ -1,7 +1,9 @@
 package doubleslash05.mini.team11.model
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import doubleslash05.mini.team11.model.data.MenuList
+import doubleslash05.mini.team11.model.data.RecipeData
 import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.model.network.base.RestClient
 import doubleslash05.mini.team11.util.extension.RetroLiveData
@@ -64,10 +66,14 @@ object RecipeModel {
         return service.getMadeList()
     }
 
-    fun setFavorite(recipeId: String, isChecked: Boolean) {
+    fun setFavorite(recipeId: Int, isChecked: Boolean) {
         if (isChecked)
             service.setFavorite(recipeId)
         else
             service.unsetFavorite(recipeId)
+    }
+
+    fun getRecipeDetail(recipeId: Int): RetroLiveData<RecipeData>{
+        return service.getRecipeDetail(recipeId)
     }
 }

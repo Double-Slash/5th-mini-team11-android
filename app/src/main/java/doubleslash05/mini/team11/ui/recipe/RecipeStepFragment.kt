@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
 import androidx.recyclerview.widget.RecyclerView
 import doubleslash05.mini.team11.R
+import doubleslash05.mini.team11.model.data.RecipeData
 import doubleslash05.mini.team11.model.data.RecipeStepData
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_recyclerview.view.*
@@ -25,20 +26,12 @@ class RecipeStepFragment : BaseFragment() {
         v.recyclerview.layoutManager = LinearLayoutManager(context)
         v.recyclerview.adapter = adapter
 
-        adapter.setData(
-            listOf(
-                RecipeStepData(listOf("믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.", "믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.")),
-                RecipeStepData(listOf("믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.", "믹스와 물을 잘 섞어줍니다.")),
-                RecipeStepData(listOf("믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.", "믹스와 물을 잘 섞어줍니다.", "멍울이 지지않게 풀어줍니다.")),
-                RecipeStepData(listOf("믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.", "믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.")),
-                RecipeStepData(listOf("믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.", "믹스와 물을 잘 섞어줍니다.")),
-                RecipeStepData(listOf("믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.", "믹스와 물을 잘 섞어줍니다.", "멍울이 지지않게 풀어줍니다.")),
-                RecipeStepData(listOf("믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다.", "믹스와 물을 잘 섞어줍니다.", "반죽에 계란을 넣고 섞습니다.", "멍울이 지지않게 풀어줍니다."))
-            )
-        )
         return v
     }
 
+    fun setData(data : RecipeData) {
+        adapter.setData(data.step)
+    }
 
     fun setStep(index: Int) {
         smoothScroller.targetPosition = index

@@ -130,10 +130,10 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
     fun setDataSource(path: String?) {
         try {
-            //            player.setDataSource(path)
+            if(!LOCAL_VIDEO) player.setDataSource(path)
             state = State.INITIALIZED
             if (needPrepare) {
-                player.prepareAsync()
+                if(!LOCAL_VIDEO) player.prepareAsync()
                 state = State.PREPARED
             }
         } catch (e: IOException) {
@@ -150,7 +150,7 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
     }
 
     private fun initMediaPlayer() {
-         player = MediaPlayer.create(context, R.raw.out)
+        player = if(LOCAL_VIDEO) MediaPlayer.create(context, R.raw.out) else MediaPlayer()
         player.setOnVideoSizeChangedListener(OnVideoSizeChangedListener { mp, width, height ->
             setFitToFillAspectRatio(mp, width, height)
         })
@@ -187,5 +187,9 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
 
     private enum class State {
         IDLE, INITIALIZED, PREPARED, STARTED, PAUSED, STOPPED,
+    }
+
+    companion object {
+        const val LOCAL_VIDEO = true
     }
 }

@@ -16,7 +16,7 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
-    private var sections: Array<Int>? = null
+    private var sections: List<Int>? = null
     private var onSeekBarChangeListener: OnSeekBarChangeListener? = null
 
     private val backgroundPaint = Paint().apply {
@@ -31,7 +31,7 @@ class SectionSeekBar(context: Context, attrs: AttributeSet?, defStyle: Int) : Ap
         super.setOnSeekBarChangeListener(this)
     }
 
-    fun setSections(sections: Array<Int>) {
+    fun setSections(sections: List<Int>) {
         this.sections = sections
         invalidate()
     }

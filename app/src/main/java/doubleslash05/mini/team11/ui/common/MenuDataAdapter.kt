@@ -55,7 +55,7 @@ class MenuDataAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             checkbox.setOnClickListener { v ->
                 v as CheckBox
-                RecipeModel.setFavorite(data.id.toString(), v.isChecked)
+                RecipeModel.setFavorite(data.id, v.isChecked)
             }
         }
 

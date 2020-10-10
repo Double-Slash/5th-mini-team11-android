@@ -2,7 +2,7 @@ package doubleslash05.mini.team11.model.data
 
 import doubleslash05.mini.team11.util.LogUtils
 
-data class RecipeVideoData(val path: String, val sections: Array<Int>) {
+data class RecipeVideoData(val path: String, val sections: List<Int>) {
     fun getSectionIndex(ms: Int): Int {
         for (i in sections.size - 1 downTo 0) {
             if (sections[i] <= ms) {
