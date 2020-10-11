@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseFragment
-import kotlinx.android.synthetic.main.fragment_tutorial_page1.*
+import kotlinx.android.synthetic.main.fragment_tutorial_page.*
 
 class Tutorial4Fragment : BaseFragment() {
     override fun onCreateView(
@@ -15,7 +15,7 @@ class Tutorial4Fragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         activity
-        val view = inflater.inflate(R.layout.fragment_tutorial_page1, container, false)
+        val view = inflater.inflate(R.layout.fragment_tutorial_page, container, false)
         return view
     }
 
