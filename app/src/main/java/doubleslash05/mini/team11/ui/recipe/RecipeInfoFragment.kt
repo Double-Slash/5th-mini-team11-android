@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeData
 import doubleslash05.mini.team11.ui.base.BaseFragment
+import doubleslash05.mini.team11.util.extension.dpToPx
 import kotlinx.android.synthetic.main.fragment_recipe_info.view.*
 import kotlinx.android.synthetic.main.item_ingredient.view.*
 
@@ -18,46 +21,60 @@ class RecipeInfoFragment : BaseFragment() {
     }
 
     fun setData(data: RecipeData) {
-        view?.textview_recipeinfo_detail?.text = data.descriptionLong
+        val view = view ?: return
+        view.textview_recipeinfo_detail.text = data.descriptionLong
 
         val inflater = LayoutInflater.from(context)
+        var list = data.ingredient.main.entries
         // 주재료 동적
-        for (column in data.ingredient.main.entries) {
-            val item = inflater.inflate(R.layout.item_ingredient, view?.layout_recipeinfo_ingredient_main, false)
+        for (column in list) {
+            val item = inflater.inflate(R.layout.item_ingredient, view.layout_recipeinfo_ingredient_main, false)
 
             item.textview_ingredient_name.text = column.key
             item.textview_ingredient_amount.text = column.value
 
-            view?.layout_recipeinfo_ingredient_main?.addView(item)
+            if (list.last() == column)
+                item.line_ingredient.visibility = View.GONE
+
+            view.layout_recipeinfo_ingredient_main.addView(item)
         }
 
+        list = data.ingredient.sub.entries
         // 부재료 동적
-        for (column in data.ingredient.sub.entries) {
-            val item = inflater.inflate(R.layout.item_ingredient, view?.layout_recipeinfo_ingredient_sub, false)
+        for (column in list) {
+            val item = inflater.inflate(R.layout.item_ingredient, view.layout_recipeinfo_ingredient_sub, false)
 
             item.textview_ingredient_name.text = column.key
             item.textview_ingredient_amount.text = column.value
 
-            view?.layout_recipeinfo_ingredient_sub?.addView(item)
+            if (list.last() == column)
+                item.line_ingredient.visibility = View.GONE
+
+            view.layout_recipeinfo_ingredient_sub.addView(item)
         }
 
+        list = data.nutrition.info.entries
         // 영양정보
-        for (column in data.nutrition.info.entries){
-            val item = inflater.inflate(R.layout.item_ingredient, view?.layout_recipeinfo_ingredient_sub, false)
+        for (column in data.nutrition.info.entries) {
+            val item = inflater.inflate(R.layout.item_ingredient, view.layout_recipeinfo_ingredient_sub, false)
 
             item.textview_ingredient_name.text = column.key
             item.textview_ingredient_amount.text = column.value
 
-            view?.layout_recipeinfo_nutrition?.addView(item)
+            if (list.last() == column)
+                item.line_ingredient.visibility = View.GONE
+
+            view.layout_recipeinfo_nutrition.addView(item)
         }
 
         //칼로리
 
-        val item = inflater.inflate(R.layout.item_ingredient, view?.layout_recipeinfo_ingredient_sub, false)
-
+        val item = inflater.inflate(R.layout.item_ingredient, view.layout_recipeinfo_ingredient_sub, false)
+        (item.layoutParams as LinearLayout.LayoutParams).topMargin = context!!.dpToPx(7)
         item.textview_ingredient_name.text = "칼로리"
-        item.textview_ingredient_amount.text = data.nutrition.calorie.toString()
+        item.textview_ingredient_amount.text = "약 ${data.nutrition.calorie} kcal"
+        item.line_ingredient.visibility = View.GONE
 
-        view?.layout_recipeinfo_nutrition?.addView(item)
+        view.layout_recipeinfo_nutrition.addView(item)
     }
 }

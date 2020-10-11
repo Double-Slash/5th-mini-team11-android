@@ -42,6 +42,8 @@
                 android:layout_marginStart="@dimen/margin_recipeinfo_layout_horizon"
                 android:layout_marginLeft="@dimen/margin_recipeinfo_layout_horizon"
                 android:text="@string/all_ingredient_info"
+                android:textColor="@color/greyish_brown"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
@@ -53,6 +55,7 @@
                 android:layout_marginEnd="@dimen/margin_recipeinfo_item_horizon"
                 android:layout_marginRight="@dimen/margin_recipeinfo_item_horizon"
                 android:text="2인분 기준"
+                android:textSize="13sp"
                 app:layout_constraintBaseline_toBaselineOf="@+id/textview_recipeinfo_title"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -62,10 +65,10 @@
             style="@style/TextViewDefault"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:background="@color/orange_yellow"
+            android:layout_marginTop="13dp"
+            android:background="#26ff9e00"
             android:paddingHorizontal="@dimen/margin_recipeinfo_item_horizon"
-            android:paddingVertical="5dp"
+            android:paddingVertical="8dp"
             android:text="@string/all_ingredient_main"
             android:textColor="@color/greyish_brown"
             android:textSize="14sp" />
@@ -84,9 +87,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="@color/orange_yellow"
+            android:background="#26ff9e00"
             android:paddingHorizontal="@dimen/margin_recipeinfo_item_horizon"
-            android:paddingVertical="5dp"
+            android:paddingVertical="8dp"
             android:text="@string/all_ingredient_sub"
             android:textColor="@color/greyish_brown"
             android:textSize="14sp" />
@@ -102,6 +105,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
+            android:layout_marginTop="7dp"
             android:background="#d5d5d5" />
 
         <TextView
@@ -109,14 +113,19 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="start"
+            android:layout_marginVertical="20dp"
             android:layout_marginStart="@dimen/margin_recipeinfo_layout_horizon"
             android:layout_marginLeft="@dimen/margin_recipeinfo_layout_horizon"
-            android:text="@string/all_nutrition_info" />
+            android:text="@string/all_nutrition_info"
+            android:textColor="@color/greyish_brown"
+            android:textSize="20sp" />
 
         <LinearLayout
             android:id="@+id/layout_recipeinfo_nutrition"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingVertical="30dp"
+            android:background="#26ff9e00"
             android:orientation="vertical" />
     </LinearLayout>
 </ScrollView>

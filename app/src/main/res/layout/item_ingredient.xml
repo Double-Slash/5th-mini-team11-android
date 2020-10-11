@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="33dp">
+    android:layout_height="40dp">
 
     <TextView
         android:id="@+id/textview_ingredient_name"
@@ -32,9 +32,10 @@
         tools:text="반컵" />
 
     <View
+        android:id="@+id/line_ingredient"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#dddddd"
-        android:visibility="invisible"
+        android:background="#d5d5d5"
+        android:layout_marginHorizontal="17dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
