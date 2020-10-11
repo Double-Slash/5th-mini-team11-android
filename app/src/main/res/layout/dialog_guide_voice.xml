@@ -5,19 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingHorizontal="16dp">
 
     <ImageView
         android:id="@+id/button_guide_close"
         android:layout_width="22.5dp"
         android:layout_height="22.5dp"
         android:layout_gravity="right"
-        android:src="#531"/>
+        android:src="@drawable/ic_x_white" />
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="17dp"
         app:cardCornerRadius="10dp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -31,9 +32,9 @@
 
             <ImageView
                 android:id="@+id/imageview_guide_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="#553"
+                android:layout_width="30dp"
+                android:layout_height="18dp"
+                android:src="#077"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -42,9 +43,12 @@
                 android:id="@+id/textview_guide_head"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:text="@string/guide_voice_head"
-                android:textColor="@color/greyish_brown"
-                android:textSize="14sp"
+                android:textColor="#505050"
+                android:lineSpacingExtra="9sp"
+                android:textSize="18sp"
+                android:gravity="center_horizontal"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/imageview_guide_icon" />
@@ -54,8 +58,9 @@
                 android:id="@+id/textview_guide_prev"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
                 android:textColor="@color/greyish_brown"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_guide_head"
@@ -65,8 +70,9 @@
                 android:id="@+id/textview_guide_next"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:textColor="@color/greyish_brown"
-                android:textSize="14sp"
+                android:textSize="20sp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_guide_prev"
@@ -76,8 +82,10 @@
                 android:id="@+id/textview_guide_replay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
                 android:textColor="@color/greyish_brown"
-                android:textSize="14sp"
+                android:textSize="20sp"
+
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/textview_guide_next"
@@ -100,6 +108,7 @@
                 app:layout_constraintTop_toTopOf="@id/textview_guide_prev" />
 
             <TextView
+                android:layout_marginTop="30dp"
                 android:id="@+id/textview_guide_tail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -119,6 +128,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
+        android:layout_marginTop="13dp"
         android:text="@string/guide_dont_watch"
         android:textColor="@color/white"
         android:textSize="14sp" />
