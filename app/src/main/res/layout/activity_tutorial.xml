@@ -9,10 +9,11 @@
 
     <doubleslash05.mini.team11.ui.tutorial.SwipeDisabledViewPager
         android:id="@+id/viewpager_tutorial"
-        android:layout_width="413dp"
-        android:layout_height="609dp"
-        android:layout_marginBottom="3dp"
-        app:layout_constraintBottom_toTopOf="@+id/btnSkip" />
+        android:layout_width="405dp"
+        android:layout_height="683dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/customTab"
@@ -37,7 +38,7 @@
         android:id="@+id/btnSkip"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="@drawable/btn_top_rounded"
+        android:background="#707070"
         android:text="Skip"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

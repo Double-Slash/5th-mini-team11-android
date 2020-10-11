@@ -10,7 +10,6 @@ import doubleslash05.mini.team11.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_tutorial_page.*
 
 class Tutorial3Fragment : BaseFragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -21,10 +20,10 @@ class Tutorial3Fragment : BaseFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        tvGuide.text = "다시"
-        tvLabel.setText(R.string.tutorial_detail)
-        tvDetail.setText(Html.fromHtml("레시피 영상 재생시 <font color='#FF9E00'>다시</font>라고 말하면 <br>해당스텝이 <font color='#FF9E00'>다시</font> 시작됩니다.</br>"))
-
+        tvDetail.setText(R.string.tutorial_finish)
+        tvLabel.setText(Html.fromHtml("수고하셨어요 :)<br>이제부터 요리할 때</br><br><font color='#FF9E00'>스크린</font>에 <font color='#FF9E00'>손</font>은 <font color='#FF9E00'>그만</font>!</br>"))
+        imageview_logo.visibility = View.INVISIBLE
+        view_line.visibility = View.INVISIBLE
     }
-
 }
+

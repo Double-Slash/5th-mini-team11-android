@@ -10,44 +10,32 @@
 
     <TextView
         android:id="@+id/tvLabel"
-        android:layout_width="260dp"
+        android:layout_width="240dp"
         android:layout_height="150dp"
         android:layout_marginStart="22dp"
         android:layout_marginLeft="22dp"
         android:layout_marginTop="135dp"
-        android:layout_marginEnd="105dp"
-        android:layout_marginRight="105dp"
-        android:layout_marginBottom="447dp"
         android:text=""
         android:textColor="@color/colorPrimaryDark"
         android:textSize="24sp"
         android:textStyle="bold"
         android:typeface="normal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+
     <TextView
         android:id="@+id/tvDetail"
-        android:layout_width="0dp"
-        android:layout_height="55dp"
-        android:layout_marginStart="22sp"
-        android:layout_marginLeft="22sp"
-        android:layout_marginTop="15sp"
-        android:layout_marginEnd="132dp"
-        android:layout_marginRight="132dp"
-        android:layout_marginBottom="379sp"
-        android:padding="10sp"
+        android:layout_width="206dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginLeft="22dp"
+        android:layout_marginTop="15dp"
         android:text=""
         android:textColor="@color/colorPrimary"
         android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tvLabel" />
-
 
     <ImageView
         android:id="@+id/imageview_logo"
@@ -55,7 +43,7 @@
         android:layout_height="62sp"
         android:layout_marginStart="170sp"
         android:layout_marginLeft="170sp"
-        android:layout_marginTop="105sp"
+        android:layout_marginTop="163dp"
         android:layout_marginEnd="170sp"
         android:layout_marginRight="170sp"
         android:layout_marginBottom="70sp"
@@ -63,7 +51,7 @@
         app:layout_constraintBottom_toTopOf="@+id/tvGuide"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvDetail" />
+        app:layout_constraintTop_toBottomOf="@+id/tvLabel" />
 
 
     <TextView

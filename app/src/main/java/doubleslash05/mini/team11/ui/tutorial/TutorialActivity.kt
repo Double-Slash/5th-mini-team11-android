@@ -2,6 +2,7 @@ package doubleslash05.mini.team11.ui.tutorial
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -18,7 +19,6 @@ import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_tutorial.*
-import kotlin.concurrent.timer
 
 class TutorialActivity : BaseActivity(), RapidSphinxListener {
     companion object {
@@ -59,11 +59,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
                 btnSkip.setText("Skip")
 
             }
-            pauseKeyword -> {
-                viewpager_tutorial.currentItem = 3
-                btnSkip.setText("시작하기")
 
-            }
         }
 
 
@@ -86,9 +82,18 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         updateHandler.postDelayed(runnable, 5000)
 
         btnSkip.setOnClickListener {
-            updateHandler.postDelayed(runnable, 5000)
+            if (viewpager_tutorial.currentItem == 1) {
+                btnSkip.setText("시작하기")
+                btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
+
+            }
             viewpager_tutorial.currentItem += 1
             btnSkip.isEnabled = false
+            btnSkip.setBackgroundColor(Color.parseColor("#707070"))
+            updateHandler.postDelayed(runnable, 5000)
+
+
+
         }
         customTab.setupWithViewPager(viewpager_tutorial, true)
         viewpager_tutorial.adapter = adapterViewPager
@@ -141,6 +146,8 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
     private fun updateDisplay() {
         btnSkip.isEnabled = true
+        btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
+
     }
 
 
@@ -151,8 +158,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         private val PAGE_NUMBER = listOf<BaseFragment>(
             Tutorial1Fragment(),
             Tutorial2Fragment(),
-            Tutorial3Fragment(),
-            Tutorial4Fragment()
+            Tutorial3Fragment()
         )
 
 
