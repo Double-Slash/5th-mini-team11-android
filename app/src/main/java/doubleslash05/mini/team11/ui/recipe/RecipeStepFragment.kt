@@ -52,8 +52,13 @@ class RecipeStepFragment : BaseFragment() {
     }
 
     fun setStep(index: Int) {
+        val view = view ?: return
         smoothScroller.targetPosition = index
         view?.recyclerview_recipe?.layoutManager?.startSmoothScroll(smoothScroller)
+
+        val y = view.recyclerview_recipe.layoutManager!!.getChildAt(index)!!.y
+        view.scrollview_recipe.smoothScrollTo(0, y.toInt())
+
         adapter.setStep(index)
     }
 }

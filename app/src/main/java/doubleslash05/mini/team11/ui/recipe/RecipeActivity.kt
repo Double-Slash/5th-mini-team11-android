@@ -1,6 +1,8 @@
 package doubleslash05.mini.team11.ui.recipe
 
+import android.annotation.SuppressLint
 import android.os.Bundle
+import android.widget.CheckBox
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
 import doubleslash05.mini.team11.App
@@ -17,13 +19,19 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     private val infoFragment = RecipeInfoFragment()
     private val stepFragment = RecipeStepFragment()
     private val menuId by lazy { intent.getIntExtra(EXTRA_MENU_ID, -1) }
-    private lateinit var data: RecipeData
+    private var data: RecipeData? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
 
-        videoview_receipe.setOnChangeSectionListener(object : RecipeVideoView.OnChangeSectionListener {
+        checkbox_recipe_favorite.setOnClickListener {
+            val data = data ?: return@setOnClickListener
+            it as CheckBox
+            RecipeModel.setFavorite(data.id, it.isChecked)
+        }
+
+        videoview_recipe.setOnChangeSectionListener(object : RecipeVideoView.OnChangeSectionListener {
             override fun onChangeSection(index: Int) {
                 stepFragment.setStep(index)
             }
@@ -71,12 +79,18 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
     }
 
+    @SuppressLint("SetTextI18n")
     fun refresh() {
+        val data = data ?: return
         val recipeVideoData = RecipeVideoData(data.videoUrl, data.ms)
-        videoview_receipe.setData(recipeVideoData)
+        videoview_recipe.setData(recipeVideoData)
 
-        textview_receipe_main.text = data.name
-        textview_receipe_sub.text = data.descriptionShort
+        textview_recipe_main.text = data.name
+        textview_recipe_sub.text = data.descriptionShort
+        textview_recipe_time.text = "${data.cookingTime}분"
+        textview_recipe_level.text = data.level
+
+        checkbox_recipe_favorite.isChecked = data.favorite
 
         infoFragment.setData(data)
         stepFragment.setData(data)

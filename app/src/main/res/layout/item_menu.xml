@@ -55,7 +55,7 @@
             android:layout_marginStart="6.7dp"
             android:layout_marginLeft="6.7dp"
             android:layout_marginBottom="3dp"
-            android:src="@drawable/ic_card_time"
+            android:src="@drawable/ic_time_white"
             app:layout_constraintBottom_toBottomOf="@id/textview_menu_main"
             app:layout_constraintLeft_toRightOf="@id/textview_menu_main" />
 
@@ -81,7 +81,7 @@
             android:layout_marginStart="5.5dp"
             android:layout_marginLeft="5.5dp"
             android:baselineAlignBottom="true"
-            android:src="@drawable/ic_card_star"
+            android:src="@drawable/ic_star_white"
             app:layout_constraintBottom_toBottomOf="@id/imageview_menu_time"
             app:layout_constraintLeft_toRightOf="@id/textview_menu_time" />
 
