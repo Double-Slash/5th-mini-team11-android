@@ -16,13 +16,13 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         val strArray = arrayOf(
             getString(R.string.category_1),
             getString(R.string.category_2),
-            getString(R.string.category_3)/*,
+            getString(R.string.category_3),
             getString(R.string.category_4),
             getString(R.string.category_5),
             getString(R.string.category_6),
             getString(R.string.category_7),
             getString(R.string.category_8),
-            getString(R.string.category_9)*/
+            getString(R.string.category_9)
         )
 
 

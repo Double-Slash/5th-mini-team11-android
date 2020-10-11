@@ -10,16 +10,15 @@
     <string name="all_replay">다시</string>
     <string name="all_complete">완성</string>
 
-
-    <string name="category_1">한식</string>
-    <string name="category_2">양식</string>
-    <string name="category_3">간식</string>
-<!--    <string name="category_4">카테고리_4</string>-->
-<!--    <string name="category_5">카테고리_5</string>-->
-<!--    <string name="category_6">카테고리_6</string>-->
-<!--    <string name="category_7">카테고리_7</string>-->
-<!--    <string name="category_8">카테고리_8</string>-->
-<!--    <string name="category_9">카테고리_9</string>-->
+    <string name="category_1">밥</string>
+    <string name="category_2">면</string>
+    <string name="category_3">빵</string>
+    <string name="category_4">고기</string>
+    <string name="category_5">해산물</string>
+    <string name="category_6">가공식품</string>
+    <string name="category_7">채소</string>
+    <string name="category_8">과일</string>
+    <string name="category_9">그 외</string>
     <string name="recipe_tab_0"><![CDATA[재료 & 정보]]></string>
     <string name="recipe_tab_1">레시피</string>
 
