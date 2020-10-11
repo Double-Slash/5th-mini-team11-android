@@ -5,7 +5,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
-import androidx.constraintlayout.widget.ConstraintLayout
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeData
 import doubleslash05.mini.team11.ui.base.BaseFragment
@@ -23,6 +22,11 @@ class RecipeInfoFragment : BaseFragment() {
     fun setData(data: RecipeData) {
         val view = view ?: return
         view.textview_recipeinfo_detail.text = data.descriptionLong
+        view.textview_recipeinfo_tag_1.text = data.tags[0]
+        view.textview_recipeinfo_tag_2.text = data.tags[1]
+        view.textview_recipeinfo_tag_3.text = data.tags[2]
+        view.textview_recipeinfo_servings.text = "${data.servings}인분 기준"
+
 
         val inflater = LayoutInflater.from(context)
         var list = data.ingredient.main.entries
