@@ -19,8 +19,15 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="#555"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/bg_menu_gradient"/>
 
         <TextView
             android:id="@+id/textview_menu_main"
@@ -103,9 +110,8 @@
             android:id="@+id/checkbox_menu_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="14.7dp"
-            android:layout_marginRight="14.7dp"
-            android:layout_marginBottom="13.4dp"
+            android:padding="10dp"
+            android:layout_marginBottom="3.4dp"
             android:button="@drawable/ic_card_favorite"
             app:layout_constraintBottom_toBottomOf="@id/imageview_menu_background"
             app:layout_constraintRight_toRightOf="parent" />
