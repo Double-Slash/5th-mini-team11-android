@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_recipeinfo_layout_horizon">16dp</dimen>
+    <dimen name="margin_recipeinfo_item_horizon">30dp</dimen>
+
+    <dimen name="size_bottom_navigation_height">60dp</dimen>
+
+</resources>

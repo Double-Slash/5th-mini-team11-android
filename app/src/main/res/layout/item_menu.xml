@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="154dp"
+    android:layout_marginLeft="17dp"
+    android:layout_marginTop="10dp"
+    android:layout_marginRight="17dp"
+    android:layout_marginBottom="10dp"
+    app:cardCornerRadius="10dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/imageview_menu_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="#555" />
+
+        <TextView
+            android:id="@+id/textview_menu_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginBottom="9dp"
+            android:lineSpacingExtra="8sp"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            tools:text="팬케이크" />
+
+        <TextView
+            android:id="@+id/textview_menu_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="6sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toTopOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toLeftOf="@id/textview_menu_main"
+            tools:text="주말에는 여유롭게 브런치" />
+
+        <ImageView
+            android:id="@+id/imageview_menu_clock"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:baselineAlignBottom="true"
+            android:src="#a00"
+            app:layout_constraintBaseline_toBaselineOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/textview_menu_main" />
+
+        <TextView
+            android:id="@+id/textview_menu_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="6sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/imageview_menu_clock"
+            tools:text="15분" />
+
+        <ImageView
+            android:id="@+id/imageview_menu_star"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:baselineAlignBottom="true"
+            android:src="#a00"
+            app:layout_constraintBaseline_toBaselineOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/textview_menu_time" />
+
+        <TextView
+            android:id="@+id/textview_menu_level"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:lineSpacingExtra="6sp"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            app:layout_constraintBaseline_toBaselineOf="@id/textview_menu_main"
+            app:layout_constraintLeft_toRightOf="@id/imageview_menu_star"
+            tools:text="초급" />
+
+        <CheckBox
+            android:id="@+id/checkbox_menu_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="@id/textview_menu_main"
+            app:layout_constraintRight_toRightOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.cardview.widget.CardView>

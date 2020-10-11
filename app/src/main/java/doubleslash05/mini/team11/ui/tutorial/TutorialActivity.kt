@@ -56,7 +56,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             }
             nextKeyword -> {
                 viewpager_tutorial.currentItem = 2
-                btnSkip.setText("Skip")
+                btnSkip.setText("시작하기")
 
             }
 
