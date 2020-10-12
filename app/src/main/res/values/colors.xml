@@ -3,9 +3,7 @@
     <color name="colorPrimary">#707070</color>
     <color name="colorPrimaryDark">#303030</color>
     <color name="colorAccent">#03DAC5</color>
-<<<<<<< HEAD
     <color name="colorMain">#FF9E00</color>
-=======
 
 
     <color name="orange_yellow">#ff9e00</color>
@@ -19,5 +17,4 @@
     <color name="white">#ffffff</color>
 
     <color name="colorSeekBarBackground">#e2e2e2</color>
->>>>>>> e4a6160d05bef269b6e34a2fbd7226211b765620
 </resources>

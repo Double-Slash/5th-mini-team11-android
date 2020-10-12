@@ -1,13 +1,10 @@
 <resources>
     <string name="app_name">DoubleSlashMini0511</string>
 
-<<<<<<< HEAD
     <string name="tutorial_title">잘 듣고 있어요.\n계속 따라해주세요!</string>
     <string name="tutorial_detail">이제 다왔어요!\n마지막으로 따라해주세요!</string>
     <string name="tutorial_finish">목소리로 영상 스텝을 조정하며\n편하게 요리해 보세요!</string>
-</resources>
 
-=======
     <string name="all_ingredient_info">재료 정보</string>
     <string name="all_nutrition_info">영양 정보</string>
     <string name="all_ingredient_main">주재료</string>
@@ -21,12 +18,7 @@
     <string name="category_1">한식</string>
     <string name="category_2">양식</string>
     <string name="category_3">간식</string>
-<!--    <string name="category_4">카테고리_4</string>-->
-<!--    <string name="category_5">카테고리_5</string>-->
-<!--    <string name="category_6">카테고리_6</string>-->
-<!--    <string name="category_7">카테고리_7</string>-->
-<!--    <string name="category_8">카테고리_8</string>-->
-<!--    <string name="category_9">카테고리_9</string>-->
+
     <string name="recipe_tab_0"><![CDATA[재료 & 정보]]></string>
     <string name="recipe_tab_1">레시피</string>
 
@@ -40,5 +32,6 @@
     <string name="favorite_my_menu">나의 요리</string>
     <string name="favorite_make_menu">만들 요리</string>
     <string name="favorite_made_menu">만든 요리</string>
+
 </resources>
->>>>>>> e4a6160d05bef269b6e34a2fbd7226211b765620
+

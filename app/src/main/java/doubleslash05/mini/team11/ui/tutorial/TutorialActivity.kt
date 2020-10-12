@@ -1,6 +1,7 @@
 package doubleslash05.mini.team11.ui.tutorial
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -17,8 +18,10 @@ import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
+import doubleslash05.mini.team11.ui.main.HomeActivity
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_tutorial.*
+import org.jetbrains.anko.startActivity
 
 class TutorialActivity : BaseActivity(), RapidSphinxListener {
     companion object {
@@ -86,6 +89,9 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
                 btnSkip.setText("시작하기")
                 btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
 
+            } else if (viewpager_tutorial.currentItem == 2) {
+                rapidSphinx.stop()
+                startActivity<HomeActivity>()
             }
             viewpager_tutorial.currentItem += 1
             btnSkip.isEnabled = false
