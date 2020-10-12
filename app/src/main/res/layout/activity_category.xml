@@ -31,6 +31,12 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d5d5d5"
+        app:layout_constraintBottom_toBottomOf="@id/tablayout_category" />
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_category"
         style="@style/TabLayout"
