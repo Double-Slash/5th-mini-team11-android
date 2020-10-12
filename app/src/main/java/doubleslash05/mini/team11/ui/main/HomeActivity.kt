@@ -18,6 +18,8 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_main2)
 
         setSupportActionBar(toolbar_main)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         button_main_nav_search.setOnClickListener { goToSearch() }
         button_main_nav_favorite.setOnClickListener { goToFavorite() }

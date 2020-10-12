@@ -40,16 +40,16 @@ object RecipeModel {
         result.addSource(popularLiveDouble) {
             if (it is ApiStatus.Success) {
                 it.data.horizon = true
-                it.data.mainTitle = "인기"
-                it.data.subTitle = "많은것"
+                it.data.mainTitle = "인기 메뉴"
+                it.data.subTitle = "이번주 가장 핫한 레시피"
                 list.add(0, it.data)
             }
             merge(popularLiveDouble)
         }
         result.addSource(newLiveData) {
             if (it is ApiStatus.Success) {
-                it.data.mainTitle = "새롭게"
-                it.data.subTitle = "생긴것"
+                it.data.mainTitle = "최신 메뉴"
+                it.data.subTitle = "새 레시피에 도전해보세요!"
                 list.add(it.data)
             }
             merge(newLiveData)

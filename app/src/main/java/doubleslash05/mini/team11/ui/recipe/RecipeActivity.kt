@@ -2,6 +2,7 @@ package doubleslash05.mini.team11.ui.recipe
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.MenuItem
 import android.widget.CheckBox
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
@@ -13,6 +14,7 @@ import doubleslash05.mini.team11.model.data.RecipeVideoData
 import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
+import kotlinx.android.synthetic.main.activity_category.*
 import kotlinx.android.synthetic.main.activity_recipe.*
 
 class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
@@ -24,6 +26,10 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
+
+        setSupportActionBar(toolbar_recipe)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         checkbox_recipe_favorite.setOnClickListener {
             val data = data ?: return@setOnClickListener
@@ -57,9 +63,12 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         })
     }
 
-    @Override
-    override fun onResume() {
-        super.onResume()
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            android.R.id.home -> finish()
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onTabSelected(tab: TabLayout.Tab) {
@@ -82,6 +91,7 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     @SuppressLint("SetTextI18n")
     fun refresh() {
         val data = data ?: return
+        textview_recipe_title.text = data.name
         val recipeVideoData = RecipeVideoData(data.videoUrl, data.ms)
         videoview_recipe.setData(recipeVideoData)
 

@@ -11,6 +11,7 @@ import com.google.android.material.tabs.TabLayoutMediator
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseFragment
 import doubleslash05.mini.team11.ui.favorite.FavoriteListFragment.Companion.ARGUMENT_FAVORITE_TYPE
+import kotlinx.android.synthetic.main.activity_main2.*
 import kotlinx.android.synthetic.main.fragment_favorite.view.*
 
 class FavoriteFragment : BaseFragment() {
@@ -22,7 +23,7 @@ class FavoriteFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        supportActionBar?.title = getString(R.string.favorite_my_menu)
+        activity?.textview_main_title?.text = getString(R.string.favorite_my_menu)
 
         view.viewpager_favorite.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         view.viewpager_favorite.adapter = ViewPagerAdapter()
