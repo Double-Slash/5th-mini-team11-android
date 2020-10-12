@@ -1,8 +1,15 @@
 package doubleslash05.mini.team11.ui.recipe
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
+import com.icaksama.rapidsphinx.RapidPreparationListener
+import com.icaksama.rapidsphinx.RapidSphinx
+import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.App
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.RecipeModel
@@ -11,17 +18,38 @@ import doubleslash05.mini.team11.model.data.RecipeVideoData
 import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
+import doubleslash05.mini.team11.util.Log
+import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_recipe.*
+import kotlinx.android.synthetic.main.view_recipe_video.*
 
-class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
+class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelectedListener {
     private val infoFragment = RecipeInfoFragment()
     private val stepFragment = RecipeStepFragment()
     private val menuId by lazy { intent.getIntExtra(EXTRA_MENU_ID, -1) }
     private lateinit var data: RecipeData
+    private val rapidSphinx: RapidSphinx by lazy { RapidSphinx(this) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
+
+        button_recipevideo.setOnClickListener {
+            rapidSphinx.startRapidSphinx(10000)
+        }
+
+        if (isPermissionsGranted)
+            rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
+                override fun rapidPreExecute(config: Config) {
+                    rapidSphinx.isRawLogAvailable = true
+                    config.setString("-logfn", "/dev/null")
+                    config.setBoolean("-verbose", true)
+                }
+
+                override fun rapidPostExecute(isSuccess: Boolean) {
+                }
+            })
 
         videoview_receipe.setOnChangeSectionListener(object : RecipeVideoView.OnChangeSectionListener {
             override fun onChangeSection(index: Int) {
@@ -47,11 +75,43 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
                 }
             }
         })
+
+
+    }
+
+    override fun rapidSphinxDidStop(reason: String?, code: Int) {
+    }
+
+    override fun rapidSphinxFinalResult(
+        result: String?,
+        hypArr: MutableList<String>?,
+        scores: MutableList<Double>?
+    ) {
+    }
+
+    override fun rapidSphinxPartialResult(partialResult: String?) {
+        when (partialResult){
+            stopKeyword2 -> videoview_receipe.prevSection()
+            pauseKeyword -> videoview_receipe.replySction()
+            nextKeyword -> videoview_receipe.nextSection()
+        }
+    }
+
+    override fun rapidSphinxUnsupportedWords(words: MutableList<String>?) {
+    }
+
+    override fun rapidSphinxDidSpeechDetected() {
     }
 
     @Override
     override fun onResume() {
+        val oovwords = arrayOf("darcy", "daum", "region")
         super.onResume()
+        rapidSphinx.updateVocabulary(stopKeyword, oovwords){
+            Log.d("rapid", "updated!")
+
+        }
+
     }
 
     override fun onTabSelected(tab: TabLayout.Tab) {
@@ -85,5 +145,24 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     companion object {
         const val EXTRA_MENU_ID = "EXTRA_MENU_ID"
         const val EXTRA_MENU_DATA = "EXTRA_MENU_DATA"
+        private const val pauseKeyword = "darcy"
+        private const val stopKeyword = "stop"
+        private const val stopKeyword2 = "region"
+        private const val nextKeyword = "daum"
     }
+
+    private val isPermissionsGranted: Boolean
+        private get() = if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.RECORD_AUDIO),
+                1
+            )
+            false
+        } else {
+            true
+        }
 }
