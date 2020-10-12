@@ -31,13 +31,17 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
         val v = View.inflate(context, R.layout.view_recipe_video, this)
 
         seekbar_recipevideo.isEnabled = false
-        button_recipevideo.isEnabled = false
+        button_recipevideo_start.isEnabled = false
+
+        button_recipevideo_next.visibility = View.GONE
+        button_recipevideo_prev.visibility = View.GONE
+        button_recipevideo_replay.visibility = View.GONE
 
         // player_recipevideo
         player_recipevideo.setOnPreparedListener(OnPreparedListener { mp ->
             seekbar_recipevideo.max = mp.duration
             seekbar_recipevideo.isEnabled = true
-            button_recipevideo.isEnabled = true
+            button_recipevideo_start.isEnabled = true
 
             seekBarCoroutine = GlobalScope.launch {
                 while (true) {
@@ -55,14 +59,6 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
 
         seekbar_recipevideo.setOnSeekBarChangeListener(this)
-
-        button_recipevideo.setOnClickListener(OnClickListener {
-            if (player_recipevideo.isPlaying) {
-                pause()
-            } else {
-                start()
-            }
-        })
 
         val velocityTracker: VelocityTracker = VelocityTracker.obtain()
         player_recipevideo.setOnTouchListener { v, event ->
@@ -94,6 +90,11 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
         button_recipevideo_start.setOnClickListener {
             hideController()
+
+            button_recipevideo_next.visibility = View.VISIBLE
+            button_recipevideo_prev.visibility = View.VISIBLE
+            button_recipevideo_replay.visibility = View.VISIBLE
+            button_recipevideo_start.visibility = View.GONE
             start()
         }
 
@@ -143,14 +144,17 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
 
     fun nextSection() {
+        isStopEndSection = false
         seekTo(data.getNextSection(currentPosition))
     }
 
     fun replySction() {
+        isStopEndSection = false
         seekTo(data.getCurrentSction(currentPosition))
     }
 
     fun prevSection() {
+        isStopEndSection = false
         seekTo(data.getPrevSection(currentPosition))
     }
 
@@ -204,7 +208,6 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     }
 
     fun showController() {
-        pause()
         layout_recipevideo_controller.visibility = View.VISIBLE
     }
 
@@ -233,7 +236,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
         var ch = false
         for (section in data.sections) {
-            if (abs(section - currentPosition) <= TICK_TIME) {
+            if (abs(section - currentPosition) <= TICK_TIME * 3) {
                 ch = true
                 break
             }
