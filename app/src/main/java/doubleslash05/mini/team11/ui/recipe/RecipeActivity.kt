@@ -3,6 +3,7 @@ package doubleslash05.mini.team11.ui.recipe
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -35,11 +36,6 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
 
-        button_recipevideo.setOnClickListener {
-            rapidSphinx.startRapidSphinx(10000)
-        }
-
-        if (isPermissionsGranted)
             rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
                 override fun rapidPreExecute(config: Config) {
                     rapidSphinx.isRawLogAvailable = true
@@ -48,6 +44,7 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
                 }
 
                 override fun rapidPostExecute(isSuccess: Boolean) {
+                    Log.d("rapid2", "Executed!")
                 }
             })
 
@@ -80,6 +77,8 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
     }
 
     override fun rapidSphinxDidStop(reason: String?, code: Int) {
+        Log.d("rapid", "stopped")
+        rapidSphinx.startRapidSphinx(10000)
     }
 
     override fun rapidSphinxFinalResult(
@@ -101,6 +100,7 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
     }
 
     override fun rapidSphinxDidSpeechDetected() {
+        Log.d("rapid", "detected")
     }
 
     @Override
@@ -111,6 +111,7 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
             Log.d("rapid", "updated!")
 
         }
+
 
     }
 
@@ -145,10 +146,10 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
     companion object {
         const val EXTRA_MENU_ID = "EXTRA_MENU_ID"
         const val EXTRA_MENU_DATA = "EXTRA_MENU_DATA"
-        private const val pauseKeyword = "darcy"
-        private const val stopKeyword = "stop"
-        private const val stopKeyword2 = "region"
-        private const val nextKeyword = "daum"
+         const val pauseKeyword = "darcy"
+         const val stopKeyword = "stop"
+         const val stopKeyword2 = "region"
+         const val nextKeyword = "daum"
     }
 
     private val isPermissionsGranted: Boolean

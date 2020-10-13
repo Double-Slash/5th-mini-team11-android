@@ -11,6 +11,7 @@ import android.view.View.OnClickListener
 import android.widget.FrameLayout
 import android.widget.MediaController.MediaPlayerControl
 import android.widget.SeekBar
+import com.icaksama.rapidsphinx.RapidSphinx
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
 import doubleslash05.mini.team11.util.LogUtils
@@ -23,6 +24,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     private lateinit var data: RecipeVideoData
     private lateinit var seekBarCoroutine: Job
     private var onChangeSectionListener: OnChangeSectionListener? = null
+    private val rapidsphinx: RapidSphinx by lazy { RapidSphinx(context) }
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -96,6 +98,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
             button_recipevideo_replay.visibility = View.VISIBLE
             button_recipevideo_start.visibility = View.GONE
             start()
+            rapidsphinx.startRapidSphinx(5000)
         }
 
         button_recipevideo_replay.setOnClickListener {
