@@ -19,6 +19,7 @@ public class HorAdapter extends RecyclerView.Adapter<HorAdapter.HorViewHolder> {
 
     public HorAdapter( ArrayList<String > list) {
         this.list = list;
+
     }
 
     @NonNull

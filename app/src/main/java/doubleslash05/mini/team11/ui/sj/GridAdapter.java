@@ -32,6 +32,7 @@ public class GridAdapter extends RecyclerView.Adapter<GridAdapter.GridViewHolder
     public void onBindViewHolder(@NonNull GridViewHolder holder, int position) {
         holder.tv.setText(list.get(position));
         holder.iv.setImageResource(R.drawable.category_empty);
+
     }
 
     @Override

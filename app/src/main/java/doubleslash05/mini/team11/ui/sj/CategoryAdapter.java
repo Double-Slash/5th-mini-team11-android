@@ -8,23 +8,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.ArrayList;
 
 import doubleslash05.mini.team11.R;
-import doubleslash05.mini.team11.model.data.Base;
 import doubleslash05.mini.team11.model.data.Beginner;
 import doubleslash05.mini.team11.model.data.Category;
-import doubleslash05.mini.team11.model.data.Fragment1;
-import doubleslash05.mini.team11.model.data.MainViewPager;
 import doubleslash05.mini.team11.model.data.Text1;
 import doubleslash05.mini.team11.model.data.Text2;
 import doubleslash05.mini.team11.model.data.VerBeginner;
-import doubleslash05.mini.team11.util.Log;
-import me.relex.circleindicator.CircleIndicator3;
+//import doubleslash05.mini.team11.util.Log;
+
 
 public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -63,11 +58,17 @@ public class CategoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int position) {
         if (viewHolder instanceof CategoryViewHolder) {
-            ((CategoryViewHolder) viewHolder).rv.setAdapter(new GridAdapter(((Category) list.get(position)).itemList));
+            ((CategoryViewHolder) viewHolder).rv.setAdapter(new GridAdapter(((Category)list.get(position)).item));
 
+//            CategoryViewHolder c1 = (CategoryViewHolder) viewHolder;
+//            Category category = (Category) list.get(position);
+//            c1.rv.setAdapter(new GridAdapter());
+//            c1.content.setText(category.item);
+//            c1.image.setImageResource(category.imageNum);
 
         } else if (viewHolder instanceof BeginnerViewHolder) {
             ((BeginnerViewHolder) viewHolder).rv2.setAdapter(new HorAdapter(((Beginner) list.get(position)).itemList));
+
 
 
         } else if (viewHolder instanceof Text1ViewHolder) {

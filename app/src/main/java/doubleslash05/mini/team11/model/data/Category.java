@@ -4,10 +4,13 @@ package doubleslash05.mini.team11.model.data;
 import java.util.ArrayList;
 
 public  class Category extends Base{
-    public ArrayList<String> itemList;
 
-    public Category(ArrayList<String> itemList) {
-        this.itemList = itemList;
+    public ArrayList<String> item;
+    public ArrayList<Integer> imageNum;
+
+    public Category(ArrayList<String> item,ArrayList<Integer> imageNum) {
+        this.item = item;
+        this.imageNum=imageNum;
     }
 }
 
