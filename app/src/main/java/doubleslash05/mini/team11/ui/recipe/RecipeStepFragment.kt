@@ -57,7 +57,7 @@ class RecipeStepFragment : BaseFragment() {
 
     fun setStep(index: Int) {
         val view = view ?: return
-        val y = view.recyclerview_recipe.layoutManager!!.getChildAt(index)!!.y
+        val y = view.recyclerview_recipe.layoutManager?.getChildAt(index)?.y ?: return
 
         view.scrollview_recipe.smoothScrollTo(0, y.toInt())
 
