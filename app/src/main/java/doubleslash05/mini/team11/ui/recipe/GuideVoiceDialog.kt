@@ -26,10 +26,6 @@ class GuideVoiceDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        view.textview_guide_prev.text = getInstructionString(R.string.all_prev, R.string.guide_prev)
-        view.textview_guide_next.text = getInstructionString(R.string.all_next, R.string.guide_next)
-        view.textview_guide_replay.text = getInstructionString(R.string.all_replay, R.string.guide_replay)
-
         view.button_guide_close.setOnClickListener {
             dismiss()
         }
@@ -51,16 +47,6 @@ class GuideVoiceDialog : DialogFragment() {
         params?.width = (deviceWidth * 0.9).toInt()
         dialog?.window?.attributes = params as WindowManager.LayoutParams
         dialog?.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-    }
-
-    private fun getInstructionString(keyword: Int, description: Int) :SpannableString {
-        return getInstructionString(getString(keyword), getString(description))
-    }
-
-    private fun getInstructionString(keyword: String, description: String): SpannableString {
-        return SpannableString("$keyword $description").apply {
-            setSpan(ForegroundColorSpan(spanColor), 0, keyword.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
-        }
     }
 
 }

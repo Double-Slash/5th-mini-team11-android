@@ -22,8 +22,11 @@
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="40dp"
             android:background="@drawable/btn_make"
+            android:fontFamily="@font/notosans_kr_medium"
+            android:includeFontPadding="false"
             android:paddingHorizontal="20dp"
             android:text="@string/all_complete"
+            android:textSize="20sp"
             android:textColor="@color/btn_make" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

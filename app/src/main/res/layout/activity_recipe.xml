@@ -24,6 +24,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/notosans_kr_medium"
+                android:includeFontPadding="false"
                 android:textColor="@color/greyish_brown"
                 tools:text="Toolbar Title" />
 
@@ -43,6 +45,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="@font/notosans_kr_regular"
+        android:includeFontPadding="false"
         android:textSize="14sp"
         app:layout_constraintStart_toStartOf="@id/textview_recipe_main"
         app:layout_constraintTop_toBottomOf="@id/videoview_recipe"
@@ -56,6 +60,8 @@
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="11dp"
+        android:fontFamily="@font/notosans_kr_medium"
+        android:includeFontPadding="false"
         android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/textview_recipe_sub"
@@ -80,6 +86,8 @@
         android:layout_marginStart="4.3dp"
         android:layout_marginLeft="4.3dp"
         android:layout_marginBottom="2dp"
+        android:fontFamily="@font/notosans_kr_regular"
+        android:includeFontPadding="false"
         android:lineSpacingExtra="6sp"
         android:textColor="@color/brownish_grey"
         android:textSize="12sp"
@@ -105,6 +113,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="3.5dp"
         android:layout_marginLeft="3.5dp"
+        android:fontFamily="@font/notosans_kr_regular"
+        android:includeFontPadding="false"
         android:lineSpacingExtra="6sp"
         android:textColor="@color/brownish_grey"
         android:textSize="12sp"
@@ -120,8 +130,8 @@
         android:layout_marginRight="14.7dp"
         android:layout_marginBottom="13.4dp"
         android:button="@drawable/ic_recipe_favorite"
-        app:layout_constraintTop_toBottomOf="@id/videoview_recipe"
-        app:layout_constraintRight_toRightOf="parent" />
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/videoview_recipe" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_recipe"
@@ -142,13 +152,13 @@
             android:layout_height="wrap_content"
             android:text="@string/recipe_tab_1" />
     </com.google.android.material.tabs.TabLayout>
+
     <View
         android:id="@+id/line_recipe_tab"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#d5d5d5"
-        app:layout_constraintTop_toBottomOf="@id/tablayout_recipe"
-        />
+        app:layout_constraintTop_toBottomOf="@id/tablayout_recipe" />
 
     <FrameLayout
         android:id="@+id/fragment_recipe"

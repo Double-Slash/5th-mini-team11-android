@@ -18,16 +18,16 @@
             android:id="@+id/imageview_menu_background"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:src="#555"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
+            android:src="#555"
             tools:layout_editor_absoluteX="0dp"
             tools:layout_editor_absoluteY="0dp" />
 
         <View
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@drawable/bg_menu_gradient"/>
+            android:background="@drawable/bg_menu_gradient" />
 
         <TextView
             android:id="@+id/textview_menu_main"
@@ -36,6 +36,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
             android:layout_marginBottom="12dp"
+            android:fontFamily="@font/notosans_kr_medium"
+            android:includeFontPadding="false"
             android:lineSpacingExtra="8sp"
             android:textColor="@color/white"
             android:textSize="16sp"
@@ -49,6 +51,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="5dp"
+            android:fontFamily="@font/notosans_kr_regular"
+            android:includeFontPadding="false"
             android:lineSpacingExtra="6sp"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/textview_menu_main"
@@ -74,6 +78,8 @@
             android:layout_marginStart="4.3dp"
             android:layout_marginLeft="4.3dp"
             android:layout_marginBottom="2dp"
+            android:fontFamily="@font/notosans_kr_regular"
+            android:includeFontPadding="false"
             android:lineSpacingExtra="6sp"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -99,6 +105,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="3.5dp"
             android:layout_marginLeft="3.5dp"
+            android:fontFamily="@font/notosans_kr_regular"
+            android:includeFontPadding="false"
             android:lineSpacingExtra="6sp"
             android:textColor="@color/white"
             android:textSize="12sp"
@@ -110,9 +118,9 @@
             android:id="@+id/checkbox_menu_favorite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:layout_marginBottom="3.4dp"
             android:button="@drawable/ic_card_favorite"
+            android:padding="10dp"
             app:layout_constraintBottom_toBottomOf="@id/imageview_menu_background"
             app:layout_constraintRight_toRightOf="parent" />
 
