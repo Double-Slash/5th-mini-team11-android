@@ -36,6 +36,13 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recipe)
 
+        rapidSphinx.addListener(this)
+
+
+        button_recipevideo_start.setOnClickListener {
+            rapidSphinx.startRapidSphinx(5000)
+        }
+
             rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
                 override fun rapidPreExecute(config: Config) {
                     rapidSphinx.isRawLogAvailable = true
