@@ -3,7 +3,6 @@ package doubleslash05.mini.team11.ui.recipe
 import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
@@ -24,12 +23,13 @@ import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_recipe.*
 import kotlinx.android.synthetic.main.view_recipe_video.*
 
-class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelectedListener {
+class RecipeActivity : BaseActivity(),RapidSphinxListener,TabLayout.OnTabSelectedListener {
     private val infoFragment = RecipeInfoFragment()
     private val stepFragment = RecipeStepFragment()
     private val menuId by lazy { intent.getIntExtra(EXTRA_MENU_ID, -1) }
     private lateinit var data: RecipeData
     private val rapidSphinx: RapidSphinx by lazy { RapidSphinx(this) }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,10 +38,12 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener, TabLayout.OnTabSelect
 
         rapidSphinx.addListener(this)
 
-
         button_recipevideo_start.setOnClickListener {
+            player_recipevideo.start()
             rapidSphinx.startRapidSphinx(5000)
         }
+
+
 
             rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
                 override fun rapidPreExecute(config: Config) {
