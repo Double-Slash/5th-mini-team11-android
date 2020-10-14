@@ -60,6 +60,8 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             nextKeyword -> {
                 viewpager_tutorial.currentItem = 2
                 btnSkip.setText("시작하기")
+                btnSkip.isEnabled = true
+                btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
 
             }
 
@@ -90,15 +92,18 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
                 btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
 
             } else if (viewpager_tutorial.currentItem == 2) {
+                btnSkip.isEnabled = true
                 rapidSphinx.stop()
                 startActivity<HomeActivity>()
             }
             viewpager_tutorial.currentItem += 1
-            btnSkip.isEnabled = false
-            btnSkip.setBackgroundColor(Color.parseColor("#707070"))
-            updateHandler.postDelayed(runnable, 5000)
+            if (viewpager_tutorial.currentItem == 0 || viewpager_tutorial.currentItem == 1){
+                btnSkip.setBackgroundColor(Color.parseColor("#707070"))
+                updateHandler.postDelayed(runnable, 5000)
+                btnSkip.isEnabled = false
 
 
+            }
 
         }
         customTab.setupWithViewPager(viewpager_tutorial, true)
@@ -155,7 +160,6 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
 
     }
-
 
     class TutorialPageAdapter(fragmentManager: FragmentManager?) : FragmentPagerAdapter(
         fragmentManager!!

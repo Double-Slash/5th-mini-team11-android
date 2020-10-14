@@ -1,11 +1,18 @@
 package doubleslash05.mini.team11.ui.recipe
 
+import android.Manifest
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.CheckBox
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.Observer
 import com.google.android.material.tabs.TabLayout
+import com.icaksama.rapidsphinx.RapidPreparationListener
+import com.icaksama.rapidsphinx.RapidSphinx
+import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.App
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.RecipeModel
@@ -14,14 +21,18 @@ import doubleslash05.mini.team11.model.data.RecipeVideoData
 import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
-import kotlinx.android.synthetic.main.activity_category.*
+import doubleslash05.mini.team11.util.Log
+import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_recipe.*
+import kotlinx.android.synthetic.main.view_recipe_video.*
 
-class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
+class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelectedListener {
     private val infoFragment = RecipeInfoFragment()
     private val stepFragment = RecipeStepFragment()
     private val menuId by lazy { intent.getIntExtra(EXTRA_MENU_ID, -1) }
     private var data: RecipeData? = null
+    private val rapidSphinx: RapidSphinx by lazy { RapidSphinx(this) }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +48,29 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
             RecipeModel.setFavorite(data.id, it.isChecked)
         }
 
-        videoview_recipe.setOnChangeSectionListener(object : RecipeVideoView.OnChangeSectionListener {
+        rapidSphinx.addListener(this)
+
+        button_recipevideo_start.setOnClickListener {
+            player_recipevideo.start()
+            rapidSphinx.startRapidSphinx(5000)
+        }
+
+
+        rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
+            override fun rapidPreExecute(config: Config) {
+                rapidSphinx.isRawLogAvailable = true
+                config.setString("-logfn", "/dev/null")
+                config.setBoolean("-verbose", true)
+            }
+
+            override fun rapidPostExecute(isSuccess: Boolean) {
+                Log.d("rapid2", "Executed!")
+            }
+        })
+
+        videoview_recipe.setOnChangeSectionListener(object :
+            RecipeVideoView.OnChangeSectionListener {
+
             override fun onChangeSection(index: Int) {
                 stepFragment.setStep(index)
             }
@@ -61,14 +94,53 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
                 }
             }
         })
+
+
+    }
+
+    override fun rapidSphinxDidStop(reason: String?, code: Int) {
+        Log.d("rapid", "stopped")
+        rapidSphinx.startRapidSphinx(10000)
+    }
+
+    override fun rapidSphinxFinalResult(
+        result: String?,
+        hypArr: MutableList<String>?,
+        scores: MutableList<Double>?
+    ) {
+    }
+
+    override fun rapidSphinxPartialResult(partialResult: String?) {
+        when (partialResult) {
+            stopKeyword2 -> videoview_recipe.prevSection()
+            pauseKeyword -> videoview_recipe.replySction()
+            nextKeyword -> videoview_recipe.nextSection()
+        }
+    }
+
+    override fun rapidSphinxUnsupportedWords(words: MutableList<String>?) {
+    }
+
+    override fun rapidSphinxDidSpeechDetected() {
+        Log.d("rapid", "detected")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId){
+        when (item.itemId) {
             android.R.id.home -> finish()
         }
 
         return super.onOptionsItemSelected(item)
+    }
+
+    @Override
+    override fun onResume() {
+        val oovwords = arrayOf("darcy", "daum", "region")
+        super.onResume()
+        rapidSphinx.updateVocabulary(stopKeyword, oovwords) {
+            Log.d("rapid", "updated!")
+
+        }
     }
 
     override fun onTabSelected(tab: TabLayout.Tab) {
@@ -109,5 +181,24 @@ class RecipeActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     companion object {
         const val EXTRA_MENU_ID = "EXTRA_MENU_ID"
         const val EXTRA_MENU_DATA = "EXTRA_MENU_DATA"
+        const val pauseKeyword = "darcy"
+        const val stopKeyword = "stop"
+        const val stopKeyword2 = "region"
+        const val nextKeyword = "daum"
     }
+
+    private val isPermissionsGranted: Boolean
+        private get() = if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.RECORD_AUDIO
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                this, arrayOf(Manifest.permission.RECORD_AUDIO),
+                1
+            )
+            false
+        } else {
+            true
+        }
 }

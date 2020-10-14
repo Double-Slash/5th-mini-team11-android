@@ -22,7 +22,12 @@
         <activity
             android:name="doubleslash05.mini.team11.ui.recipe.RecipeActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
+
+
+
+        </activity>
         <activity
             android:name=".ui.splash.SplashActivity"
             android:screenOrientation="portrait"

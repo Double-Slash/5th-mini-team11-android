@@ -11,6 +11,7 @@ import android.view.View.OnClickListener
 import android.widget.FrameLayout
 import android.widget.MediaController.MediaPlayerControl
 import android.widget.SeekBar
+import com.icaksama.rapidsphinx.RapidSphinx
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.model.data.RecipeVideoData
 import doubleslash05.mini.team11.util.LogUtils
