@@ -1,6 +1,8 @@
 package doubleslash05.mini.team11.ui.category
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.MenuItem
 import com.google.android.material.tabs.TabLayout
 import doubleslash05.mini.team11.R
@@ -9,6 +11,7 @@ import kotlinx.android.synthetic.main.activity_category.*
 
 class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     private val fragmentList = ArrayList<CategoryFragment>()
+    private val startIndex by lazy { intent.getIntExtra(EXTRA_CATEGORY_INDEX, 0) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,9 +46,9 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
         }
 
         tablayout_category.addOnTabSelectedListener(this)
-
-        textview_category_title.text = strArray[0]
-        supportFragmentManager.beginTransaction().replace(R.id.fragment_category, fragmentList[0]).commit()
+        Handler(Looper.myLooper()!!).postDelayed(
+            { tablayout_category.getTabAt(startIndex)?.select() }, 100
+        )
 
     }
 
@@ -66,5 +69,9 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
     }
 
     override fun onTabUnselected(tab: TabLayout.Tab) {
+    }
+
+    companion object {
+        const val EXTRA_CATEGORY_INDEX = "EXTRA_CATEGORY_INDEX"
     }
 }

@@ -3,8 +3,8 @@ package doubleslash05.mini.team11.model.data
 import com.google.gson.annotations.SerializedName
 
 data class MenuList(
-    var mainTitle: String,
-    var subTitle: String,
+    @SerializedName("title") var mainTitle: String,
+    @SerializedName("subtitle") var subTitle: String,
     @SerializedName("menu_list") val menuList: List<MenuData>,
     var horizon: Boolean
 ) {

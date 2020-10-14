@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
@@ -24,6 +25,7 @@ class FavoriteFragment : BaseFragment() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
         activity?.textview_main_title?.text = getString(R.string.favorite_my_menu)
+        activity?.textview_main_title?.setTextColor(ResourcesCompat.getColor(resources, R.color.greyish_brown, null))
 
         view.viewpager_favorite.orientation = ViewPager2.ORIENTATION_HORIZONTAL
         view.viewpager_favorite.adapter = ViewPagerAdapter()

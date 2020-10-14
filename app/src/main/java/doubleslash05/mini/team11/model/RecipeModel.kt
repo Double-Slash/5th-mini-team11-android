@@ -2,6 +2,7 @@ package doubleslash05.mini.team11.model
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import doubleslash05.mini.team11.model.data.MainData
 import doubleslash05.mini.team11.model.data.MenuList
 import doubleslash05.mini.team11.model.data.RecipeData
 import doubleslash05.mini.team11.model.network.base.ApiStatus
@@ -79,5 +80,9 @@ object RecipeModel {
 
     fun setMade(recipeId: Int): RetroLiveData<Any> {
         return service.setMade(recipeId)
+    }
+
+    fun getMain() : RetroLiveData<MainData>{
+        return service.getMain()
     }
 }
