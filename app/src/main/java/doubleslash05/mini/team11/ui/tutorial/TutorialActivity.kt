@@ -1,7 +1,6 @@
 package doubleslash05.mini.team11.ui.tutorial
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -9,6 +8,7 @@ import android.os.Handler
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -59,8 +59,13 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             }
             nextKeyword -> {
                 viewpager_tutorial.currentItem = 2
-                btnSkip.setText("시작하기")
+                btnSkip.setText("Skip")
+                btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
+            }
+            pauseKeyword -> {
+                viewpager_tutorial.currentItem = 3
                 btnSkip.isEnabled = true
+                btnSkip.setText("시작하기")
                 btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
 
             }
@@ -80,24 +85,32 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
         btnSkip.isEnabled = false
         updateHandler.postDelayed(runnable, 5000)
 
         btnSkip.setOnClickListener {
-            if (viewpager_tutorial.currentItem == 1) {
+
+            if (viewpager_tutorial.currentItem == 0) {
+                btnSkip.setText("Skip")
+            }
+            else if (viewpager_tutorial.currentItem == 1) {
+                btnSkip.setText("Skip")
+
+
+            } else if (viewpager_tutorial.currentItem == 2) {
                 btnSkip.setText("시작하기")
                 btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
 
-            } else if (viewpager_tutorial.currentItem == 2) {
+            } else if (viewpager_tutorial.currentItem == 3) {
                 btnSkip.isEnabled = true
                 rapidSphinx.stop()
                 startActivity<HomeActivity>()
+
             }
             viewpager_tutorial.currentItem += 1
-            if (viewpager_tutorial.currentItem == 0 || viewpager_tutorial.currentItem == 1){
+            if (viewpager_tutorial.currentItem == 0 || viewpager_tutorial.currentItem == 1 || viewpager_tutorial.currentItem == 2){
                 btnSkip.setBackgroundColor(Color.parseColor("#707070"))
                 updateHandler.postDelayed(runnable, 5000)
                 btnSkip.isEnabled = false
@@ -107,6 +120,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
         }
         customTab.setupWithViewPager(viewpager_tutorial, true)
+        customTab.getTabAt(3).isVi
         viewpager_tutorial.adapter = adapterViewPager
 
         Log.d("cycle", "onCreate")
@@ -168,7 +182,8 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         private val PAGE_NUMBER = listOf<BaseFragment>(
             Tutorial1Fragment(),
             Tutorial2Fragment(),
-            Tutorial3Fragment()
+            Tutorial3Fragment(),
+            Tutorial4Fragment()
         )
 
 

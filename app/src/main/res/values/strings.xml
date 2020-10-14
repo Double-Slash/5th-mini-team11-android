@@ -32,6 +32,8 @@
     <string name="favorite_my_menu">나의 요리</string>
     <string name="favorite_make_menu">만들 요리</string>
     <string name="favorite_made_menu">만든 요리</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>
 
