@@ -15,7 +15,7 @@ class Tutorial4Fragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         activity
-        val view = inflater.inflate(R.layout.fragment_tutorial_page, container, false)
+        val view = inflater.inflate(R.layout.fragment_tutorial_start, container, false)
         return view
     }
 

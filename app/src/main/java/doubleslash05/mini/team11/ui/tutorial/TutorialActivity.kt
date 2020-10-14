@@ -1,6 +1,7 @@
 package doubleslash05.mini.team11.ui.tutorial
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.content.pm.PackageManager
 import android.graphics.Color
 import android.os.Bundle
@@ -8,7 +9,6 @@ import android.os.Handler
 import android.util.Log
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -18,10 +18,8 @@ import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
-import doubleslash05.mini.team11.ui.main.HomeActivity
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_tutorial.*
-import org.jetbrains.anko.startActivity
 
 class TutorialActivity : BaseActivity(), RapidSphinxListener {
     companion object {
@@ -50,6 +48,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
     }
 
+    @SuppressLint("ResourceType")
     override fun rapidSphinxPartialResult(partialResult: String) {
 
         when (partialResult) {
@@ -60,14 +59,9 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             nextKeyword -> {
                 viewpager_tutorial.currentItem = 2
                 btnSkip.setText("Skip")
-                btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
             }
             pauseKeyword -> {
-                viewpager_tutorial.currentItem = 3
-                btnSkip.isEnabled = true
-                btnSkip.setText("시작하기")
-                btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
-
+                 loadFragment(Tutorial4Fragment())
             }
 
         }
@@ -84,6 +78,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     }
 
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
@@ -94,33 +89,27 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
             if (viewpager_tutorial.currentItem == 0) {
                 btnSkip.setText("Skip")
+                viewpager_tutorial.currentItem += 1
+                updateHandler.postDelayed(runnable, 5000)
+                btnSkip.isEnabled = false
+                btnSkip.setBackgroundColor(Color.parseColor("#707070"))
+
+
             }
             else if (viewpager_tutorial.currentItem == 1) {
                 btnSkip.setText("Skip")
-
-
-            } else if (viewpager_tutorial.currentItem == 2) {
-                btnSkip.setText("시작하기")
-                btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
-
-            } else if (viewpager_tutorial.currentItem == 3) {
-                btnSkip.isEnabled = true
-                rapidSphinx.stop()
-                startActivity<HomeActivity>()
-
-            }
-            viewpager_tutorial.currentItem += 1
-            if (viewpager_tutorial.currentItem == 0 || viewpager_tutorial.currentItem == 1 || viewpager_tutorial.currentItem == 2){
-                btnSkip.setBackgroundColor(Color.parseColor("#707070"))
+                viewpager_tutorial.currentItem += 1
                 updateHandler.postDelayed(runnable, 5000)
                 btnSkip.isEnabled = false
+                btnSkip.setBackgroundColor(Color.parseColor("#707070"))
 
-
+            } else if (viewpager_tutorial.currentItem == 2) {
+                loadFragment(Tutorial4Fragment())
             }
+
 
         }
         customTab.setupWithViewPager(viewpager_tutorial, true)
-        customTab.getTabAt(3).isVi
         viewpager_tutorial.adapter = adapterViewPager
 
         Log.d("cycle", "onCreate")
@@ -182,9 +171,10 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         private val PAGE_NUMBER = listOf<BaseFragment>(
             Tutorial1Fragment(),
             Tutorial2Fragment(),
-            Tutorial3Fragment(),
-            Tutorial4Fragment()
+            Tutorial3Fragment()
         )
+
+
 
 
 
@@ -208,4 +198,11 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     }
 
 
+    private fun loadFragment(fragment: Fragment) {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.add(fragment, "fragmentId")
+        transaction.replace(R.id.fragment_tutorial, fragment, "fragmentId")
+        transaction.disallowAddToBackStack()
+        transaction.commit()
+    }
 }
