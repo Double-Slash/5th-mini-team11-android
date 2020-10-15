@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.tutorial.TutorialActivity">
+    tools:context=".ui.tutorial.TutorialActivity"
+    android:id="@+id/fragment_tutorial_main">
 
     <doubleslash05.mini.team11.ui.tutorial.SwipeDisabledViewPager
         android:id="@+id/viewpager_tutorial"
@@ -38,7 +39,7 @@
         android:id="@+id/btnSkip"
         android:layout_width="match_parent"
         android:layout_height="46dp"
-        android:background="#707070"
+        android:background="@drawable/btn_top_rounded"
         android:text="Skip"
         android:textColor="#FFFFFF"
         android:textSize="20sp"

@@ -7,8 +7,11 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.view.isGone
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -18,8 +21,13 @@ import com.icaksama.rapidsphinx.RapidSphinxListener
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
+import doubleslash05.mini.team11.ui.main.HomeActivity
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_tutorial.*
+import kotlinx.android.synthetic.main.fragment_tutorial_page.*
+import kotlinx.android.synthetic.main.fragment_tutorial_start.*
+import kotlinx.android.synthetic.main.fragment_tutorial_start.tvDetail
+import org.jetbrains.anko.startActivity
 
 class TutorialActivity : BaseActivity(), RapidSphinxListener {
     companion object {
@@ -27,10 +35,12 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         private const val stopKeyword = "stop"
         private const val stopKeyword2 = "region"
         private const val nextKeyword = "daum"
+        private const val start = "시작하기"
     }
 
     private val rapidSphinx: RapidSphinx by lazy { RapidSphinx(this) }
     private val adapterViewPager: FragmentPagerAdapter = TutorialPageAdapter(supportFragmentManager)
+    private val startFragment = Tutorial4Fragment()
     private val updateHandler = Handler()
     private val runnable = Runnable {
         updateDisplay()
@@ -58,10 +68,13 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             }
             nextKeyword -> {
                 viewpager_tutorial.currentItem = 2
-                btnSkip.setText("Skip")
             }
             pauseKeyword -> {
-                 loadFragment(Tutorial4Fragment())
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_tutorial_main, startFragment)
+                    .addToBackStack(null).commit()
+                btnSkip.setText(start)
+                rapidSphinx.stop()
             }
 
         }
@@ -78,40 +91,49 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     }
 
 
-    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
         btnSkip.isEnabled = false
         updateHandler.postDelayed(runnable, 5000)
 
+
+
         btnSkip.setOnClickListener {
 
             if (viewpager_tutorial.currentItem == 0) {
                 btnSkip.setText("Skip")
                 viewpager_tutorial.currentItem += 1
-                updateHandler.postDelayed(runnable, 5000)
                 btnSkip.isEnabled = false
-                btnSkip.setBackgroundColor(Color.parseColor("#707070"))
+                updateHandler.postDelayed(runnable, 5000)
+                btnSkip.setBackgroundResource(R.drawable.btn_top_rounded)
 
 
-            }
-            else if (viewpager_tutorial.currentItem == 1) {
+            } else if (viewpager_tutorial.currentItem == 1) {
                 btnSkip.setText("Skip")
                 viewpager_tutorial.currentItem += 1
-                updateHandler.postDelayed(runnable, 5000)
                 btnSkip.isEnabled = false
-                btnSkip.setBackgroundColor(Color.parseColor("#707070"))
+                updateHandler.postDelayed(runnable, 5000)
+                btnSkip.setBackgroundResource(R.drawable.btn_top_rounded)
+
 
             } else if (viewpager_tutorial.currentItem == 2) {
-                loadFragment(Tutorial4Fragment())
+                btnSkip.isSelected = true
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_tutorial_main, startFragment)
+                    .addToBackStack(null).commit()
+                btnSkip.setText(start)
+                btnSkip.isEnabled = true
+                btnSkip.isClickable = true
+                rapidSphinx.stop()
+            } else if (viewpager_tutorial.currentItem != 0 && viewpager_tutorial.currentItem != 1 && viewpager_tutorial.currentItem != 2) {
+                startActivity<HomeActivity>()
             }
 
 
         }
         customTab.setupWithViewPager(viewpager_tutorial, true)
         viewpager_tutorial.adapter = adapterViewPager
-
         Log.d("cycle", "onCreate")
         rapidSphinx.addListener(this)
 
@@ -128,7 +150,6 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
                 override fun rapidPostExecute(isSuccess: Boolean) {
                 }
             })
-
 
     }
 
@@ -160,7 +181,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
     private fun updateDisplay() {
         btnSkip.isEnabled = true
-        btnSkip.setBackgroundColor(Color.parseColor("#FF9E00"))
+        btnSkip.setBackgroundResource(R.drawable.btn_top_rounded_activated)
 
     }
 
@@ -173,9 +194,6 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             Tutorial2Fragment(),
             Tutorial3Fragment()
         )
-
-
-
 
 
         override fun getItemPosition(`object`: Any): Int {
@@ -198,11 +216,4 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     }
 
 
-    private fun loadFragment(fragment: Fragment) {
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(fragment, "fragmentId")
-        transaction.replace(R.id.fragment_tutorial, fragment, "fragmentId")
-        transaction.disallowAddToBackStack()
-        transaction.commit()
-    }
 }
