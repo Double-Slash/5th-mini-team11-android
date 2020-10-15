@@ -6,27 +6,26 @@
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
-    tools:context=".ui.tutorial.TutorialActivity">
+    tools:context=".ui.tutorial.TutorialActivity"
+    android:background="#FFFFFF">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:id="@+id/fragment_tutorial">
-
+        >
 
         <TextView
             android:id="@+id/tvLabel"
             android:layout_width="260dp"
             android:layout_height="150dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginLeft="44dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
             android:layout_marginTop="135dp"
             android:layout_marginEnd="148dp"
             android:layout_marginRight="148dp"
             android:layout_marginBottom="605dp"
             android:includeFontPadding="false"
-            android:padding="0dp"
             android:text=""
             android:textColor="@color/colorPrimaryDark"
             android:textSize="24sp"
@@ -37,20 +36,19 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.056" />
+            app:layout_constraintVertical_bias="0.106" />
 
         <TextView
             android:id="@+id/tvDetail"
             android:layout_width="206dp"
+            android:includeFontPadding="false"
             android:layout_height="60dp"
-            android:layout_marginStart="44dp"
-            android:layout_marginLeft="44dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginLeft="22dp"
             android:layout_marginTop="15dp"
             android:layout_marginEnd="183dp"
             android:layout_marginRight="183dp"
             android:layout_marginBottom="402dp"
-            android:includeFontPadding="false"
-            android:padding="0dp"
             android:text=""
             android:textColor="@color/colorPrimary"
             android:textSize="12sp"
@@ -59,7 +57,7 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvLabel"
-            app:layout_constraintVertical_bias="0.181" />
+            app:layout_constraintVertical_bias="0.0" />
 
         <ImageView
             android:id="@+id/imageview_logo"
@@ -80,6 +78,7 @@
 
         <TextView
             android:id="@+id/tvGuide"
+            android:includeFontPadding="false"
             android:layout_width="211sp"
             android:layout_height="66sp"
             android:layout_marginStart="67sp"
@@ -89,7 +88,6 @@
             android:layout_marginRight="67sp"
             android:layout_marginBottom="208sp"
             android:gravity="center"
-            android:includeFontPadding="false"
             android:text=""
             android:textColor="@color/colorPrimaryDark"
             android:textSize="16sp"
@@ -116,6 +114,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvDetail" />
+
+
+
+
+
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
