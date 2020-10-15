@@ -47,7 +47,9 @@ class CategoryActivity : BaseActivity(), TabLayout.OnTabSelectedListener {
 
         tablayout_category.addOnTabSelectedListener(this)
         Handler(Looper.myLooper()!!).postDelayed(
-            { tablayout_category.getTabAt(startIndex)?.select() }, 100
+            {
+                if(startIndex == 0) onTabSelected(tablayout_category.getTabAt(0)!!)
+                tablayout_category.getTabAt(startIndex)?.select() }, 100
         )
 
     }
