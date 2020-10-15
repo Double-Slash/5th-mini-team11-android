@@ -190,6 +190,6 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
     }
 
     companion object {
-        const val LOCAL_VIDEO = true
+        const val LOCAL_VIDEO = false
     }
 }

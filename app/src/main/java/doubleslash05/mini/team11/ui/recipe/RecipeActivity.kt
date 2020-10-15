@@ -41,6 +41,7 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener,TabLayout.OnTabSelecte
         button_recipevideo_start.setOnClickListener {
             player_recipevideo.start()
             rapidSphinx.startRapidSphinx(5000)
+            rapidSphinx.setSilentToDetect(1000)
         }
 
 
@@ -86,7 +87,7 @@ class RecipeActivity : BaseActivity(),RapidSphinxListener,TabLayout.OnTabSelecte
     }
 
     override fun rapidSphinxDidStop(reason: String?, code: Int) {
-        Log.d("rapid", "stopped")
+        rapidSphinx.stop()
         rapidSphinx.startRapidSphinx(10000)
     }
 

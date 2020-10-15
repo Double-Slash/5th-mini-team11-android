@@ -40,7 +40,10 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     }
 
     override fun rapidSphinxDidStop(reason: String, code: Int) {
+        rapidSphinx.stop()
         rapidSphinx.startRapidSphinx(10000)
+        rapidSphinx.setSilentToDetect(1000
+        )
     }
 
     override fun rapidSphinxFinalResult(
@@ -64,6 +67,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             }
             pauseKeyword -> {
                 supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, 0, 0)
                     .replace(R.id.fragment_tutorial_main, startFragment)
                     .addToBackStack(null).commit()
                 btnSkip.setText(start)
@@ -115,6 +119,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             } else if (viewpager_tutorial.currentItem == 2) {
                 btnSkip.isSelected = true
                 supportFragmentManager.beginTransaction()
+                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, 0, 0)
                     .replace(R.id.fragment_tutorial_main, startFragment)
                     .addToBackStack(null).commit()
                 btnSkip.setText(start)
