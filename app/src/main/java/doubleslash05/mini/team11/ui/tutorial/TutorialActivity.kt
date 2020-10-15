@@ -3,15 +3,11 @@ package doubleslash05.mini.team11.ui.tutorial
 import android.Manifest
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager
-import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.View
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.view.isGone
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
@@ -24,9 +20,6 @@ import doubleslash05.mini.team11.ui.base.BaseFragment
 import doubleslash05.mini.team11.ui.main.HomeActivity
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_tutorial.*
-import kotlinx.android.synthetic.main.fragment_tutorial_page.*
-import kotlinx.android.synthetic.main.fragment_tutorial_start.*
-import kotlinx.android.synthetic.main.fragment_tutorial_start.tvDetail
 import org.jetbrains.anko.startActivity
 
 class TutorialActivity : BaseActivity(), RapidSphinxListener {
@@ -91,6 +84,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
     }
 
 
+    private var goToHome = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_tutorial)
@@ -100,8 +94,9 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
 
         btnSkip.setOnClickListener {
-
-            if (viewpager_tutorial.currentItem == 0) {
+            if (goToHome) {
+                startActivity<HomeActivity>()
+            } else if (viewpager_tutorial.currentItem == 0) {
                 btnSkip.setText("Skip")
                 viewpager_tutorial.currentItem += 1
                 btnSkip.isEnabled = false
@@ -126,8 +121,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
                 btnSkip.isEnabled = true
                 btnSkip.isClickable = true
                 rapidSphinx.stop()
-            } else if (viewpager_tutorial.currentItem != 0 && viewpager_tutorial.currentItem != 1 && viewpager_tutorial.currentItem != 2) {
-                startActivity<HomeActivity>()
+                goToHome = true
             }
 
 
