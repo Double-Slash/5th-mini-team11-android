@@ -103,17 +103,12 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
             } else if (viewpager_tutorial.currentItem == 0) {
                 btnSkip.setText("Skip")
                 viewpager_tutorial.currentItem += 1
-                btnSkip.isEnabled = false
-                updateHandler.postDelayed(runnable, 5000)
-                btnSkip.setBackgroundResource(R.drawable.btn_top_rounded)
+                btnSkip.setBackgroundResource(R.drawable.btn_top_rounded_activated)
 
 
             } else if (viewpager_tutorial.currentItem == 1) {
                 btnSkip.setText("Skip")
                 viewpager_tutorial.currentItem += 1
-                btnSkip.isEnabled = false
-                updateHandler.postDelayed(runnable, 5000)
-                btnSkip.setBackgroundResource(R.drawable.btn_top_rounded)
 
 
             } else if (viewpager_tutorial.currentItem == 2) {
