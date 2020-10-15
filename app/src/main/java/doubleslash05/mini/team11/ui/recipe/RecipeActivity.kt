@@ -51,13 +51,6 @@ class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelec
 
         rapidSphinx.addListener(this)
 
-        button_recipevideo_start.setOnClickListener {
-            player_recipevideo.start()
-            rapidSphinx.startRapidSphinx(5000)
-            rapidSphinx.setSilentToDetect(1000)
-        }
-
-
         rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
             override fun rapidPreExecute(config: Config) {
                 rapidSphinx.isRawLogAvailable = true
@@ -124,7 +117,7 @@ class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelec
     }
 
     override fun rapidSphinxDidSpeechDetected() {
-        Log.d("rapid", "detected")
+        Log.d("hwan", "detected")
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -141,6 +134,8 @@ class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelec
         super.onResume()
         rapidSphinx.updateVocabulary(stopKeyword, oovwords) {
             Log.d("rapid", "updated!")
+
+            rapidSphinx.startRapidSphinx(10000)
 
         }
     }

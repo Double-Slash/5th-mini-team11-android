@@ -10,6 +10,7 @@ import android.util.AttributeSet
 import android.view.SurfaceHolder
 import android.view.SurfaceView
 import android.widget.MediaController
+import com.icaksama.rapidsphinx.RapidSphinx
 import doubleslash05.mini.team11.BuildConfig
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.util.LogUtils
@@ -79,6 +80,7 @@ class SurfaceVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : 
             State.STARTED, State.PAUSED -> {
                 player.pause()
                 state = State.PAUSED
+
             }
             else -> {
             }
