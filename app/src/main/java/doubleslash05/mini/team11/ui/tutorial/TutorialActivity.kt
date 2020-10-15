@@ -95,8 +95,6 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
         btnSkip.isEnabled = false
         updateHandler.postDelayed(runnable, 5000)
 
-
-
         btnSkip.setOnClickListener {
             if (goToHome) {
                 startActivity<HomeActivity>()
