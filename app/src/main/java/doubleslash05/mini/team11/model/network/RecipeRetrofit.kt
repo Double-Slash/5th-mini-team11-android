@@ -1,5 +1,6 @@
 package doubleslash05.mini.team11.model.network
 
+import doubleslash05.mini.team11.model.data.MainData
 import doubleslash05.mini.team11.model.data.MenuList
 import doubleslash05.mini.team11.model.data.RecipeData
 import doubleslash05.mini.team11.util.extension.RetroLiveData
@@ -48,4 +49,7 @@ interface RecipeRetrofit {
     fun searchRecipe(
         @Query("keyword") keyword: String
     )
+
+    @GET("/recipe/main")
+    fun getMain() : RetroLiveData<MainData>
 }

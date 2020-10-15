@@ -133,11 +133,11 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
     // region MediaPlayer Controller
     override fun start() {
+        hideController()
         player_recipevideo.start()
         if (!isStopEndSection) {
             onChangeSectionListener?.onChangeSection(data.getSectionIndex(currentPosition))
         }
-        isStopEndSection = true
     }
 
     override fun pause() {
@@ -147,16 +147,19 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     fun nextSection() {
         isStopEndSection = false
         seekTo(data.getNextSection(currentPosition))
+        start()
     }
 
     fun replySction() {
         isStopEndSection = false
         seekTo(data.getCurrentSction(currentPosition))
+        start()
     }
 
     fun prevSection() {
         isStopEndSection = false
         seekTo(data.getPrevSection(currentPosition))
+        start()
     }
 
     override fun getDuration(): Int {
@@ -237,17 +240,20 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
         var ch = false
         for (section in data.sections) {
-            if (abs(section - currentPosition) <= TICK_TIME * 3) {
-                ch = true
+            val diff = abs(section - currentPosition)
+            if (diff <= TICK_TIME) {
+                if (!isStopEndSection) return
+                pause()
+                showController()
+                isStopEndSection = false
                 break
+            }else if (diff <= TICK_TIME * 3){
+                ch = true
             }
         }
 
-        if (ch) {
-            if (!isStopEndSection) return
-            pause()
-            showController()
-            isStopEndSection = false
+        if (!ch) {
+            isStopEndSection = true
         }
     }
 

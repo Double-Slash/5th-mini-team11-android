@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.ViewCompat
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSmoothScroller
@@ -26,13 +27,16 @@ class RecipeStepFragment : BaseFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragment_recipe_step, container, false)
+        return inflater.inflate(R.layout.fragment_recipe_step, container, false).apply {
+            recyclerview_recipe.isNestedScrollingEnabled = false
+        }
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         view.recyclerview_recipe.layoutManager = LinearLayoutManager(context)
         view.recyclerview_recipe.adapter = adapter
+//        ViewCompat.setNestedScrollingEnabled(view.recyclerview_recipe, false)
 
         view.button_recipe_make.setOnClickListener {
             if(data.isMade) return@setOnClickListener
@@ -52,8 +56,11 @@ class RecipeStepFragment : BaseFragment() {
     }
 
     fun setStep(index: Int) {
-        smoothScroller.targetPosition = index
-        view?.recyclerview_recipe?.layoutManager?.startSmoothScroll(smoothScroller)
+        val view = view ?: return
+        val y = view.recyclerview_recipe.layoutManager?.getChildAt(index)?.y ?: return
+
+        view.scrollview_recipe.smoothScrollTo(0, y.toInt())
+
         adapter.setStep(index)
     }
 }

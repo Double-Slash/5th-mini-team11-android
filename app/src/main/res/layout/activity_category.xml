@@ -13,7 +13,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
-            android:id="@+id/topAppBar"
+            android:id="@+id/toolbar_category"
             style="@style/AppBar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
@@ -24,12 +24,20 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
+                android:fontFamily="@font/notosans_kr_medium"
+                android:includeFontPadding="false"
                 android:textColor="@color/greyish_brown"
                 tools:text="Toolbar Title" />
 
         </androidx.appcompat.widget.Toolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d5d5d5"
+        app:layout_constraintBottom_toBottomOf="@id/tablayout_category" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_category"

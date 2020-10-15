@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/scrollview_recipe"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -21,8 +22,11 @@
             android:layout_marginHorizontal="15dp"
             android:layout_marginVertical="40dp"
             android:background="@drawable/btn_make"
+            android:fontFamily="@font/notosans_kr_medium"
+            android:includeFontPadding="false"
             android:paddingHorizontal="20dp"
             android:text="@string/all_complete"
+            android:textSize="20sp"
             android:textColor="@color/btn_make" />
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

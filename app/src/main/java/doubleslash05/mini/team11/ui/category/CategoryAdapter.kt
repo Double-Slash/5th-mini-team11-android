@@ -131,12 +131,16 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     private inner class HorizonRecyclerViewHolder(val recyclerView: RecyclerView) : RecyclerView.ViewHolder(recyclerView) {
         init {
-            recyclerView.layoutParams = ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            val padding = recyclerView.context.dpToPx(6)
+            recyclerView.layoutParams = FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            recyclerView.clipToPadding = false
+            recyclerView.setPadding(padding, 0, padding, 0)
             recyclerView.layoutManager = LinearLayoutManager(recyclerView.context, LinearLayoutManager.HORIZONTAL, false)
         }
     }
 
     private inner class MenuViewHolder(v: View) : RecyclerView.ViewHolder(v) {
+        lateinit var data : MenuData
         val background = v.imageview_menu_background!!
         val txtMain = v.textview_menu_main!!
         val txtSub = v.textview_menu_sub!!
@@ -146,20 +150,17 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
         init {
             v.setOnClickListener {
-                val position = adapterPosition
-                val data = getMenuData(position) ?: return@setOnClickListener
                 onMenuItemClickListener?.onMenuItemClick(data)
             }
 
             checkbox.setOnCheckedChangeListener { _, isChecked ->
-                val position = adapterPosition
-                val data = getMenuData(position) ?: return@setOnCheckedChangeListener
                 RecipeModel.setFavorite(data.id, isChecked)
             }
         }
 
         @SuppressLint("SetTextI18n")
         fun bind(data: MenuData) {
+            this.data = data
             Glide.with(background.context).load(data.thumbnailUrl).into(background)
 
             txtMain.text = data.name
@@ -177,7 +178,12 @@ class CategoryAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MenuViewHolder {
             val context = parent.context
             val v = LayoutInflater.from(context).inflate(R.layout.item_menu, parent, false)
-
+            v.layoutParams = FrameLayout.LayoutParams(context.dpToPx(286), context.dpToPx(132)).apply {
+                rightMargin = context.dpToPx(10)
+                leftMargin = context.dpToPx(10)
+                topMargin = context.dpToPx(10)
+                bottomMargin = context.dpToPx(10)
+            }
             return MenuViewHolder(v)
         }
 

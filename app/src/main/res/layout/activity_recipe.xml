@@ -4,61 +4,166 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
-    >
+    android:background="@color/white">
 
-    <doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
-        android:id="@+id/videoview_receipe"
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/layout_category_appbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_recipe"
+            style="@style/AppBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:navigationIcon="@drawable/ic_btn_back_24dp">
+
+            <TextView
+                android:id="@+id/textview_recipe_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:fontFamily="@font/notosans_kr_medium"
+                android:includeFontPadding="false"
+                android:textColor="@color/greyish_brown"
+                tools:text="Toolbar Title" />
+
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
+        android:id="@+id/videoview_recipe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/layout_category_appbar" />
 
     <TextView
-        android:id="@+id/textview_receipe_sub"
+        android:id="@+id/textview_recipe_sub"
         style="@style/TitleSub"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/textview_receipe_main"
-        app:layout_constraintTop_toBottomOf="@id/videoview_receipe"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/notosans_kr_regular"
+        android:includeFontPadding="false"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/textview_recipe_main"
+        app:layout_constraintTop_toBottomOf="@id/videoview_recipe"
         tools:text="주말에는 여유롭게 브런치" />
 
     <TextView
-        android:id="@+id/textview_receipe_main"
+        android:id="@+id/textview_recipe_main"
         style="@style/TitleMain"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
+        android:layout_marginTop="11dp"
+        android:fontFamily="@font/notosans_kr_medium"
+        android:includeFontPadding="false"
+        android:textSize="20sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textview_receipe_sub"
+        app:layout_constraintTop_toBottomOf="@id/textview_recipe_sub"
         tools:text="팬케이크" />
+
+    <ImageView
+        android:id="@+id/imageview_recipe_time"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="6.7dp"
+        android:layout_marginLeft="6.7dp"
+        android:layout_marginBottom="3dp"
+        android:src="@drawable/ic_time_brownish_grey"
+        app:layout_constraintBottom_toBottomOf="@id/textview_recipe_main"
+        app:layout_constraintLeft_toRightOf="@id/textview_recipe_main" />
+
+    <TextView
+        android:id="@+id/textview_recipe_time"
+        style="@style/MenuCardSubtitleAndTimeAndLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="4.3dp"
+        android:layout_marginLeft="4.3dp"
+        android:layout_marginBottom="2dp"
+        android:fontFamily="@font/notosans_kr_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textColor="@color/brownish_grey"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@id/textview_recipe_main"
+        app:layout_constraintLeft_toRightOf="@id/imageview_recipe_time"
+        tools:text="15분" />
+
+    <ImageView
+        android:id="@+id/imageview_recipe_star"
+        android:layout_width="13dp"
+        android:layout_height="13dp"
+        android:layout_marginStart="5.5dp"
+        android:layout_marginLeft="5.5dp"
+        android:baselineAlignBottom="true"
+        android:src="@drawable/ic_star_brownish_grey"
+        app:layout_constraintBottom_toBottomOf="@id/imageview_recipe_time"
+        app:layout_constraintLeft_toRightOf="@id/textview_recipe_time" />
+
+    <TextView
+        android:id="@+id/textview_recipe_level"
+        style="@style/MenuCardSubtitleAndTimeAndLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="3.5dp"
+        android:layout_marginLeft="3.5dp"
+        android:fontFamily="@font/notosans_kr_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="6sp"
+        android:textColor="@color/brownish_grey"
+        android:textSize="12sp"
+        app:layout_constraintBaseline_toBaselineOf="@id/textview_recipe_time"
+        app:layout_constraintLeft_toRightOf="@id/imageview_recipe_star"
+        tools:text="초급" />
+
+    <CheckBox
+        android:id="@+id/checkbox_recipe_favorite"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="14.7dp"
+        android:layout_marginRight="14.7dp"
+        android:layout_marginBottom="13.4dp"
+        android:button="@drawable/ic_recipe_favorite"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/videoview_recipe" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tablayout_recipe"
         style="@style/TabLayout"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        app:layout_constraintTop_toBottomOf="@id/textview_receipe_main"
-        >
+        android:layout_marginTop="3dp"
+        app:layout_constraintTop_toBottomOf="@id/textview_recipe_main">
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/recipe_tab_0"
-            />
+            android:text="@string/recipe_tab_0" />
 
 
         <com.google.android.material.tabs.TabItem
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/recipe_tab_1"
-            />
+            android:text="@string/recipe_tab_1" />
     </com.google.android.material.tabs.TabLayout>
+
+    <View
+        android:id="@+id/line_recipe_tab"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#d5d5d5"
+        app:layout_constraintTop_toBottomOf="@id/tablayout_recipe" />
 
     <FrameLayout
         android:id="@+id/fragment_recipe"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/tablayout_recipe"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/line_recipe_tab" />
 </androidx.constraintlayout.widget.ConstraintLayout>

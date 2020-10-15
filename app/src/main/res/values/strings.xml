@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">DoubleSlashMini0511</string>
+    <string name="app_name">Cookice</string>
 
     <string name="tutorial_title">잘 듣고 있어요.\n계속 따라해주세요!</string>
     <string name="tutorial_detail">이제 다왔어요!\n마지막으로 따라해주세요!</string>
@@ -14,11 +14,16 @@
     <string name="all_replay">다시</string>
     <string name="all_complete">완성</string>
 
-
-    <string name="category_1">한식</string>
-    <string name="category_2">양식</string>
-    <string name="category_3">간식</string>
-
+    <string name="category_1">밥</string>
+    <string name="category_2">면</string>
+    <string name="category_3">빵</string>
+    <string name="category_4">고기</string>
+    <string name="category_5">해산물</string>
+    <string name="category_6">가공식품</string>
+    <string name="category_7">채소</string>
+    <string name="category_8">과일</string>
+    <string name="category_9">그 외</string>
+    
     <string name="recipe_tab_0"><![CDATA[재료 & 정보]]></string>
     <string name="recipe_tab_1">레시피</string>
 

@@ -1,15 +1,14 @@
 package doubleslash05.mini.team11.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseActivity
-import doubleslash05.mini.team11.ui.category.CategoryActivity
 import doubleslash05.mini.team11.ui.favorite.FavoriteFragment
 import doubleslash05.mini.team11.ui.search.SearchFragment
 import kotlinx.android.synthetic.main.activity_main2.*
 
 class HomeActivity : BaseActivity() {
+    private val homeFragment = HomeFragment()
     private val searchFragment = SearchFragment()
     private val favoriteFragment = FavoriteFragment()
 
@@ -18,21 +17,21 @@ class HomeActivity : BaseActivity() {
         setContentView(R.layout.activity_main2)
 
         setSupportActionBar(toolbar_main)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         button_main_nav_search.setOnClickListener { goToSearch() }
         button_main_nav_favorite.setOnClickListener { goToFavorite() }
         button_main_nav_home.setOnClickListener { goToHome() }
 
-        goToFavorite()
+        goToHome()
     }
 
 
     private fun goToHome() {
         clearNavigation()
         button_main_nav_home.isSelected = true
-        supportFragmentManager.beginTransaction().remove(searchFragment).remove(favoriteFragment).commit()
-        val intent = Intent(this, CategoryActivity::class.java)
-        startActivity(intent)
+        supportFragmentManager.beginTransaction().replace(R.id.fragment_main, homeFragment).commit()
     }
 
     private fun goToSearch() {
