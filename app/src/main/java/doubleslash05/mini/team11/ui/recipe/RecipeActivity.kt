@@ -24,7 +24,6 @@ import doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
 import doubleslash05.mini.team11.util.Log
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_recipe.*
-import kotlinx.android.synthetic.main.view_recipe_video.*
 
 class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelectedListener {
     private val infoFragment = RecipeInfoFragment()
@@ -51,7 +50,6 @@ class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelec
         rapidSphinx.addListener(this)
 
         videoview_recipe.setOnStartLisner {
-            player_recipevideo.start()
             rapidSphinx.startRapidSphinx(5000)
         }
 
