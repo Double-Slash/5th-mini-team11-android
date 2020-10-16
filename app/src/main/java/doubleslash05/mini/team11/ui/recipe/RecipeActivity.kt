@@ -50,11 +50,10 @@ class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelec
 
         rapidSphinx.addListener(this)
 
-        button_recipevideo_start.setOnClickListener {
+        videoview_recipe.setOnStartLisner {
             player_recipevideo.start()
             rapidSphinx.startRapidSphinx(5000)
         }
-
 
         rapidSphinx.prepareRapidSphinx(object : RapidPreparationListener {
             override fun rapidPreExecute(config: Config) {

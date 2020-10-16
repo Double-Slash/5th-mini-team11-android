@@ -24,6 +24,7 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
     private lateinit var data: RecipeVideoData
     private lateinit var seekBarCoroutine: Job
     private var onChangeSectionListener: OnChangeSectionListener? = null
+    private var onStartListener: (() -> Unit)? = null
 
     constructor(context: Context) : this(context, null, 0)
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -97,6 +98,8 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
             button_recipevideo_replay.visibility = View.VISIBLE
             button_recipevideo_start.visibility = View.GONE
             start()
+
+            onStartListener?.invoke()
         }
 
         button_recipevideo_replay.setOnClickListener {
@@ -228,6 +231,10 @@ class RecipeVideoView(context: Context, attrs: AttributeSet?, defStyle: Int) : F
 
     fun setOnChangeSectionListener(listener: OnChangeSectionListener) {
         this.onChangeSectionListener = listener
+    }
+
+    fun setOnStartLisner(listener: (() -> Unit)?){
+        onStartListener = listener
     }
 
     // true 일경우 Section이 끝나면 Stop
