@@ -7,6 +7,10 @@ class SharedPreferenceUtil(private val context: Context) {
         context.getSharedPreferences(PREFS_NAME, Context.MODE_PRIVATE)
     }
 
+    var isShowTutorial: Boolean
+        get() = prefs.getBoolean(PREFS_IS_SHOW_TUTORIAL, true)
+        set(value) = prefs.edit().putBoolean(PREFS_IS_SHOW_TUTORIAL, value).apply()
+
     var isShowVoiceGuide: Boolean
         get() = prefs.getBoolean(PREFS_IS_SHOW_VOICE_GUIDE, true)
         set(value) = prefs.edit().putBoolean(PREFS_IS_SHOW_VOICE_GUIDE, value).apply()
@@ -14,6 +18,7 @@ class SharedPreferenceUtil(private val context: Context) {
     companion object {
         private const val PREFS_NAME = "DoubleSlash05_mini_team11"
 
+        private const val PREFS_IS_SHOW_TUTORIAL = "PREFS_IS_SHOW_TUTORIAL"
         private const val PREFS_IS_SHOW_VOICE_GUIDE = "PREFS_IS_SHOW_VOICE_GUIDE"
     }
 }

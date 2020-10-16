@@ -14,6 +14,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.icaksama.rapidsphinx.RapidPreparationListener
 import com.icaksama.rapidsphinx.RapidSphinx
 import com.icaksama.rapidsphinx.RapidSphinxListener
+import doubleslash05.mini.team11.App
 import doubleslash05.mini.team11.R
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.base.BaseFragment
@@ -115,6 +116,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
                 btnSkip.isClickable = true
                 rapidSphinx.stop()
                 goToHome = true
+                App.prefs.isShowVoiceGuide = false
             }
 
 
