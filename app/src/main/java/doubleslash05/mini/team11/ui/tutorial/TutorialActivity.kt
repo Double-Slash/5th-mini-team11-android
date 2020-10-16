@@ -54,27 +54,22 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
 
     }
 
-    @SuppressLint("ResourceType")
     override fun rapidSphinxPartialResult(partialResult: String) {
 
-        when (partialResult) {
-            stopKeyword2 -> {
-                viewpager_tutorial.currentItem = 1
-                btnSkip.setText("Skip")
-            }
-            nextKeyword -> {
-                viewpager_tutorial.currentItem = 2
-            }
-            pauseKeyword -> {
-                supportFragmentManager.beginTransaction()
-                    .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, 0, 0)
-                    .replace(R.id.fragment_tutorial_main, startFragment)
-                    .addToBackStack(null).commit()
-                btnSkip.setText(start)
-                rapidSphinx.stop()
-            }
-
+        if (partialResult == stopKeyword2 && viewpager_tutorial.currentItem == 0) {
+            viewpager_tutorial.currentItem = 1
+            btnSkip.setText("Skip")
+        } else if (partialResult == nextKeyword && viewpager_tutorial.currentItem == 1) {
+            viewpager_tutorial.currentItem = 2
+        } else if (partialResult == pauseKeyword && viewpager_tutorial.currentItem == 2){
+            supportFragmentManager.beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out, 0, 0)
+                .replace(R.id.fragment_tutorial_main, startFragment)
+                .addToBackStack(null).commit()
+            btnSkip.setText(start)
+            rapidSphinx.stop()
         }
+
 
 
     }

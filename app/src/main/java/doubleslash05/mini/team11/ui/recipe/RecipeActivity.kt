@@ -134,7 +134,6 @@ class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelec
         super.onResume()
         rapidSphinx.updateVocabulary(stopKeyword, oovwords) {
             Log.d("rapid", "updated!")
-
             rapidSphinx.startRapidSphinx(10000)
 
         }
