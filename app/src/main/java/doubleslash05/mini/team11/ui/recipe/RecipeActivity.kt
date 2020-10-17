@@ -22,10 +22,10 @@ import doubleslash05.mini.team11.model.network.base.ApiStatus
 import doubleslash05.mini.team11.ui.base.BaseActivity
 import doubleslash05.mini.team11.ui.common.widget.recipevideo.RecipeVideoView
 import doubleslash05.mini.team11.util.Log
+import doubleslash05.mini.team11.util.LogUtils
 import edu.cmu.pocketsphinx.Config
 import kotlinx.android.synthetic.main.activity_recipe.*
-import kotlinx.android.synthetic.main.view_recipe_video.*
-import kotlinx.android.synthetic.main.view_recipe_video.view.*
+import java.util.*
 
 class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelectedListener {
     private val infoFragment = RecipeInfoFragment()
@@ -105,12 +105,18 @@ class RecipeActivity : BaseActivity(), RapidSphinxListener, TabLayout.OnTabSelec
     ) {
     }
 
+    var time: Long = 0
     override fun rapidSphinxPartialResult(partialResult: String?) {
-        when (partialResult) {
-            stopKeyword2 -> videoview_recipe.prevSection()
-            pauseKeyword -> videoview_recipe.replySction()
-            nextKeyword -> videoview_recipe.nextSection()
+        var cTime = Calendar.getInstance().timeInMillis
+        LogUtils.d("Sphinx", "$partialResult ${cTime - time}")
+        if (cTime - time > 2000) {
+            when (partialResult) {
+                stopKeyword2 -> videoview_recipe.prevSection()
+                pauseKeyword -> videoview_recipe.replySction()
+                nextKeyword -> videoview_recipe.nextSection()
+            }
         }
+        time = cTime
     }
 
     override fun rapidSphinxUnsupportedWords(words: MutableList<String>?) {

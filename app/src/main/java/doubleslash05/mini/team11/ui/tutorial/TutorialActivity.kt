@@ -116,7 +116,7 @@ class TutorialActivity : BaseActivity(), RapidSphinxListener {
                 btnSkip.isClickable = true
                 rapidSphinx.stop()
                 goToHome = true
-                App.prefs.isShowVoiceGuide = false
+                App.prefs.isShowTutorial = false
             }
 
 
